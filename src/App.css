@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+#App {
+  height: 100%;
+  max-width: 100%;
+}
+
+html {
+  min-width: 100%;
+  min-height: 100vh;
+}
+body {
+  width: 100%;
+  height: -webkit-fill-available;
+  min-height: 100dvh;
+}
+
+#login-btn {
+  font-family: vina sans;
+}
+
+#open-menu-btn {
+  display: none;
+}
+
+#menu-btn {
+  font-family: vina sans;
+}
+
+.menu-list {
+  list-style: none;
+  text-decoration: none;
+
+  background: #40e0d0;
+  background: -webkit-linear-gradient(
+    to right,
+    #73254c,
+    #ff8c00,
+    #164f49,
+    #ff8c00,
+    #73254c,
+    #164f49,
+    #ff8c00,
+    #164f49,
+    #73254c
+  );
+  background: linear-gradient(
+    to right,
+    #73254c,
+    #ff8c00,
+    #164f49,
+    #ff8c00,
+    #73254c,
+    #164f49,
+    #ff8c00,
+    #164f49,
+    #73254c
+  );
+  background-size: 300% 300%;
+
+  background-clip: text;
+  color: transparent;
+}
+
+/* !SHOW CASE SECTION */
+
+.card-brand {
+  background: #40e0d0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ff0080,
+    #ff8c00,
+    #40e0d0,
+    #ff8c00,
+    #ff0080,
+    #40e0d0,
+    #ff8c00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ff0080,
+    #ff8c00,
+    #40e0d0,
+    #ff8c00,
+    #ff0080,
+    #40e0d0,
+    #ff8c00
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: 300% 300%;
+
+  background-clip: text;
+  color: transparent;
+}
+#form-section {
+  position: sticky;
+  top: 0;
+
+  z-index: 5;
+  overflow: clip;
+}
+#form {
+}
+.cart {
+  background-color: #3c3b3f;
+}
+#allproducts {
+  transition: all 1000ms ease-in-out;
+}
+.size--container::-webkit-scrollbar {
+  display: none;
+}
+.indicator::-webkit-scrollbar {
+  display: none;
+}
+.detail--section::-webkit-scrollbar{
+  width: 0.8em;
+  border-radius: 1px;
+}
+.detail--section::-webkit-scrollbar-corner{
+  
+
+}
+.detail--section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 1rem;
+}
+.detail--section::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}

@@ -1,0 +1,324 @@
+.navbar ul h2 {
+  font-family: Oswald, sans-serif;
+  letter-spacing: 0.05rem;
+}
+
+@media (max-width: 340px) {
+  #search-input.expand {
+    width: 50px;
+    transition: all 1000ms ease-in-out;
+    pointer-events: fill;
+  }
+}
+/* search input */
+#search-input {
+  width: 200px;
+  transition: all 1000ms ease-in-out;
+}
+
+@media (max-width: 640px) {
+  #search-input.expand {
+    opacity: 1;
+    width: 100px;
+    transition: all 1000ms ease-in-out;
+    pointer-events: fill;
+  }
+  .top-products-header {
+    clip-path: polygon(
+      50% 0%,
+      100% 28%,
+      100% 0,
+      100% 100%,
+      80% 100%,
+      50% 100%,
+      20% 100%,
+      0 69%,
+      0 0,
+      20% 0
+    );
+  }
+  #nav-list {
+    width: 240px;
+    z-index: 1500;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    right: -100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffff;
+    transition: all 800ms ease-in-out;
+    border-radius: 0px 5px 5px 5px;
+  }
+  #nav-list.active {
+    right: 0%;
+  }
+  #open-menu-btn {
+    display: block;
+    z-index: 9999;
+  }
+
+  #search-input {
+    width: 0px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .menu-list {
+    padding: 8px;
+    border-bottom: 1px solid;
+    border-color: rgb(38, 79, 96);
+  }
+
+  #nav-list > button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 90%;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 250ms ease-in;
+  }
+  .toggle {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .toggle span {
+    border-radius: 5px;
+    position: absolute;
+    left: 5px;
+    width: 25px;
+    height: 4px;
+    background: rgb(106, 106, 155);
+    transition: 0.5s;
+  }
+  .toggle span:nth-child(1) {
+    border-radius: 5px;
+    transform: translateY(-10px);
+
+    position: absolute;
+    left: 5px;
+    width: 15px;
+    height: 4px;
+    background: rgb(106, 106, 155);
+  }
+  .toggle span:nth-child(2) {
+    border-radius: 5px;
+    transform: translateY(10px);
+    position: absolute;
+    left: 5px;
+    width: 15px;
+    height: 4px;
+    background: rgb(106, 106, 155);
+  }
+  .toggle.aria-active {
+    background: inherit;
+  }
+
+  .toggle.aria-active span:nth-child(3) {
+    transform: translateX(35px);
+    background: rgb(137, 137, 202);
+  }
+  .toggle.aria-active span:nth-child(1) {
+    transform: translateY(0px) rotate(45deg);
+    background: rgb(76, 76, 110);
+    transition-delay: 0.125s;
+    width: 25px;
+    left: 5px;
+  }
+  .toggle.aria-active span:nth-child(2) {
+    transform: translateY(0px) rotate(315deg);
+    background: rgb(76, 76, 110);
+    transition-delay: 0.25s;
+    width: 25px;
+    left: 5px;
+  }
+}
+
+#nav-list > button {
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .men-women-menu.show {
+    transform: translateY(5px);
+    pointer-events: fill;
+    opacity: 1;
+  }
+  #kids-menu.show {
+    transform: translateY(5px);
+    pointer-events: fill;
+    opacity: 1;
+  }
+  .new-featured-menu.show {
+    transform: translateY(5px);
+    pointer-events: all;
+    opacity: 1;
+  }
+  .accessories-menu.show {
+    transform: translateY(5px);
+    pointer-events: fill;
+    opacity: 1;
+  }
+
+  #nav-list > button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 80%;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 250ms ease-in;
+  }
+}
+
+.men-women-menu {
+  pointer-events: none;
+  position: absolute;
+  left: 1%;
+  top: 4rem;
+  width: 98%;
+  z-index: 9999;
+  box-shadow: #3c3b3f;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in, transform 150ms ease-in-out;
+}
+.men-women-menu .men-menu-inner-1 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.men-women-menu .offer > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.men-women-menu .men-menu-inner-2 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.men-women-menu .men-menu-inner-3 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+.kids-menu {
+  pointer-events: none;
+  position: absolute;
+  left: 1%;
+  top: 4rem;
+  width: 98%;
+  z-index: 9999;
+  box-shadow: #3c3b3f;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in, transform 150ms ease-in;
+}
+
+.kids-menu .kids-menu-inner-1 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+.kids-menu .kids-menu-inner-2 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+.kids-menu .kids-menu-inner-3 > h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+.new-featured-menu {
+  pointer-events: none;
+  position: absolute;
+  left: 1%;
+  top: 4rem;
+  width: 98%;
+  z-index: 9999;
+  box-shadow: #3c3b3f;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in, transform 150ms ease-in-out;
+}
+.new-featured-menu .new-featured-inner-1 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.new-featured-menu .new-featured-inner-2 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.new-featured-menu .new-featured-inner-3 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.new-featured-menu .new-featured-inner-4 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+.accessories-menu {
+  pointer-events: none;
+  position: absolute;
+  left: 1%;
+  top: 4rem;
+  width: 98%;
+  z-index: 9999;
+  box-shadow: #3c3b3f;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in, transform 150ms ease-in-out;
+}
+.accessories-menu .accessories-menu-inner-1 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.accessories-menu .accessories-menu-inner-2 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.accessories-menu .accessories-menu-inner-3 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+.accessories-menu .accessories-menu-inner-4 h2:hover {
+  color: #3c3b3f;
+  cursor: pointer;
+}
+
+#nav-list > button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.overly {
+  z-index: 1000;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 1500ms ease;
+}
+.overly.active {
+  opacity: 1;
+  pointer-events: all;
+}
+

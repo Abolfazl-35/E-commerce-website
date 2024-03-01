@@ -1,0 +1,27 @@
+/* #msg-section{
+    animation:scroll 30s linear infinite ;
+    }
+    
+    @keyframes scroll{
+        to{
+            transform:translate(calc(-50% - 0.5rem));
+        }
+    } */
+    @media(max-width:640px){
+        #nav-buttom {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s ease-out;
+            justify-content: center;
+          }
+          #nav-buttom.open_menu {
+            grid-template-rows: 1fr;
+          }
+          #nav-buttom-inner {
+            overflow: hidden;
+          }
+        
+          #menu-btn {
+            display: block;
+          }
+    }
