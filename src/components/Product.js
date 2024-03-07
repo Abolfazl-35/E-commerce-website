@@ -1,3 +1,4 @@
+import { Label } from "@mui/icons-material";
 import classNames from "classnames";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
@@ -63,13 +64,11 @@ function Product(props) {
       return i
     }
   })
-  console.log(imageRef.current);
+console.log(props)
 const scrollTo=useRef()
 
 
 
-
-  
   //  useEffect(()=>{
   //      const Values=Object.values(props.item.images)
   //     setimages(Values)
@@ -110,35 +109,45 @@ const scrollTo=useRef()
 
   const [bagproduct, setBagProduct] = useState({
     ...props.item,
-    selectedSize:"",
+    selectedColor:props.item.images[0].shown,
+    selectedSize:""
+  
   });
 
   function HandleProduct(event) {
-    console.log(event.target.value);
+    
     setBagProduct((prevdata) => {
       return { ...prevdata, [event.target.name]: event.target.value };
     });
+
   }
   // useEffect(() => {
   //   scrollTo.current.scrollIntoView();
   // },[]);
-  
+ 
 
   function HandleDetailPage(params) {
     setDetailPageVisible((prevdata) => {
       return !prevdata;
     });
   }
+   
   function AddtoBag(e) {
-    e.preventDefault()
-   console.log(e)
+
     if (!bagproduct.selectedSize) {
       scrollTo.current.scrollIntoView({behavior:"smooth", block:"end",inline: "nearest"})
+     
     }
     if (bagproduct.selectedSize) {
-      
+     
     }
   }
+
+
+
+
+
+console.log(bagproduct)
 
   
   return (
@@ -188,7 +197,7 @@ const scrollTo=useRef()
                   return (
                     <img
                       alt="product"
-                      key={url}
+                      key={url.image}
                       src={url.image}
                       className="w-full  object-cover max-h-[680px] block flex-shrink-0 flex-grow-0   rounded"
                       style={{
@@ -285,8 +294,36 @@ const scrollTo=useRef()
                 </p>
               </div>
               {/* Size and descrebtion section */}
-              <form ref={scrollTo} className={classNames("h-max w-full flex flex-col  p-1 mt-1",{"border border-transparent":bagproduct.selectedSize},{"border border-red-500":!bagproduct.selectedSize})}
+              <form ref={scrollTo} className={classNames("h-max w-full flex flex-col  p-1 mt-1",{"border border-transparent":bagproduct.selectedSize},{"border border-red-500":!bagproduct})}
               onSubmit={AddtoBag}>
+                <div className="flex gap-1 flex-nowrap overflow-x-auto">
+            {imageRef.current.map((i,index)=>{
+              
+            return (<div>
+            <input
+            value={i.shown}
+            id={i.shown}
+            type="radio"
+            name="selectedColor"
+            className="hidden peer"
+           onChange={HandleProduct}
+           checked={bagproduct.selectedColor === i.shown}
+           
+            />
+           <label htmlFor={i.shown} className="w-full flex border  cursor-pointer peer-checked:border-green-500">
+<img
+alt="colorshown"
+src={i.image}
+width={100}
+onClick={() => setimageIndex(index)}
+/>
+
+           </label>
+            </div>
+            
+            )
+            })}
+          </div>
                 <div className="flex w-full justify-between pt-8 ">
                   <h1 className="font-serif text-xl ">Select Size</h1>
                   <button className="font-serif text-xl text-greyish-0">
@@ -308,7 +345,9 @@ const scrollTo=useRef()
                         />
                         <label
                           htmlFor={i}
-                          className=" flex justify-center w-full p-4 cursor-pointer text-center bg-slate-200 rounded peer-checked:bg-gray-500"
+                          className={classNames("flex justify-center w-full p-4 cursor-pointer text-center bg-slate-200 rounded peer-checked:bg-gray-500",)
+                        }
+                         
                         >
                           {i}
                         </label>
@@ -467,7 +506,7 @@ const scrollTo=useRef()
       )}
              {!fixedbtnvisible && (
               <button
-              type="submit"
+              type="button"
                 className="w-full sm:hidden fixed bottom-0 p-2 text-center font-serif  bg-slate-950 text-slate-200"
                       // onClick={() => {props.Handleclick(bagproduct)}}
                 //       props.HandleMiniBag(props.item)
@@ -475,7 +514,8 @@ const scrollTo=useRef()
                 //    }
 
                 //       }
-                onClick={AddtoBag}
+                onClick={()=>{
+                  props.HandleProductData(bagproduct)}}
               >
                 ADD To Cart
               </button>

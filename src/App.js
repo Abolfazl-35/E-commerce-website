@@ -69,21 +69,23 @@ function App() {
 
   let [Cart, Setcart] = useState([]);
 
-  const AddToCart = (Product) => {
+  function AddToCart(product) {
+    
+    console.log(product)
     const NewProduct = Cart.find((i) => {
-      return i.id === Product.id;
+      return i.selectedSize === product.selectedSize && i.selectedColor===product.selectedColor
     });
-    console.log(NewProduct);
+   
     if (NewProduct) {
       Setcart((prevdata) => {
         return Cart.map((i) => {
-          return i.id === NewProduct.id
+          return i.selectedSize === NewProduct.selectedSize &&  i.selectedColor===product.selectedColor
             ? { ...NewProduct, count: NewProduct.count + 1 }
             : i;
         });
       });
     } else {
-      Setcart([...Cart, { ...Product, count: 1 }]);
+      Setcart([...Cart, { ...product, count: 1 }]);
     }
     // const Basket={...NewProduct}
   };
@@ -105,7 +107,7 @@ function App() {
   function HandleProduct(newProduct) {
     setproduct((prevdat) =>  newProduct);
   }
-
+console.log(Cart)
   const [EmailData,setEmailData]=useState({Email:""})
 
   function HandleEmail(event) {
@@ -132,7 +134,7 @@ function App() {
                 <Main />
                 <ShopHeader />
                 <Section
-                  Handleclick={AddToCart}
+                  // Handleclick={AddToCart}
                   data={ShoesData}
                   // HandleImage={changeimage}
                   HandlePriceHigh={PriceHighLow}
@@ -165,7 +167,7 @@ function App() {
           <Route path="/Product" element={
           <>
           <Navbar/> 
-          <Product item={product} Handleclick={AddToCart} />
+          <Product item={product} Handleclick={AddToCart} HandleProductData={AddToCart} />
           </>} />
         </Routes>
       </Router>
