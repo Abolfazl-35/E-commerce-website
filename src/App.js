@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -23,8 +23,6 @@ import SignInForm from "./components/SignInPage/SignInForm";
 function App() {
   let [ShoesData, setShoesData] = useState(AllShoesData);
 
-
-
   let [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
   function setJordan() {
     setShoesData((prevdata) => JordanData);
@@ -42,7 +40,7 @@ function App() {
   //   });
   // }
 
-
+ 
   function PriceHighLow() {
     const copyitems = [...ShoesData];
     setsort({ sortbyprice: "price", reversed: !sortbyprice.reversed });
@@ -66,29 +64,35 @@ function App() {
     });
     setShoesData(ShoesData);
   }
-
+  
   let [Cart, Setcart] = useState([]);
 
   function AddToCart(product) {
-    
-    console.log(product)
+ if (product.selectedSize) {
+  
+ }
+
     const NewProduct = Cart.find((i) => {
-      return i.selectedSize === product.selectedSize && i.selectedColor===product.selectedColor
+      return (
+        i.selectedSize === product.selectedSize &&
+        i.selectedColor === product.selectedColor
+      );
     });
-   
+
     if (NewProduct) {
       Setcart((prevdata) => {
         return Cart.map((i) => {
-          return i.selectedSize === NewProduct.selectedSize &&  i.selectedColor===product.selectedColor
+          return i.selectedSize === NewProduct.selectedSize &&
+            i.selectedColor === product.selectedColor
             ? { ...NewProduct, count: NewProduct.count + 1 }
             : i;
         });
       });
-    } else {
+    } else if (product.selectedSize) {
       Setcart([...Cart, { ...product, count: 1 }]);
     }
     // const Basket={...NewProduct}
-  };
+  }
 
   const [MiniBagState, setMiniBag] = useState(false);
 
@@ -105,18 +109,16 @@ function App() {
 
   const [product, setproduct] = useState([]);
   function HandleProduct(newProduct) {
-    setproduct((prevdat) =>  newProduct);
+    setproduct((prevdat) => newProduct);
   }
-console.log(Cart)
-  const [EmailData,setEmailData]=useState({Email:""})
+  console.log(Cart);
+  const [EmailData, setEmailData] = useState({ Email: "" });
 
   function HandleEmail(event) {
-  console.log(event)
-  setEmailData((prevformdata=>{
-      return {...prevformdata,
-      [event.target.name]:event.target.value}
-    }))
-  
+    console.log(event);
+    setEmailData((prevformdata) => {
+      return { ...prevformdata, [event.target.name]: event.target.value };
+    });
   }
 
   console.log("app render");
@@ -129,7 +131,11 @@ console.log(Cart)
             path="/"
             element={
               <>
-                <Navbar CartAmount={Cart.length} MiniBagState={MiniBagState} item={product} />
+                <Navbar
+                  CartAmount={Cart.length}
+                  MiniBagState={MiniBagState}
+                  item={product}
+                />
                 <ShoesMenu />
                 <Main />
                 <ShopHeader />
@@ -140,7 +146,6 @@ console.log(Cart)
                   HandlePriceHigh={PriceHighLow}
                   HandlePriceLow={PriceLowHigh}
                   Handleset={setJordan}
-                 
                   HandleMiniBag={MiniBag}
                   HandleProduct={HandleProduct}
                 />
@@ -162,13 +167,28 @@ console.log(Cart)
             }
           />
 
-          <Route path="/SignIn" element={<SignIn HandleEmail={HandleEmail} EmailData={EmailData}/>} />
-          <Route path="/SignInForm" element={<SignInForm EmailData={EmailData}/>}/>
-          <Route path="/Product" element={
-          <>
-          <Navbar/> 
-          <Product item={product} Handleclick={AddToCart} HandleProductData={AddToCart} />
-          </>} />
+          <Route
+            path="/SignIn"
+            element={<SignIn HandleEmail={HandleEmail} EmailData={EmailData} />}
+          />
+          <Route
+            path="/SignInForm"
+            element={<SignInForm EmailData={EmailData} />}
+          />
+          <Route
+            path="/Product"
+            element={
+              <>
+                <Navbar CartAmount={Cart.length} />
+                <Product
+                 
+                  item={product}
+                  Handleclick={AddToCart}
+                  HandleProductData={AddToCart}
+                />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </>

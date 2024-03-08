@@ -4,7 +4,8 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Product(props) {
+function Product(props,ref) {
+  console.log(ref)
   let { images } = props.item;
   // var settings = {
   //   dots: true,
@@ -329,7 +330,9 @@ onClick={() => setimageIndex(index)}
                   <button className="font-serif text-xl text-greyish-0">
                     Size Guid
                   </button>
+                
                 </div>
+                {/* sizes */}
                 <div  className="p-2 w-full pt-8 mt-2 grid grid-cols-5 md:grid-cols-3 gap-1">
                   {Object.values(props.item.sizes).map((i) => {
                     return (
@@ -370,10 +373,16 @@ onClick={() => setimageIndex(index)}
                 {/* buttons for submit */}
                 <div className="flex flex-col space-y-4 w-full mt-6 p-2">
                   <button
+                  type="button"
+                  onClick={()=>{
+                    AddtoBag()
+                    props.HandleProductData(bagproduct)
+                  }}
                     ref={fixedStickybtn}
                     className="w-full sticky bottom-0 bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 "
                    
                   >
+                    
                     Add to Bag
                   </button>
                   <button className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 ">
@@ -383,6 +392,7 @@ onClick={() => setimageIndex(index)}
                     </span>
                   </button>
                 </div>
+              
               </form>
               <div className="w-full flex space-y-1 flex-col p-2 text-lg font-serif">
                 <h1 className="">Shipping</h1>
@@ -514,7 +524,7 @@ onClick={() => setimageIndex(index)}
                 //    }
 
                 //       }
-                onClick={()=>{
+                onClick={()=>{AddtoBag()
                   props.HandleProductData(bagproduct)}}
               >
                 ADD To Cart
