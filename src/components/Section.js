@@ -34,33 +34,23 @@ function Section(props) {
   //   });
   // },[ShoesData]);
   console.log();
-const [filterVisibility,setfilterVisibility]=useState(false)
+  const [filterVisibility, setfilterVisibility] = useState(true);
 
-function openFilterSection(params) {
-  setfilterVisibility((prevdata)=>{
-    return !prevdata
-  })
+  function openFilterSection(params) {
+    setfilterVisibility((prevdata) => {
+      return !prevdata;
+    });
+  }
+const [sortByvisible,setsortByvisible]=useState(false)
+
+function openSortBy(params) {
+  setsortByvisible((prevdata) => {
+    return !prevdata;
+  });
 }
 
 
   AllShoesData.map((i) => {});
-
-  useEffect(() => {
-    console.log("hook run");
-    const sortBy_btn = document.getElementById("sortby-btn");
-    const sortBy_list = document.getElementById("sort-by");
-    sortBy_btn.addEventListener("click", (e) => {
-      if (sortBy_btn.ariaExpanded === "false") {
-        sortBy_list.classList.add("drop");
-        sortBy_btn.ariaExpanded = true;
-      } else if (sortBy_btn.ariaExpanded === "true") {
-        sortBy_list.classList.remove("drop");
-        sortBy_btn.ariaExpanded = false;
-      }
-    });
-
-
-  }, []);
 
   const cards = props.data.map((item) => {
     if (item.isexist) {
@@ -93,14 +83,14 @@ function openFilterSection(params) {
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
           {props.data && (
-            <h1 className=" font-bold pl-2 p-5 text-nowrap  w-max text-xl md:text-2xl lg:text-3xl font-serif">
+            <h1 className=" font-bold pl-2 p-5 text-nowrap  w-max text-xl  font-serif">
               {HeadText} Shoes & Sneakers({props.data.length})
             </h1>
           )}
 
           <div className="sm:flex hidden space-x-1 relative">
             <button
-              className=" sm:flex sm:text-xl md:text-2xl lg:text-3xl p-5 justify-between font-serif font-semibold text-nowrap w-max"
+              className=" sm:flex sm:text-xl  p-5 justify-between font-serif font-semibold text-nowrap w-max"
               id="filter-btn"
               onClick={openFilterSection}
             >
@@ -110,19 +100,21 @@ function openFilterSection(params) {
               </span>
             </button>
             <button
-              className="flex justify-between sm:text-xl md:text-2xl lg:text-3xl p-5 font-serif font-semibold text-nowrap w-max"
+              className="flex justify-between sm:text-xl   p-5 font-serif font-semibold text-nowrap w-max"
               aria-expanded="false"
               aria-controls="sort-by"
               id="sortby-btn"
+              onClick={openSortBy}
             >
               Sort By
               <span className="ml-2">
-                <i className="bi bi-caret-down-fill sm:text-2xl md:text-3xl lg:text-4xl "></i>
+                <i className="bi bi-caret-down-fill sm:text-xl   "></i>
               </span>
             </button>
 
             <ul
-              className="bg-[#EFE9EB] flex flex-col space-y-2 sort-dropdown font-serif font-semibold text-center absolute right-[-20px] top-6 p-2 z-50 "
+              className={classNames( "bg-[#EFE9EB] flex flex-col space-y-2 sort-dropdown font-serif font-semibold text-center absolute right-[-20px] top-6 p-2 z-50 ",{"drop":sortByvisible})}
+            
               id="sort-by"
             >
               <li>Featured</li>
@@ -142,7 +134,7 @@ function openFilterSection(params) {
             </ul>
           </div>
         </div>
-{/* filter section in small screens */}
+        {/* filter section in small screens */}
         <div className="flex border-b border-t border-slate-850 p-3 pl-5 space-x-8 max-w-full overflow-x-scroll  flex-nowrap font-serif font-semibold text-nowrap sm:hidden">
           <h1 className=" cursor-pointer text-start font-serif hover:bg-slate-950 hover:text-white p-1 rounded">
             Lifestyle
@@ -183,9 +175,11 @@ function openFilterSection(params) {
         {/* product container */}
         <div className="flex relative p-2 w-full" id="product-container">
           {/* filter section in big screens */}
-          <div  className={classNames( " flex-col border-b border-slate-850 p-5 md:text-xl pl-5 space-y-5  font-serif font-semibold  hidden sm:flex",{"open":filterVisibility})}
-        
-         
+          <div
+            className={classNames(
+              " flex-col border-b border-slate-850 p-5 md:text-xl pl-5 space-y-5  font-serif font-semibold  hidden sm:flex",
+              { open: filterVisibility }
+            )}
             id="filter-col"
           >
             <h1 className=" cursor-pointer text-start font-serif hover:bg-slate-950 hover:text-white p-1 rounded">
@@ -227,7 +221,11 @@ function openFilterSection(params) {
           {/* product card */}
 
           <div
-            className="w-full mt-3 grid  grid-cols-1  xs:grid-cols-1 sm:grid-cols-2 h-max md:grid-cols-2 lg:grid-cols-3  gap-4 "
+            className={classNames(
+              "w-full mt-3 grid    h-max     gap-5",
+              { "grid-cols-1 md:grid-cols-1 lg:grid-cols-2": filterVisibility },
+              { "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ": !filterVisibility }
+            )}
             id="product-section"
           >
             {cards}

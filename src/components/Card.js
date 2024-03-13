@@ -71,11 +71,11 @@ imagesIn.current=images.map((i)=>{
   console.log();
   return (
     <>
-      <div className="card flex-col border-2 h-max  shadow-lg   w-full">
-        <div className="h-[460px]   w-full">
+      <div className="card rounded flex-col w-full border-2 h-max  shadow-lg ">
+        <div className="h-[460px] rounded   ">
           <Link to="./product">
             <img
-              className="h-full w-full object-cover "
+              className="h-full w-full rounded object-cover "
               src={images[imgIndex].image}
               alt="productimage"
               loading="lazy"
@@ -87,9 +87,9 @@ imagesIn.current=images.map((i)=>{
           className="product-dec  relative    text-sm flex h-max space-y-4 w-full flex-col items-start rounded bg-zinc-400 "
           data-attribute="false"
         >
-          <div className="product-dec-inner-1 w-full font-serif flex flex-col lg:text-xl text-base space-y-2  ">
+          <div className="product-dec-inner-1 w-full font-serif flex flex-col  text-lg space-y-2  ">
             <span className="w-full rounded bg-zinc-900">
-              <h1 className="card-brand animate-gradient font-Roboto  tracking-wide    w-full rounded p-2">
+              <h1 className="card-brand animate-gradient font-Roboto text-base  tracking-wide    w-full rounded p-2">
                 <strong>{props.item.name}</strong>
               </h1>
             </span>
@@ -98,7 +98,7 @@ imagesIn.current=images.map((i)=>{
             </h2>
             <p className="w-full p-2 text-gray-600">{props.item.dec}</p>
 
-            <p className="w-full p-2 text-gray-600">{images.length} Color</p>
+            <p className="w-full flex p-2 text-gray-600"><span className="">{images.length}</span> <span className="mt-[.2rem] ml-1">Color</span></p>
           </div>
           <div className="product-dec-inner-2 flex flex-col w-full max-h-max  gap-2   p-1">
             <div>
@@ -138,25 +138,21 @@ imagesIn.current=images.map((i)=>{
            
             </div>
           </div>
-          <div className="flex pb-2 pl-2  text-xl md:text-2xl font-Oswald tracking-wider ">
+          <div className="flex pb-2 pl-2  text-lg font-Oswald tracking-wider ">
             <p className="price w-full p-1   ">{props.item.price}$</p>
           </div>
         </div>
+        <Link to="/Product" >
         <button
           className="w-full bg-slate-200 p-1 text-center font-serif text-slate-950 hover:bg-slate-950 hover:text-slate-200"
-          onClick={() => {
-            props.Handleclick(props.item);
-            props.HandleMiniBag(props.item);
-            props.HandleProduct(props.item);
-          }}
+          onClick={() => props.HandleProduct(props.item)}
         >
+
           ADD To Cart
         </button>
-        <Link to="/Product">
-          <button onClick={() => props.HandleProduct(props.item)}>
-            proceed
-          </button>
         </Link>
+        
+       
       </div>
     </>
   );

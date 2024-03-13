@@ -24,13 +24,13 @@
   #sort-by {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-10px);
+    transform: translateY(-1rem);
     transition: opacity 250ms ease-in, transform 250ms ease-in;
     box-shadow: #3c3b3f;
   }
   #sort-by.drop {
     pointer-events: all;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(2rem);
   }
 }

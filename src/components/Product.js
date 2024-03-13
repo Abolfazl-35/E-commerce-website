@@ -109,16 +109,19 @@ const scrollTo=useRef()
   const [detailPageVisible, setDetailPageVisible] = useState(false);
 
   const [bagproduct, setBagProduct] = useState({
-    ...props.item,
+   
+    id:props.item.id,
+    name:props.item.name,
+    price:props.item.price,
     selectedColor:props.item.images[0].shown,
     selectedSize:""
   
   });
 
   function HandleProduct(event) {
-    
+    const {name,value,type,checked}=event.target
     setBagProduct((prevdata) => {
-      return { ...prevdata, [event.target.name]: event.target.value };
+      return { ...prevdata, [name]:value};
     });
 
   }
@@ -139,9 +142,7 @@ const scrollTo=useRef()
       scrollTo.current.scrollIntoView({behavior:"smooth", block:"end",inline: "nearest"})
      
     }
-    if (bagproduct.selectedSize) {
-     
-    }
+
   }
 
 
