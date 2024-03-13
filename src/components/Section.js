@@ -7,7 +7,7 @@ import airmaxData from "../AirMaxShoesData";
 import AllShoesData from "../AllShoesData";
 import { colors } from "@mui/material";
 import classNames from "classnames";
-
+import Filter from "./Filter";
 function Section(props) {
   // useEffect(() => {
   //   const sortBy_btn = document.getElementById("sortby-btn");
@@ -34,7 +34,7 @@ function Section(props) {
   //   });
   // },[ShoesData]);
   console.log();
-  const [filterVisibility, setfilterVisibility] = useState(true);
+  const [filterVisibility, setfilterVisibility] = useState(false);
 
   function openFilterSection(params) {
     setfilterVisibility((prevdata) => {
@@ -48,9 +48,17 @@ function openSortBy(params) {
     return !prevdata;
   });
 }
+const [bigFiltervisible,setbigFiltervisible]=useState(false)
+
+function BigFilterF(params) {
+  setbigFiltervisible((prevdata)=>{
+return !prevdata
+  })
+}
 
 
-  AllShoesData.map((i) => {});
+
+  
 
   const cards = props.data.map((item) => {
     if (item.isexist) {
@@ -83,14 +91,14 @@ function openSortBy(params) {
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
           {props.data && (
-            <h1 className=" font-bold pl-2 p-5 text-nowrap  w-max text-xl  font-serif">
+            <h1 className=" font-bold pl-2 p-5 text-nowrap  w-max text-lg  font-serif">
               {HeadText} Shoes & Sneakers({props.data.length})
             </h1>
           )}
 
-          <div className="sm:flex hidden space-x-1 relative">
+          <div className="md:flex sm:text-lg hidden space-x-1 relative">
             <button
-              className=" sm:flex sm:text-xl  p-5 justify-between font-serif font-semibold text-nowrap w-max"
+              className=" sm:flex    p-5 justify-between font-serif font-semibold text-nowrap w-max"
               id="filter-btn"
               onClick={openFilterSection}
             >
@@ -100,7 +108,7 @@ function openSortBy(params) {
               </span>
             </button>
             <button
-              className="flex justify-between sm:text-xl   p-5 font-serif font-semibold text-nowrap w-max"
+              className="flex justify-between    p-5 font-serif font-semibold text-nowrap w-max"
               aria-expanded="false"
               aria-controls="sort-by"
               id="sortby-btn"
@@ -135,7 +143,7 @@ function openSortBy(params) {
           </div>
         </div>
         {/* filter section in small screens */}
-        <div className="flex border-b border-t border-slate-850 p-3 pl-5 space-x-8 max-w-full overflow-x-scroll  flex-nowrap font-serif font-semibold text-nowrap sm:hidden">
+        <div className="flex border-b border-t border-slate-850 p-3 pl-5 space-x-8 max-w-full overflow-x-scroll  flex-nowrap font-serif font-semibold text-nowrap md:hidden">
           <h1 className=" cursor-pointer text-start font-serif hover:bg-slate-950 hover:text-white p-1 rounded">
             Lifestyle
           </h1>
@@ -172,8 +180,15 @@ function openSortBy(params) {
             Nike By You
           </h1>
         </div>
+        <div className="flex md:hidden w-full items-center justify-between pl-6 p-3 border-t mt-2 font-Roboto text-lg font-medium ">
+          <h1>Results</h1>
+          <button onClick={BigFilterF} className="border flex w-max space-x-2 p-2 rounded-lg">
+            <span>Filter</span>
+            <span><i className="bi bi-filter  text-black text-2xl font-semibold"></i></span>
+          </button>
+        </div>
         {/* product container */}
-        <div className="flex relative p-2 w-full" id="product-container">
+        <div className="flex relative mt-3 p-2 w-full" id="product-container">
           {/* filter section in big screens */}
           <div
             className={classNames(
@@ -296,6 +311,7 @@ function openSortBy(params) {
           </div>
         </div>
       </div>
+      <Filter bigFiltervisible={bigFiltervisible} BigFilterF={BigFilterF}/>
     </>
   );
 }

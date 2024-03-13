@@ -9,7 +9,6 @@ import MiniBag from "./MiniBag";
 import classNames from "classnames";
 import SearchCart from "../SearchCart";
 
-
 function Navbar(props) {
   useEffect(() => {
     const men_women_menu = document.querySelector(".men-women-menu");
@@ -21,11 +20,6 @@ function Navbar(props) {
     const new_featured_menu = document.getElementById("new-featured-menu");
     const accessories_menu = document.getElementById("accessories-menu");
     const accessories_item = document.getElementById("accessories-item");
-
-
-
-
-
 
     function dropdown_hover() {
       men_item.addEventListener("mouseenter", (e) => {
@@ -154,18 +148,21 @@ function Navbar(props) {
       }
     }
   }, []);
-
-  const [openNav,setopenNav]=useState(false)
-
-function Navtoggle(params) {
-  setopenNav((prevdata)=>{
-return !prevdata
-  })
-}
-
-
-  console.log("navbar render");
+const [Data,setData]=useState([])
  
+
+
+  const [openNav, setopenNav] = useState(false);
+
+  function Navtoggle(params) {
+    setopenNav((prevdata) => {
+      return !prevdata;
+    });
+  }
+
+
+  console.log("navbar render" ,props);
+
   return (
     <>
       <div className="navbar  sticky top-0 left-0 z-40 flex h-max w-full max-w-full items-center  justify-between shadow-md">
@@ -174,8 +171,7 @@ return !prevdata
           className="relative h-max w-full flex-col items-start justify-between bg-slate-200"
         >
           <MiniBag MiniBagState={props.MiniBagState} item={props.item} />
-          <div className={classNames("overly",{"active":openNav})}
-          ></div>
+          <div className={classNames("overly", { active: openNav })}></div>
           {/* logo and navbar lists */}
           <div
             id="nav-top"
@@ -196,9 +192,8 @@ return !prevdata
               onClick={Navtoggle}
             >
               <div className="flex p-1 justify-center w-max  items-center reletive ">
-                <div className={classNames("toggle"
-                ,{"aria-active":openNav})}
-                
+                <div
+                  className={classNames("toggle", { "aria-active": openNav })}
                 >
                   <span className=""></span>
                   <span className=""></span>
@@ -213,10 +208,9 @@ return !prevdata
             >
               <div
                 className={classNames(
-                  "relative sm:space-x-1 md:space-x-8  sm:space-y-0 sm:text-xl  justify-start md:justify-center flex flex-col sm:flex-row w-full items-center  space-y-6 p-3 text-lg  sm:mt-0"
-             ,{"active":openNav}
-                  )}
-                
+                  "relative sm:space-x-1 md:space-x-8  sm:space-y-0 sm:text-xl  justify-start md:justify-center flex flex-col sm:flex-row w-full items-center  space-y-6 p-3 text-lg  sm:mt-0",
+                  { active: openNav }
+                )}
                 id="nav-list"
               >
                 <button
@@ -619,8 +613,13 @@ return !prevdata
             </div>
           </div>
           {/* search and cart */}
-        <SearchCart CartAmount={props.CartAmount}
-        MiniBagState={props.MiniBagState}/>
+          <SearchCart
+          HandleSearch={props.HandleSearch}
+          searchresult={props.searchresult}
+          data={props.data}
+            CartAmount={props.CartAmount}
+            MiniBagState={props.MiniBagState}
+          />
         </div>
       </div>
     </>

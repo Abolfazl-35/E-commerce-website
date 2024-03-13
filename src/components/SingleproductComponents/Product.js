@@ -3,9 +3,8 @@ import classNames from "classnames";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
-function Product(props,ref) {
-  console.log(ref)
+import Details from "./Details";
+function Product(props, ref) {
   let { images } = props.item;
   // var settings = {
   //   dots: true,
@@ -59,16 +58,14 @@ function Product(props,ref) {
   //     />
   //   );
   // }
-  let imageRef=useRef()
-  imageRef.current=images.map((i)=>{
+  let imageRef = useRef();
+  imageRef.current = images.map((i) => {
     if (i) {
-      return i
+      return i;
     }
-  })
-console.log(props)
-const scrollTo=useRef()
+  });
 
-
+  const scrollTo = useRef();
 
   //  useEffect(()=>{
   //      const Values=Object.values(props.item.images)
@@ -97,7 +94,7 @@ const scrollTo=useRef()
       }
     });
   }
-  
+
   const [fixedbtnvisible, setsticktbtnvisible] = useState();
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -109,49 +106,42 @@ const scrollTo=useRef()
   const [detailPageVisible, setDetailPageVisible] = useState(false);
 
   const [bagproduct, setBagProduct] = useState({
-   
-    id:props.item.id,
-    name:props.item.name,
-    price:props.item.price,
-    selectedColor:props.item.images[0].shown,
-    selectedSize:""
-  
+    id: props.item.id,
+    name: props.item.name,
+    price: props.item.price,
+    selectedColor: props.item.images[0].shown,
+    selectedSize: "",
+    image:props.item.images[0].image
   });
 
   function HandleProduct(event) {
-    const {name,value,type,checked}=event.target
+    const { name, value, type, checked } = event.target;
     setBagProduct((prevdata) => {
-      return { ...prevdata, [name]:value};
+      return { ...prevdata, [name]: value,image:props.item.images[imageIndex].image };
     });
-
   }
   // useEffect(() => {
   //   scrollTo.current.scrollIntoView();
   // },[]);
- 
 
   function HandleDetailPage(params) {
     setDetailPageVisible((prevdata) => {
       return !prevdata;
     });
   }
-   
+
   function AddtoBag(e) {
-
     if (!bagproduct.selectedSize) {
-      scrollTo.current.scrollIntoView({behavior:"smooth", block:"end",inline: "nearest"})
-     
+      scrollTo.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
     }
-
   }
 
+  console.log(bagproduct);
 
-
-
-
-console.log(bagproduct)
-
-  
   return (
     <>
       {props && (
@@ -285,7 +275,7 @@ console.log(bagproduct)
               </div>
             </div>
 
-            <div  className="size--container md:max-h-[680px] w-full overflow-y-scroll p-1 flex flex-col  md:w-4/12  ">
+            <div className="size--container md:max-h-[680px] w-full overflow-y-scroll p-1 flex flex-col  md:w-4/12  ">
               {/* Header in big screens */}
               <div className="p-1 hidden md:block">
                 <h1 className="font-serif text-2xl ">{props.item.dec}</h1>
@@ -296,48 +286,55 @@ console.log(bagproduct)
                 </p>
               </div>
               {/* Size and descrebtion section */}
-              <form ref={scrollTo} className={classNames("h-max w-full flex flex-col  p-1 mt-1",{"border border-transparent":bagproduct.selectedSize},{"border border-red-500":!bagproduct})}
-              onSubmit={AddtoBag}>
+              <form
+                ref={scrollTo}
+                className={classNames(
+                  "h-max w-full flex flex-col  p-1 mt-1",
+                  { "border border-transparent": bagproduct.selectedSize },
+                  { "border border-red-500": !bagproduct }
+                )}
+                onSubmit={AddtoBag}
+              >
+                {/* images form */}
                 <div className="flex gap-1 flex-nowrap overflow-x-auto">
-            {imageRef.current.map((i,index)=>{
-              
-            return (<div>
-            <input
-            value={i.shown}
-            id={i.shown}
-            type="radio"
-            name="selectedColor"
-            className="hidden peer"
-           onChange={HandleProduct}
-           checked={bagproduct.selectedColor === i.shown}
-           
-            />
-           <label htmlFor={i.shown} className="w-full flex border  cursor-pointer peer-checked:border-green-500">
-<img
-alt="colorshown"
-src={i.image}
-width={100}
-onClick={() => setimageIndex(index)}
-/>
-
-           </label>
-            </div>
-            
-            )
-            })}
-          </div>
+                  {imageRef.current.map((i, index) => {
+                    return (
+                      <div>
+                        <input
+                          value={i.shown}
+                          id={i.shown}
+                          type="radio"
+                          name="selectedColor"
+                          className="hidden peer"
+                          onChange={HandleProduct}
+                          checked={bagproduct.selectedColor === i.shown}
+                        />
+                        <label
+                          htmlFor={i.shown}
+                          className="w-full flex border  cursor-pointer peer-checked:border-green-500"
+                        >
+                          <img
+                            alt="colorshown"
+                            src={i.image}
+                            width={100}
+                            onClick={() => setimageIndex(index)}
+                          />
+                        </label>
+                      </div>
+                    );
+                  })}
+                </div>
                 <div className="flex w-full justify-between pt-8 ">
                   <h1 className="font-serif text-xl ">Select Size</h1>
                   <button className="font-serif text-xl text-greyish-0">
                     Size Guid
                   </button>
-                
                 </div>
                 {/* sizes */}
-                <div  className="p-2 w-full pt-8 mt-2 grid grid-cols-5 md:grid-cols-3 gap-1">
+                <div className="p-2 w-full pt-8 mt-2 grid grid-cols-5 md:grid-cols-3 gap-1">
                   {Object.values(props.item.sizes).map((i) => {
                     return (
-                      <div  className="w-full h-full ">
+                      <div className="w-full h-full ">
                         <input
                           value={i}
                           id={i}
@@ -349,9 +346,9 @@ onClick={() => setimageIndex(index)}
                         />
                         <label
                           htmlFor={i}
-                          className={classNames("flex justify-center w-full p-4 cursor-pointer text-center bg-slate-200 rounded peer-checked:bg-gray-500",)
-                        }
-                         
+                          className={classNames(
+                            "flex justify-center w-full p-4 cursor-pointer text-center bg-slate-200 rounded peer-checked:bg-gray-500"
+                          )}
                         >
                           {i}
                         </label>
@@ -374,16 +371,15 @@ onClick={() => setimageIndex(index)}
                 {/* buttons for submit */}
                 <div className="flex flex-col space-y-4 w-full mt-6 p-2">
                   <button
-                  type="button"
-                  onClick={()=>{
-                    AddtoBag()
-                    props.HandleProductData(bagproduct)
-                  }}
+                    type="button"
+                    onClick={() => {
+                      AddtoBag();
+                      props.HandleProductData(bagproduct);
+                      props.HandleMiniBag(bagproduct)
+                    }}
                     ref={fixedStickybtn}
                     className="w-full sticky bottom-0 bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 "
-                   
                   >
-                    
                     Add to Bag
                   </button>
                   <button className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 ">
@@ -393,46 +389,13 @@ onClick={() => setimageIndex(index)}
                     </span>
                   </button>
                 </div>
-              
               </form>
-              <div className="w-full flex space-y-1 flex-col p-2 text-lg font-serif">
-                <h1 className="">Shipping</h1>
 
-                <p>You'll see pur shipping options at Checkout</p>
-                <br />
-                <p>Free Pickup</p>
-                <Link>
-                  <p className=" underline underline-offset-8">Find a Store</p>
-                </Link>
-              </div>
-              <div className="p-2 mt-3">
-                <p>
-                  Get grounded, stay grounded. The AJ XXXVIII is all about
-                  groundwork—we're talking about your running, your cutting,
-                  your turn-around jumpers—with low-to-the-court cushioning and
-                  a secure upper that helps support every move. It's also
-                  designed with sustainability in mind, with at least 20%
-                  recycled content by weight. So you can hit 'em with that
-                  windshield-wiper fake and feel good about more than just
-                  sinking a bucket for your team.
-                </p>
-              </div>
-              <div className="pt-5 mt-3">
-                <ul className="list-disc list-inside font-serif text-base">
-                  <li className=" uppercase">Shown:<span className="">{imageRef.current[imageIndex].shown}</span></li>
-                  <li className="mt-2 uppercase">Style:DD1391-601</li>
-                </ul>
-              </div>
-              <div>
-              <button
-                onClick={HandleDetailPage}
-                className="p-2 font-serif cursor-pointer underline underline-offset-8"
-              >
-                View Product Details
-              </button>
+              <Details
+                HandleDetailPage={HandleDetailPage}
+                Shown={imageRef.current[imageIndex].shown}
+              />
             </div>
-            </div>
-         
 
             {/* product detail */}
             {detailPageVisible && (
@@ -509,28 +472,29 @@ onClick={() => setimageIndex(index)}
                 </div>
               </div>
             )}
-
-    
           </div>
-         
         </div>
       )}
-             {!fixedbtnvisible && (
-              <button
-              type="button"
-                className="w-full sm:hidden fixed bottom-0 p-2 text-center font-serif  bg-slate-950 text-slate-200"
-                      // onClick={() => {props.Handleclick(bagproduct)}}
-                //       props.HandleMiniBag(props.item)
-                //       props.HandleProduct(props.item)
-                //    }
 
-                //       }
-                onClick={()=>{AddtoBag()
-                  props.HandleProductData(bagproduct)}}
-              >
-                ADD To Cart
-              </button>
-            )}
+      {!fixedbtnvisible && (
+        <button
+          type="button"
+          className="w-full sm:hidden fixed bottom-0 p-2 text-center font-serif  bg-slate-950 text-slate-200"
+          // onClick={() => {props.Handleclick(bagproduct)}}
+          //       props.HandleMiniBag(props.item)
+          //       props.HandleProduct(props.item)
+          //    }
+
+          //       }
+          onClick={() => {
+            AddtoBag();
+            props.HandleProductData(bagproduct);
+            props.HandleMiniBag(bagproduct);
+          }}
+        >
+          ADD To Cart
+        </button>
+      )}
     </>
   );
 }

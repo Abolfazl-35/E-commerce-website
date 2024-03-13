@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useEffect } from "react";
+import { useState, useRef,useMemo } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -17,7 +17,7 @@ import VideoSection from "./components/SignUpPage/VideoSection";
 import MemberBenefitsSection from "./components/SignUpPage/MemberBenefitsSection";
 import Slider from "react-slick";
 import SimpleSlider from "./components/SignUpPage/SimpleSlider";
-import Product from "./components/Product";
+import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
 
 function App() {
@@ -68,11 +68,7 @@ function App() {
   let [Cart, Setcart] = useState([]);
 
   function AddToCart(product) {
- if (product.selectedSize) {
-  
- }
-
-    const NewProduct = Cart.find((i) => {
+   const NewProduct = Cart.find((i) => {
       return (
         i.selectedSize === product.selectedSize &&
         i.selectedColor === product.selectedColor
@@ -93,18 +89,22 @@ function App() {
     }
     // const Basket={...NewProduct}
   }
-
+console.log(Cart)
   const [MiniBagState, setMiniBag] = useState(false);
 
-  function MiniBag(params) {
-    setMiniBag((prevdata) => {
+  function MiniBag(item) {
+   if (item.selectedSize && item.selectedColor) {
+      setMiniBag((prevdata) => {
       return true;
     });
-    setTimeout(() => {
+        setTimeout(() => {
       setMiniBag((prevdata) => {
         return false;
       });
     }, "3000");
+   }
+
+
   }
 
   const [product, setproduct] = useState([]);
@@ -120,6 +120,46 @@ function App() {
       return { ...prevformdata, [event.target.name]: event.target.value };
     });
   }
+  const[Searchresult,setSearchresult]=useState({
+    Search:""
+  })
+  function HandleSearch(event) {
+    const {name,value}=event.target
+        setSearchresult((prevdata)=>{
+        return {...prevdata,[name]:value}
+         })
+    if (!value) return setShoesData(AllShoesData)
+
+  }
+
+
+  // useEffect(()=>{
+  //   if (!Searchresult) {
+  //     setShoesData(AllShoesData)
+  //   }else{
+  //    const resultArray=ShoesData.filter((i)=>{
+  //   return i.dec.toLowerCase().includes(Searchresult.Search.toLowerCase())
+  //    })
+
+  //    setShoesData(resultArray)
+  //   }
+
+
+
+  //   },[Searchresult.Search,Searchresult])
+const searchkeys=["dec","brand","name"]
+
+  const search=(data)=>{
+    return data.filter((i)=>{
+      return searchkeys.some((item)=>{
+        return i[item].toLowerCase().trim().replace(" ","").includes(Searchresult.Search.trim().replace(" ","").toLowerCase())
+      })
+         
+
+    })
+ 
+  }
+
 
   console.log("app render");
 
@@ -132,16 +172,20 @@ function App() {
             element={
               <>
                 <Navbar
+                HandleSearch={HandleSearch}
+                searchresult={Searchresult}
+                 data={ShoesData}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
-                  item={product}
+                  item={Cart[Cart.length-1]}
                 />
                 <ShoesMenu />
                 <Main />
                 <ShopHeader />
                 <Section
+                
                   // Handleclick={AddToCart}
-                  data={ShoesData}
+                  data={search(ShoesData)}
                   // HandleImage={changeimage}
                   HandlePriceHigh={PriceHighLow}
                   HandlePriceLow={PriceLowHigh}
@@ -157,7 +201,13 @@ function App() {
             path="/SignUp"
             element={
               <>
-                <Navbar />
+                <Navbar  
+                HandleSearch={HandleSearch}
+                searchresult={Searchresult}
+                 data={ShoesData}
+                  CartAmount={Cart.length}
+                  MiniBagState={MiniBagState}
+                  item={Cart[Cart.length-1]}/>
                 <SignUp />
                 <Header />
                 <VideoSection />
@@ -179,9 +229,14 @@ function App() {
             path="/Product"
             element={
               <>
-                <Navbar CartAmount={Cart.length} />
+                <Navbar  HandleSearch={HandleSearch}
+                searchresult={Searchresult}
+                 data={ShoesData}
+                  CartAmount={Cart.length}
+                  MiniBagState={MiniBagState}
+                  item={Cart[Cart.length-1]} />
                 <Product
-                 
+                 HandleMiniBag={MiniBag}
                   item={product}
                   Handleclick={AddToCart}
                   HandleProductData={AddToCart}
