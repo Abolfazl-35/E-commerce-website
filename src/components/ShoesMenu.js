@@ -55,18 +55,23 @@ function ShoesMenu() {
   
   
   const [msg,setmsg]=useState(0)
-  let msgTime=setTimeout(()=>{
+  useEffect(()=>{
+    let msgTime=setTimeout(()=>{
     setmsg((prevdata)=>{
       if (prevdata<2) {
-        return ++prevdata
+        return prevdata+1
       }
       if (prevdata===2) {
         clearTimeout(msgTime)
-        return 0
+       return 0
       }
       
     })
+    
   },"4000")
+  },[msg])
+
+  
 
   const msgstyle={transform:`translateX(${-100 * msg}vw)`,transition:".7s"}
 
@@ -74,9 +79,9 @@ function ShoesMenu() {
     <div>
       <div className="mt-2 flex w-full items-center justify-start">
        
-        <div className="flex w-full overflow-hidden ">
+        <div  className="flex w-full overflow-hidden ">
           <ul style={msgstyle}
-            className="flex relative justify-center w-max p-2"
+            className="flex relative justify-center w-[300vw] p-2"
             id="msg-section"
           >
             <li 

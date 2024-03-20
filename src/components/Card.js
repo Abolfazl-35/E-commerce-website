@@ -72,7 +72,7 @@ imagesIn.current=images.map((i)=>{
   return (
     <>
       <div className="card rounded flex-col w-full border-2 h-max  shadow-lg ">
-        <div className="h-[460px] rounded   ">
+        <div className="h-[420px] rounded   ">
           <Link to="./product">
             <img
               className="h-full w-full rounded object-cover "

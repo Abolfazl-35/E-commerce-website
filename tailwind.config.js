@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor:{
-        "greyish":["rgb(117, 117, 117)"]
+        "greyish":["rgb(117, 117, 117)"],
+        "main":["#fff"],
+        "overly":["rgba(0, 0, 0, 50%)"]
       },
       textColor:{
 "greyish":["rgb(117, 117, 117)"]

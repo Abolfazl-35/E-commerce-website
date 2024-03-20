@@ -86,7 +86,7 @@ return !prevdata
 
   console.log("section render");
   return (
-    <>
+    <div className="container mx-auto">
       <div className=" relative flex  sm:p-4 flex-col mt-2">
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
@@ -312,7 +312,7 @@ return !prevdata
         </div>
       </div>
       <Filter bigFiltervisible={bigFiltervisible} BigFilterF={BigFilterF}/>
-    </>
+    </div>
   );
 }
 

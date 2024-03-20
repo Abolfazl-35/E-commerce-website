@@ -143,9 +143,10 @@ function Product(props, ref) {
   console.log(bagproduct);
 
   return (
+    
     <>
       {props && (
-        <div className="flex container mx-auto    flex-col  p-2">
+        <div className=" container mx-auto      p-2">
           <div
             className={classNames(
               "overly--detail fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-40   bg-[rgba(0,0,0,50%)]",

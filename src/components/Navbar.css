@@ -55,7 +55,7 @@
   }
   #open-menu-btn {
     display: block;
-    z-index: 9999;
+    z-index:10000;
   }
 
   #search-input {
@@ -305,7 +305,7 @@
   transform-origin: left;
 }
 .overly {
-  z-index: 1000;
+  z-index: 0;
   opacity: 0;
   background-color: rgba(0, 0, 0, 50%);
   position: fixed;

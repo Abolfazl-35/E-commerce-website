@@ -193,7 +193,7 @@ const [Data,setData]=useState([])
             >
               <div className="flex p-1 justify-center w-max  items-center reletive ">
                 <div
-                  className={classNames("toggle", { "aria-active": openNav })}
+                  className={classNames({"toggle":!props.searchresult.Search}, { "aria-active": openNav },{"hidden":props.searchresult.Search})}
                 >
                   <span className=""></span>
                   <span className=""></span>
@@ -619,6 +619,7 @@ const [Data,setData]=useState([])
           data={props.data}
             CartAmount={props.CartAmount}
             MiniBagState={props.MiniBagState}
+            CloseSearch={props.CloseSearch}
           />
         </div>
       </div>

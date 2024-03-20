@@ -14,11 +14,10 @@ import AllShoesData from "./AllShoesData";
 import JordanData from "./JordanShoesData";
 import Header from "./components/SignUpPage/Header";
 import VideoSection from "./components/SignUpPage/VideoSection";
-import MemberBenefitsSection from "./components/SignUpPage/MemberBenefitsSection";
-import Slider from "react-slick";
 import SimpleSlider from "./components/SignUpPage/SimpleSlider";
 import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
+import classNames from "classnames";
 
 function App() {
   let [ShoesData, setShoesData] = useState(AllShoesData);
@@ -89,7 +88,7 @@ function App() {
     }
     // const Basket={...NewProduct}
   }
-console.log(Cart)
+
   const [MiniBagState, setMiniBag] = useState(false);
 
   function MiniBag(item) {
@@ -111,7 +110,7 @@ console.log(Cart)
   function HandleProduct(newProduct) {
     setproduct((prevdat) => newProduct);
   }
-  console.log(Cart);
+ 
   const [EmailData, setEmailData] = useState({ Email: "" });
 
   function HandleEmail(event) {
@@ -131,53 +130,63 @@ console.log(Cart)
     if (!value) return setShoesData(AllShoesData)
 
   }
+const [filterItem,setfilterItem]=useState([])
+
+  useEffect(()=>{
+    if (Searchresult.Search) {
+      const resultArray=ShoesData.filter((i)=>{
+    return i.dec.toLowerCase().includes(Searchresult.Search.toLowerCase())
+     })
+
+     setfilterItem(resultArray.slice(1,6))
+    }else if (!Searchresult.Search) {
+      setfilterItem([])
+    }
+ 
+    
 
 
-  // useEffect(()=>{
-  //   if (!Searchresult) {
-  //     setShoesData(AllShoesData)
-  //   }else{
-  //    const resultArray=ShoesData.filter((i)=>{
-  //   return i.dec.toLowerCase().includes(Searchresult.Search.toLowerCase())
-  //    })
 
-  //    setShoesData(resultArray)
-  //   }
+    },[Searchresult.Search,Searchresult])
+    console.log(filterItem)
 
+function CloseSearch(params) {
+  setSearchresult((prevdata)=>{
+    return{...prevdata,Search:""}
+  })
+}
 
+// const searchkeys=["dec","brand","name"]
 
-  //   },[Searchresult.Search,Searchresult])
-const searchkeys=["dec","brand","name"]
-
-  const search=(data)=>{
-    return data.filter((i)=>{
-      return searchkeys.some((item)=>{
-        return i[item].toLowerCase().trim().replace(" ","").includes(Searchresult.Search.trim().replace(" ","").toLowerCase())
-      })
+//   const search=(data)=>{
+//     return data.filter((i)=>{
+//       return searchkeys.some((item)=>{
+//         return i[item].toLowerCase().trim().replace(" ","").includes(Searchresult.Search.trim().replace(" ","").toLowerCase())
+//       })
          
 
-    })
+//     })
  
-  }
+//   }
 
 
   console.log("app render");
 
   return (
-    <>
+    <div className={classNames("")}>
       <Router>
         <Routes>
-          <Route
-            path="/"
+          <Route path="/"
+            
             element={
               <>
                 <Navbar
                 HandleSearch={HandleSearch}
                 searchresult={Searchresult}
-                 data={ShoesData}
+                 data={filterItem}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
-                  item={Cart[Cart.length-1]}
+                 CloseSearch={CloseSearch}
                 />
                 <ShoesMenu />
                 <Main />
@@ -185,7 +194,7 @@ const searchkeys=["dec","brand","name"]
                 <Section
                 
                   // Handleclick={AddToCart}
-                  data={search(ShoesData)}
+                  data={ShoesData}
                   // HandleImage={changeimage}
                   HandlePriceHigh={PriceHighLow}
                   HandlePriceLow={PriceLowHigh}
@@ -197,8 +206,8 @@ const searchkeys=["dec","brand","name"]
             }
           />
 
-          <Route
-            path="/SignUp"
+          <Route path="/SignUp"
+           
             element={
               <>
                 <Navbar  
@@ -207,7 +216,7 @@ const searchkeys=["dec","brand","name"]
                  data={ShoesData}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
-                  item={Cart[Cart.length-1]}/>
+                  />
                 <SignUp />
                 <Header />
                 <VideoSection />
@@ -217,21 +226,21 @@ const searchkeys=["dec","brand","name"]
             }
           />
 
-          <Route
-            path="/SignIn"
+          <Route path="/SignIn"
+            
             element={<SignIn HandleEmail={HandleEmail} EmailData={EmailData} />}
           />
-          <Route
-            path="/SignInForm"
+          <Route path="/SignInForm"
+            
             element={<SignInForm EmailData={EmailData} />}
           />
-          <Route
-            path="/Product"
+          <Route path="/Product"
+            
             element={
               <>
                 <Navbar  HandleSearch={HandleSearch}
                 searchresult={Searchresult}
-                 data={ShoesData}
+                 data={filterItem}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
                   item={Cart[Cart.length-1]} />
@@ -246,7 +255,7 @@ const searchkeys=["dec","brand","name"]
           />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 
