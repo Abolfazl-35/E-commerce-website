@@ -31,8 +31,10 @@ function openSearch(params) {
   //   });
   // }
   const minicards = props.data.map((searchdata) => {
-    if (props.data) {
+   if (props.data) {
       return <MiniCard data={searchdata} key={searchdata.id} />;
+    }else{
+      return null
     }
   });
 console.log(props)
@@ -63,17 +65,19 @@ console.log(props)
 
         
       </div>
-        <div className="bottom flex h-max w-full items-center justify-between ">
+        <div className="bottom relative flex h-max w-full items-center justify-between ">
           <form
             style={{ transition: "all ease-in 250ms" }}
+            
             action="submit"
+            
             className={classNames(
               {
                 "ml-2 flex w-max items-start justify-start rounded bg-transparent":
                   !searchState ,
               },
               {
-                " fixed flex border shadow-lg  border-slate-950 flex-col top-0 justify-start items-center min-w-[100vw] bg-main-0 h-[75vh] overflow-y-scroll  p-2 z-[9999] ":
+                " fixed flex border shadow-lg  border-slate-950 flex-col top-0 justify-start items-center min-w-[100vw] bg-main-0 h-[75vh] overflow-y-scroll  p-2 z-[999] ":
                  searchState,
               }
             )}
@@ -91,7 +95,7 @@ console.log(props)
       />
      </div>
      <div className={classNames("flex w-1/3 items-center",
-      {"flex items-center relative  w-2/3":searchState})}>
+      {"flex items-center relative   w-2/3":searchState})}>
                 <label htmlFor="searchinput"
                 className="absolute left-7">
                 <i
@@ -127,8 +131,8 @@ console.log(props)
                 Cancel
               </button>
             </div>
-            <div className={classNames("p-2 mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2" ,
-            {"hidden":!searchState})}
+            <div className={classNames("p-2 mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 h-full  gap-2" ,
+            {"":!searchState})}
           >
               {minicards}
               </div>

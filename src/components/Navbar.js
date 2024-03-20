@@ -187,13 +187,15 @@ const [Data,setData]=useState([])
             </Link>
 
             <div
-              className="absolute right-[15px] top-5 w-max cursor-pointer"
+              className={classNames("absolute right-[15px] top-5 w-max cursor-pointer",
+)}
               id="open-menu-btn"
               onClick={Navtoggle}
             >
-              <div className="flex p-1 justify-center w-max  items-center reletive ">
+              <div className={classNames(        "flex p-1 justify-center w-max  items-center reletive")}>
+
                 <div
-                  className={classNames({"toggle":!props.searchresult.Search}, { "aria-active": openNav },{"hidden":props.searchresult.Search})}
+                  className={classNames("toggle", { "aria-active": openNav },)}
                 >
                   <span className=""></span>
                   <span className=""></span>

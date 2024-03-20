@@ -8,6 +8,7 @@ import AllShoesData from "../AllShoesData";
 import { colors } from "@mui/material";
 import classNames from "classnames";
 import Filter from "./Filter";
+import FilterSection from "./FilterSection";
 function Section(props) {
   // useEffect(() => {
   //   const sortBy_btn = document.getElementById("sortby-btn");
@@ -86,7 +87,7 @@ return !prevdata
 
   console.log("section render");
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className=" relative flex  sm:p-4 flex-col mt-2">
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
@@ -190,9 +191,9 @@ return !prevdata
         {/* product container */}
         <div className="flex relative mt-3 p-2 w-full" id="product-container">
           {/* filter section in big screens */}
-          <div
+          {/* <div
             className={classNames(
-              " flex-col border-b border-slate-850 p-5 md:text-xl pl-5 space-y-5  font-serif font-semibold  hidden sm:flex",
+              " flex-col border-b border-slate-850 p-5 md:text-base pl-5 space-y-5   font-serif font-semibold  hidden md:flex sm:text-base",
               { open: filterVisibility }
             )}
             id="filter-col"
@@ -231,13 +232,18 @@ return !prevdata
             <h1 className=" cursor-pointer text-start font-serif hover:bg-slate-950 hover:text-white p-1 rounded">
               Nike By You
             </h1>
-          </div>
+          </div> */}
+<FilterSection
+Handleset={props.Handleset}
+filterVisibility={filterVisibility}
 
+
+/>
           {/* product card */}
 
           <div
             className={classNames(
-              "w-full mt-3 grid    h-max     gap-5",
+              "w-full mt-3 grid justify-center items-center    h-max     gap-5",
               { "grid-cols-1 md:grid-cols-1 lg:grid-cols-2": filterVisibility },
               { "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ": !filterVisibility }
             )}

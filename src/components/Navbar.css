@@ -39,7 +39,7 @@
   }
   #nav-list {
     width: 240px;
-    z-index: 1500;
+    z-index: 90;
     position: fixed;
     height: 100vh;
     top: 0;
@@ -55,7 +55,7 @@
   }
   #open-menu-btn {
     display: block;
-    z-index:10000;
+    z-index: 100;
   }
 
   #search-input {
