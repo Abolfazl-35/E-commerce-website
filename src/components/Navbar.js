@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Logo from "../images/logo/trust-logo-4.png";
 import "../components/Navbar.css";
 
-import SignIn from "./SignInPage/SignIn";
 import MiniBag from "./MiniBag";
 import classNames from "classnames";
 import SearchCart from "../SearchCart";
@@ -148,9 +147,23 @@ function Navbar(props) {
       }
     }
   }, []);
-const [Data,setData]=useState([])
- 
 
+
+  const [searchState, setsearchState] = useState(false);
+  useEffect(() => {
+    setsearchState(() => {
+      if (props.searchresult.Search) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }, [props]);
+  function openSearch(params) {
+    setsearchState((prevdata) => {
+      return true;
+    });
+  }
 
   const [openNav, setopenNav] = useState(false);
 
@@ -160,8 +173,7 @@ const [Data,setData]=useState([])
     });
   }
 
-
-  console.log("navbar render" ,props);
+  console.log(searchState);
 
   return (
     <>
@@ -171,7 +183,12 @@ const [Data,setData]=useState([])
           className="relative h-max w-full flex-col items-start justify-between bg-slate-200"
         >
           <MiniBag MiniBagState={props.MiniBagState} item={props.item} />
-          <div className={classNames("overly", { active: openNav })}></div>
+          
+          <div 
+          onClick={Navtoggle}
+          className={classNames("overly", { active: openNav })}>
+
+          </div>
           {/* logo and navbar lists */}
           <div
             id="nav-top"
@@ -185,17 +202,25 @@ const [Data,setData]=useState([])
                 <img src={Logo} className="h-full w-full" alt="logo" />
               </div>
             </Link>
-
+{/* navbar btn in small screens */}
             <div
-              className={classNames("absolute right-[15px] top-5 w-max cursor-pointer",
-)}
+              className={classNames(
+                {
+                  "absolute z-[999]  right-[15px] top-5 w-max cursor-pointer":
+                    !searchState,
+                },
+                { "hidden": searchState }
+              )}
               id="open-menu-btn"
               onClick={Navtoggle}
             >
-              <div className={classNames(        "flex p-1 justify-center w-max  items-center reletive")}>
-
+              <div
+                className={classNames(
+                  "flex p-1 justify-center w-max  items-center reletive"
+                )}
+              >
                 <div
-                  className={classNames("toggle", { "aria-active": openNav },)}
+                  className={classNames("toggle", { "aria-active": openNav })}
                 >
                   <span className=""></span>
                   <span className=""></span>
@@ -616,9 +641,11 @@ const [Data,setData]=useState([])
           </div>
           {/* search and cart */}
           <SearchCart
-          HandleSearch={props.HandleSearch}
-          searchresult={props.searchresult}
-          data={props.data}
+            HandleSearch={props.HandleSearch}
+            searchresult={props.searchresult}
+            searchstate={searchState}
+            openSearch={openSearch}
+            data={props.data}
             CartAmount={props.CartAmount}
             MiniBagState={props.MiniBagState}
             CloseSearch={props.CloseSearch}

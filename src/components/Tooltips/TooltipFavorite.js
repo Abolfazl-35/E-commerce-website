@@ -1,8 +1,7 @@
 import * as React from "react";
-
-import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip from "@mui/material/Tooltip";
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Fade } from "@mui/material";
 
 export default function BasicTooltip() {
@@ -14,9 +13,8 @@ export default function BasicTooltip() {
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 600 }}
     >
-      <IconButton className="w-8 max-h-12">
-        <i className="bi bi-heart text-xl mt-1 font-semibold text-slate-950 sm:text-2xl"></i>
-      </IconButton>
+      <FavoriteBorderIcon sx={{fontSize:35}} className="pt-1">
+      </FavoriteBorderIcon>
     </Tooltip>
   );
 }

@@ -13,7 +13,7 @@ function Filter(props) {
       return { ...prevdata, [event.target.name]: event.target.value };
     });
   }
-  console.log(FilterForm);
+ 
 
   useEffect(() => {
     if (props.bigFiltervisible) {
@@ -27,7 +27,7 @@ function Filter(props) {
     }
 
   }, [props]);
-  console.log(props);
+
   return (
     <>
       <div

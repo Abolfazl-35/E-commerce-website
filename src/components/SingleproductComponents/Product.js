@@ -1,71 +1,73 @@
 import { Label } from "@mui/icons-material";
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Details from "./Details";
-function Product(props, ref) {
-  let { images } = props.item;
-  // var settings = {
-  //   dots: true,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
+import AllShoesData from "../../AllShoesData";
+import JordanShoesData from "../../JordanShoesData";
+import SingleProductImages from "./SingleProductImages";
+import Nextbtn from "./Nextbtn"
+import { name } from "@cloudinary/url-gen/actions/namedTransformation";
 
-  //   className: "slider variable-width",
-  //   prevArrow: <SamplePrevArrow />,
-  //  nextArrow:<SampleNextArrow/>,
-  //  appendDots: dots => (
-  //   <div
-  //  className=""
-  //   >
-  //     <ul className="flex flex-col w-2/12 bg-black"> {dots} </ul>
-  //   </div>
-  // ),
+function Product(props) {
+  const {id}=useParams()
+  console.log(props)
+const singleproduct=AllShoesData.filter((i)=>{
+  if (i.id==id) {
+    return i
+  }else return null
+})
+console.log(singleproduct)
+const scrollTo = useRef();
+const [product,setproduct]=useState(singleproduct)
 
-  // };
-  // function SampleNextArrow(props) {
-  //   const { className, style, onClick } = props;
-  //   return (
-  //     <i
-  //       className="prev-btn bi bi-arrow-right-circle-fill opacity-0 sm:opacity-100 pointer-events-none sm:pointer-events-auto "
-  //       style={{
-  //         ...style,
-  //         position: "absolute",
-  //         top: "12rem",
-  //         right: "2rem",
-  //         fontSize: "2rem",
-  //       }}
-  //       onClick={onClick}
-  //     />
-  //   );
-  // }
+useEffect(()=>{
 
-  // function SamplePrevArrow(props) {
-  //   const { className, style, onClick } = props;
-  //   return (
-  //     <i
-  //       className="prev-btn bi bi-arrow-left-circle-fill opacity-0 sm:opacity-100 pointer-events-none sm:pointer-events-auto z-50 "
-  //       style={{
-  //         ...style,
-  //         position: "absolute",
-  //         top: "12rem",
-  //         left: "2rem",
-  //         fontSize: "2rem",
-  //       }}
-  //       onClick={onClick}
-  //     />
-  //   );
-  // }
-  let imageRef = useRef();
-  imageRef.current = images.map((i) => {
-    if (i) {
-      return i;
-    }
-  });
 
-  const scrollTo = useRef();
+  
+})
+
+
+
+
+
+
+
+
+
+
+
+  const [imageIndex, setimageIndex] = useState(0);
+
+
+
+
+
+
+  const singleproductimages=product.map((i)=>{
+  return <SingleProductImages
+  key={i.id}
+  item={i}
+  index={imageIndex}/>
+})
+
+
+
+
+
+
+  
+
+
+
+
+console.log(imageIndex)
+  console.log(props.item)
+  console.log(product)
+
+
+
 
   //  useEffect(()=>{
   //      const Values=Object.values(props.item.images)
@@ -74,11 +76,11 @@ function Product(props, ref) {
 
   const fixedStickybtn = useRef();
 
-  const [imageIndex, setimageIndex] = useState(0);
 
   function NextSlider(params) {
+    console.log("clicked")
     setimageIndex((prevdata) => {
-      if (prevdata < imageRef.current.length - 1) {
+      if (prevdata < product[0].images.length - 1) {
         return ++prevdata;
       } else {
         return 0;
@@ -86,6 +88,7 @@ function Product(props, ref) {
     });
   }
   function prevslider(params) {
+    console.log("clicked")
     setimageIndex((prevdata) => {
       if (prevdata > 0) {
         return --prevdata;
@@ -106,18 +109,19 @@ function Product(props, ref) {
   const [detailPageVisible, setDetailPageVisible] = useState(false);
 
   const [bagproduct, setBagProduct] = useState({
-    id: props.item.id,
-    name: props.item.name,
-    price: props.item.price,
-    selectedColor: props.item.images[0].shown,
+    type:product[0].type,
+    id:product[0].id,
+    dec: product[0].dec,
+    price: product[0].price,
+    selectedColor:product[0].images[0].shown,
     selectedSize: "",
-    image:props.item.images[0].image
+    image:product[0].images[0].image
   });
 
   function HandleProduct(event) {
     const { name, value, type, checked } = event.target;
     setBagProduct((prevdata) => {
-      return { ...prevdata, [name]: value,image:props.item.images[imageIndex].image };
+      return { ...prevdata, [name]: value,image:product[0].images[imageIndex].image };
     });
   }
   // useEffect(() => {
@@ -140,13 +144,13 @@ function Product(props, ref) {
     }
   }
 
-  console.log(bagproduct);
+  console.log("render product");
 
   return (
     
     <>
-      {props && (
-        <div className=" container mx-auto      p-2">
+      {product && (
+        <div className=" md:container mx-auto      p-2">
           <div
             className={classNames(
               "overly--detail fixed top-0 left-0 right-0 bottom-0 h-[100vh] w-[100vw] z-40   bg-[rgba(0,0,0,50%)]",
@@ -159,20 +163,21 @@ function Product(props, ref) {
           <div className="flex w-full  flex-col   md:flex-row flex-nowrap    ">
             {/* Header in small screens */}
             <div className="p-2 block md:hidden">
-              <h1 className="font-serif text-2xl ">{props.item.dec}</h1>
-              <p className="font-serif text-xl">{props.item.type}</p>
+              <h1 className="font-serif text-2xl ">{product[0].dec}</h1>
+              <p className="font-serif text-xl">{product[0].type}</p>
               <br />
               <p className=" font-Oswald tracking-wider text-lg ">
-                ${props.item.price}
+                ${product[0].price}
               </p>
             </div>
             {/* product images */}
             <div className="slider-container h-max relative max-w-full md:gap-1 md:w-8/12  flex  w-full   ">
               {/* image indicator */}
               <div className="indicator hidden space-y-1 max-h-[680px] overflow-y-scroll  md:block w-1/12">
-                {imageRef.current.map((indicator, index) => {
+                {product[0].images.map((indicator, index) => {
                   return (
                     <img
+                    loading="lazy"
                       key={index}
                       alt="indicatorimage"
                       src={indicator.image}
@@ -186,20 +191,22 @@ function Product(props, ref) {
                 })}
               </div>
               <div className="image--item flex w-full max-w-full md:w-11/12 overflow-hidden     ">
-                {imageRef.current.map((url) => {
+                {/* {imageRef.current.map((url) => {
                   return (
                     <img
+                    loading="lazy"
                       alt="product"
                       key={url.image}
                       src={url.image}
-                      className="w-full  object-cover max-h-[680px] block flex-shrink-0 flex-grow-0   rounded"
+                      className="w-full max-w-full  object-cover max-h-[680px] block flex-shrink-0 flex-grow-0   rounded"
                       style={{
                         translate: `${-100 * imageIndex}%`,
                         transition: "translate 300ms ease-in",
                       }}
                     />
                   );
-                })}
+                })} */}
+                {singleproductimages}
               </div>
               <div className="absolute w-max hidden md:block  right-5 bottom-12 ">
                 <div className="flex space-x-5">
@@ -223,15 +230,21 @@ function Product(props, ref) {
                       className={classNames(
                         {
                           "bi bi-arrow-right-circle-fill text-black  text-4xl":
-                            imageIndex < imageRef.current.length - 1,
+                            imageIndex < product[0].images.length - 1,
                         },
                         {
                           "bi bi-arrow-right-circle-fill text-greyish-0  text-4xl":
-                            imageIndex === imageRef.current.length - 1,
+                            imageIndex ===  product[0].images.length - 1,
                         }
                       )}
                     ></i>
                   </button>
+
+                  {/* <Nextbtn
+                  NextSlider={NextSlider}
+                  imageIndex={imageIndex}
+                  images={productImages}
+                  /> */}
                 </div>
               </div>
               <div className="absolute  top-[50%] left-5 block md:hidden ">
@@ -256,7 +269,7 @@ function Product(props, ref) {
               <div className="absolute  top-[50%] right-5 block md:hidden ">
                 <button
                   disabled={
-                    imageIndex === imageRef.current.length - 1 ? true : false
+                    imageIndex === product[0].images.length - 1 ? true : false
                   }
                   onClick={NextSlider}
                 >
@@ -264,11 +277,11 @@ function Product(props, ref) {
                     className={classNames(
                       {
                         "bi bi-arrow-right-circle-fill text-black  text-4xl":
-                          imageIndex < imageRef.current.length - 1,
+                          imageIndex < product[0].images.length - 1,
                       },
                       {
                         "bi bi-arrow-right-circle-fill text-greyish-0  text-4xl":
-                          imageIndex === imageRef.current.length - 1,
+                          imageIndex === product[0].images.length - 1,
                       }
                     )}
                   ></i>
@@ -298,7 +311,7 @@ function Product(props, ref) {
               >
                 {/* images form */}
                 <div className="flex gap-1 flex-nowrap overflow-x-auto">
-                  {imageRef.current.map((i, index) => {
+                  {product[0].images.map((i, index) => {
                     return (
                       <div>
                         <input
@@ -333,7 +346,7 @@ function Product(props, ref) {
                 </div>
                 {/* sizes */}
                 <div className="p-2 w-full pt-8 mt-2 grid grid-cols-5 md:grid-cols-3 gap-1">
-                  {Object.values(props.item.sizes).map((i) => {
+                  {Object.values(product[0].sizes).map((i) => {
                     return (
                       <div className="w-full h-full ">
                         <input
@@ -394,7 +407,7 @@ function Product(props, ref) {
 
               <Details
                 HandleDetailPage={HandleDetailPage}
-                Shown={imageRef.current[imageIndex].shown}
+                Shown={product[0].images[imageIndex].shown}
               />
             </div>
 

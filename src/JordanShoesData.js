@@ -28,7 +28,7 @@
   type:"Big Kids' Shoes"
   },
   {
-    id: 2,
+    id:2,
     name: "JORDAN",
     brand: "Nike",
     dec: "Air Jordan 1 Low",

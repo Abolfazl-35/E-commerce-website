@@ -2,6 +2,9 @@
   font-family: Oswald, sans-serif;
   letter-spacing: 0.05rem;
 }
+/* #open-menu-btn {
+  display: none;
+} */
 
 @media (max-width: 340px) {
   #search-input.expand {
@@ -53,10 +56,10 @@
   #nav-list.active {
     right: 0%;
   }
-  #open-menu-btn {
+  /* #open-menu-btn {
     display: block;
     z-index: 100;
-  }
+  } */
 
   #search-input {
     width: 0px;
@@ -320,5 +323,6 @@
 .overly.active {
   opacity: 1;
   pointer-events: all;
+  z-index: 90;
 }
 

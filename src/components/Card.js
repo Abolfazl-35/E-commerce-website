@@ -71,11 +71,11 @@ imagesIn.current=images.map((i)=>{
   console.log();
   return (
     <>
-      <div className="card rounded flex-col w-full border-2 h-max  shadow-lg ">
-        <div className="h-[320px] sm:h-[420px] w-full  rounded   ">
-          <Link to="./product">
+      <div className="card rounded flex-col   items-center md:justify-self-center  sm:w-[480px] md:w-full border-2 h-max  shadow-lg ">
+        <div className="h-[360px] md:h-[460px] md:[w-full]  rounded   ">
+          <Link to={`/product/${props.item.id}`}>
             <img
-              className="h-full w-full rounded object-cover "
+              className="h-full max-h-full max-w-full w-full rounded object-cover "
               src={images[imgIndex].image}
               alt="productimage"
               loading="lazy"

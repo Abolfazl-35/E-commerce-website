@@ -1,9 +1,7 @@
 import React from 'react'
-
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { Fade,} from '@mui/material';
-
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 function Tooltip_cart() {
   return (
     <>
@@ -13,9 +11,8 @@ function Tooltip_cart() {
       TransitionProps={{ timeout: 600 }}
      
     >
-    <IconButton className='h-10'>
-    <i className="bi bi-bag-check text-xl font-semibold text-white sm:text-2xl"></i>
-    </IconButton>
+    <ShoppingBagOutlinedIcon sx={{fontSize:35}} color='action' className=''>
+    </ShoppingBagOutlinedIcon>
   </Tooltip>
   </>
   )

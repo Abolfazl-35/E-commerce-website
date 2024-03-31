@@ -18,7 +18,7 @@ import SimpleSlider from "./components/SignUpPage/SimpleSlider";
 import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
 import classNames from "classnames";
-
+import Bag from "./components/Bag/Bag";
 function App() {
   let [ShoesData, setShoesData] = useState(AllShoesData);
 
@@ -88,7 +88,7 @@ function App() {
     }
     // const Basket={...NewProduct}
   }
-
+console.log(Cart)
   const [MiniBagState, setMiniBag] = useState(false);
 
   function MiniBag(item) {
@@ -135,7 +135,10 @@ const [filterItem,setfilterItem]=useState([])
   useEffect(()=>{
     if (Searchresult.Search) {
       const resultArray=ShoesData.filter((i)=>{
-    return i.dec.toLowerCase().includes(Searchresult.Search.toLowerCase())
+    return i.dec.toLowerCase().replace(
+      / /g,
+      ""
+  ).includes(Searchresult.Search.toLowerCase())
      })
 
      setfilterItem(resultArray.slice(1,6))
@@ -213,7 +216,7 @@ function CloseSearch(params) {
                 <Navbar  
                 HandleSearch={HandleSearch}
                 searchresult={Searchresult}
-                 data={ShoesData}
+                 data={filterItem}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
                   />
@@ -234,7 +237,7 @@ function CloseSearch(params) {
             
             element={<SignInForm EmailData={EmailData} />}
           />
-          <Route path="/Product"
+          <Route path="/Product/:id"
             
             element={
               <>
@@ -252,6 +255,20 @@ function CloseSearch(params) {
                 />
               </>
             }
+          />
+          <Route
+          path="/Bag"
+          element={<>
+          <Navbar  HandleSearch={HandleSearch}
+                searchresult={Searchresult}
+                 data={filterItem}
+                  CartAmount={Cart.length}
+                  MiniBagState={MiniBagState}
+                  item={Cart[Cart.length-1]} />
+
+           <Bag CartItems={Cart}/>
+           </>
+        }
           />
         </Routes>
       </Router>
