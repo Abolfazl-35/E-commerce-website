@@ -11,10 +11,11 @@ function BagCard(props) {
   let { image, count, dec, price, selectedColor, selectedSize, type } =
     props.item;
 
-  console.log(props);
+ console.log(props)
   return (
     <>
-      <div className="flex w-full">
+    {props.item&&(
+ <div className="flex w-full">
         <div className="min-w-max h-[200px] w-[200px]">
           <img alt="" src={image} className="w-full h-full " />
         </div>
@@ -47,12 +48,15 @@ function BagCard(props) {
           </div>
           <div className="flex items-center space-x-3 ">
              <TooltipFavorite />
-          <TooltipDelete/>
+          <TooltipDelete removeItem={props.removeItem} iteminfo={props.item}/>
           </div>
          
         </div>
         <p className=" font-bold p-2 mr-2 ">${price}</p>
       </div>
+
+    )}
+     
     </>
   );
 }

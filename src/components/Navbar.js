@@ -173,7 +173,7 @@ function Navbar(props) {
     });
   }
 
-  console.log(searchState);
+
 
   return (
     <>

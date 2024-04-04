@@ -88,6 +88,26 @@ function App() {
     }
     // const Basket={...NewProduct}
   }
+  function removeitem(item) {
+
+    const removedProduct = Cart.find((i) => {
+      return (
+        i.selectedColor === item.selectedColor 
+        && i.selectedSize===item.selectedSize
+        && i.id===item.id
+       
+      );
+    });
+Setcart(()=>{
+  return Cart.filter((i)=>{
+    return i!==removedProduct
+  })
+})
+
+
+
+
+  }
 console.log(Cart)
   const [MiniBagState, setMiniBag] = useState(false);
 
@@ -151,7 +171,7 @@ const [filterItem,setfilterItem]=useState([])
 
 
     },[Searchresult.Search,Searchresult])
-    console.log(filterItem)
+  
 
 function CloseSearch(params) {
   setSearchresult((prevdata)=>{
@@ -266,7 +286,8 @@ function CloseSearch(params) {
                   MiniBagState={MiniBagState}
                   item={Cart[Cart.length-1]} />
 
-           <Bag CartItems={Cart}/>
+           <Bag CartItems={Cart}
+           removeItem={removeitem}/>
            </>
         }
           />

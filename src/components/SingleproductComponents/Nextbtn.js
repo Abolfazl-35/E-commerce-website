@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 function Nextbtn(props) {
-  console.log(props)
+  
   return (
     <>
          <button onClick={props.NextSlider}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import dummyimage from "../../images/shoes/jordan/jordan-1.jpg";
 import TooltipFavorite from "../Tooltips/TooltipFavorite";
 import BagProductcss from "./Bagproduct.css";
@@ -18,12 +18,14 @@ function BagProduct(props) {
       });
     });
 
-    console.log(event);
-    console.log(id);
-    console.log(selectedSize);
   }
+  useEffect(()=>{
+    setCartitems(props.CartItems)
+  },[props.CartItems])
 
   const [Subtotal, setSubtotal] = useState(null);
+  
+  console.log(props)
   console.log(Cartitems);
   const [promocodeVisible, setpromocodeVisible] = useState(false);
 
@@ -32,8 +34,8 @@ function BagProduct(props) {
       return !prevdata;
     });
   }
-  const itemCards = Cartitems.map((i) => {
-    return <BagCard key={i.id} item={i} addcount={addcount} />;
+  const itemCards = Cartitems.map((i,index) => {
+    return <BagCard key={index} item={i} addcount={addcount} removeItem={props.removeItem} />;
   });
   useEffect(() => {
     const subtotalArray = Cartitems.map((i) => {

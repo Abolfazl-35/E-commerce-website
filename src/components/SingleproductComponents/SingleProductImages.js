@@ -2,7 +2,7 @@ import React from 'react'
 
 
 function SingleProductImages({item,index}) {
-    console.log(item)
+ 
   return (
 
 <>

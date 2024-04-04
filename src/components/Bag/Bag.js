@@ -4,7 +4,7 @@ import BagProduct from "./BagProduct";
 
 function Bag(props) {
    
-    console.log("bag",props)
+    
   return (
     <div className="md:container mx-auto">
       <div className="flex justify-center items-center font-Roboto flex-col space-y-2 p-10">
@@ -18,7 +18,7 @@ function Bag(props) {
       </div>
       <div>
         
-        <BagProduct CartItems={props.CartItems} />
+        <BagProduct CartItems={props.CartItems} removeItem={props.removeItem} />
       </div>
     </div>
   );

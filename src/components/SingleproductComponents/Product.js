@@ -12,13 +12,13 @@ import { name } from "@cloudinary/url-gen/actions/namedTransformation";
 
 function Product(props) {
   const {id}=useParams()
-  console.log(props)
+ 
 const singleproduct=AllShoesData.filter((i)=>{
   if (i.id==id) {
     return i
   }else return null
 })
-console.log(singleproduct)
+
 const scrollTo = useRef();
 const [product,setproduct]=useState(singleproduct)
 
@@ -62,9 +62,7 @@ useEffect(()=>{
 
 
 
-console.log(imageIndex)
-  console.log(props.item)
-  console.log(product)
+
 
 
 

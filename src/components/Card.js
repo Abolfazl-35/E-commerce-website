@@ -68,7 +68,7 @@ imagesIn.current=images.map((i)=>{
     } else return true;
   });
 
-  console.log();
+
   return (
     <>
       <div className="card rounded flex-col   items-center md:justify-self-center  sm:w-[480px] md:w-full border-2 h-max  shadow-lg ">

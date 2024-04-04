@@ -22,7 +22,7 @@ function SearchCart(props) {
   //     return true;
   //   });
   // }
-console.log(props)
+
   // function SearchWidthF(params) {
   //   setSearchWidth((prevdata) => {
   //     return !prevdata;
