@@ -5,6 +5,7 @@ import BagProductcss from "./Bagproduct.css";
 import classNames from "classnames";
 import Massage from "./Massage";
 import BagCard from "./BagCard";
+import TooltipDropdown from "../Tooltips/TooltipDropdown";
 function BagProduct(props) {
   const [Cartitems, setCartitems] = useState(props.CartItems);
   function addcount(event, id, selectedSize) {
@@ -61,9 +62,9 @@ function BagProduct(props) {
           <div className="flex flex-col space-y-7 w-full justify-start items-center relative">
             <h1 className="text-center font-bold text-3xl">Summary</h1>
             {/* form for promo code */}
-            <p>
+            <p className="flex justify-center items-center">
               Do you have a Promo Code?
-              <button onClick={promocodeopen}>dropdown</button>
+              <button  onClick={promocodeopen}><TooltipDropdown/></button>
             </p>
             <form
               className={classNames("promocode-form ", {
