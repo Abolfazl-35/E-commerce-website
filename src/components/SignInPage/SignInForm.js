@@ -180,9 +180,9 @@ console.log(Formstate)
                 <div className="relative w-full">
                   <input
                     type="text"
-                    className={classNames(
-                      {"border-gray-500 input p-2":!Formstate.FirstName},
-                      { "input p-2  border focus:border-red-800": !validFirstName },
+                    className={classNames("border border-gray-500",
+                      
+                      { "input p-2  border border-red-800": !validFirstName &&inputfocus },
                       { "input has-value": Formstate.FirstName },
                       { "input  border border-green-800": validFirstName }
                     )}
@@ -234,8 +234,7 @@ console.log(Formstate)
                   <input
                     type="text"
                     className={classNames(
-                      { "input p-2  border focus:border-gray-500": !validFirstName },
-                      {"input p-2 border border-gray-400":!Formstate.LastName},
+                  "border border-gray-500",
                       { "input has-value": Formstate.LastName },
                       { "input  border border-green-800": validFirstName }
                     )}
@@ -255,9 +254,8 @@ console.log(Formstate)
               <div className="relative mt-5">
                 <input
                   type={passwordvisibility ? "text" : "password"}
-                  className={classNames(
-                    { "input p-2  border focus:border-red-800": !validPassword },
-                    {"input p-2 border border-gray-500":!Formstate.Password},
+                  className={classNames("border border-gray-500",
+                    { "input p-2  border border-red-800": !validPassword &&inputfocus  },
                     { "input has-value": Formstate.Password },
                     { "input  border border-green-800": validPassword }
                   )}
