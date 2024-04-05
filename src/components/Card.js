@@ -71,7 +71,7 @@ imagesIn.current=images.map((i)=>{
 
   return (
     <>
-      <div className="card rounded flex-col   items-center md:justify-self-center  sm:w-[480px] md:w-full border-2 h-max  shadow-lg ">
+      <div className="card rounded flex-col   items-center sm:justify-self-center  sm:w-[480px] md:w-full border-2 h-max  shadow-lg ">
         <div className="h-[360px] md:h-[460px] md:[w-full]  rounded   ">
           <Link to={`/product/${props.item.id}`}>
             <img

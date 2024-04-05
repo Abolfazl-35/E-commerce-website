@@ -1,312 +1,316 @@
 #next-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    z-index: 10;
-    right: 3%;
-  }
-  #prev-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    left: 3%;
-    z-index: 10;
-  }
-  .price-header {
-    z-index: 2;
-  }
-
-
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  right: 3%;
+}
+#prev-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  z-index: 10;
+}
+.price-header {
+  z-index: 2;
+}
 
 #show-case-section {
-    transition: all 1000ms ease-in-out;
-  }
-  
-  /* jorsan showcase section */
-  .show-case-item:nth-child(1) {
-    background-image: url(/src/images/shoes/showcase/jordan-2.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-clip: border-box;
-    background-size: contain;
-  }
-  
-  .show-case-item:nth-child(1) .brand-header {
-    background-color: rgb(55, 141, 175);
-    width: max-content;
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(1) .price-header {
-    background-color: rgb(55, 141, 175);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(1) .buy-btn {
-    background-color: rgb(55, 141, 175);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  /* airmax showcase section */
-  
-  .show-case-item:nth-child(2) {
-    background-image: url(/src/images/shoes/showcase/airmax.jpeg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-clip: border-box;
-    background-size: contain;
-  }
-  
-  .show-case-item:nth-child(2) .brand-header {
-    background-color: rgb(9, 119, 108);
-    width: max-content;
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(2) .price-header {
-    background-color: rgb(9, 119, 108);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  .show-case-item:nth-child(2) .buy-btn {
-    background-color: rgb(9, 119, 108);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  /* airforce showcase section */
-  .show-case-item:nth-child(3) {
-    background-image: url(/src/images/shoes/showcase/airforce.jpeg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-clip: border-box;
-    background-size: contain;
-  }
-  
-  .show-case-item:nth-child(3) .brand-header {
-    background-color: rgb(109, 84, 19);
-    width: max-content;
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(3) .price-header {
-    background-color: rgb(109, 84, 19);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  .show-case-item:nth-child(3) .buy-btn {
-    background-color: rgb(109, 84, 19);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  /* dunk and blazer showcase section */
-  
-  .show-case-item:nth-child(4) {
-    background-image: url(/src/images/shoes/showcase/dunk-1.jpeg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-clip: border-box;
-    background-size: contain;
-  }
-  
-  .show-case-item:nth-child(4) .brand-header {
-    background-color: rgb(196, 76, 25);
-    width: max-content;
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(4) .price-header {
-    background-color: rgb(196, 76, 25);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  .show-case-item:nth-child(4) .buy-btn {
-    background-color: rgb(196, 76, 25);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  /* new ballance show case section */
-  
-  .show-case-item:nth-child(5) {
-    background-image: url(/src/images/shoes/newballance.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-clip: border-box;
-    background-size: contain;
-  }
-  
-  .show-case-item:nth-child(5) .brand-header {
-    background-color: rgb(143, 48, 60);
-    width: max-content;
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  .show-case-item:nth-child(5) .price-header {
-    background-color: rgb(143, 48, 60);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  .show-case-item:nth-child(5) .buy-btn {
-    background-color: rgb(143, 48, 60);
-    clip-path: polygon(
-      8% 19%,
-      0% 100%,
-      19% 86%,
-      100% 100%,
-      91% 85%,
-      99% 0%,
-      73% 0,
-      50% 16%,
-      22% 0
-    );
-  }
-  
-  #fetuers {
-    clip-path: polygon(
-      50% 0%,
-      79% 17%,
-      100% 0,
-      100% 100%,
-      85% 100%,
-      50% 100%,
-      20% 100%,
-      0 100%,
-      0 0,
-      21% 17%
-    );
-  
-    padding: 1rem;
-  }
+  transition: all 1000ms ease-in-out;
+}
+
+/* jorsan showcase section */
+.show-case-item:nth-child(1) {
+  background-image: url(/src/images/shoes/showcase/jordan-2.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+  background-size: contain;
+  max-width: 100%;
+  image-rendering: auto;
+}
+
+.show-case-item:nth-child(1) .brand-header {
+  background-color: rgb(55, 141, 175);
+  width: max-content;
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(1) .price-header {
+  background-color: rgb(55, 141, 175);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(1) .buy-btn {
+  background-color: rgb(55, 141, 175);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+/* airmax showcase section */
+
+.show-case-item:nth-child(2) {
+  background-image: url(/src/images/shoes/showcase/airmax.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+  background-size: contain;
+  max-width: 100%;
+}
+
+.show-case-item:nth-child(2) .brand-header {
+  background-color: rgb(9, 119, 108);
+  width: max-content;
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(2) .price-header {
+  background-color: rgb(9, 119, 108);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+.show-case-item:nth-child(2) .buy-btn {
+  background-color: rgb(9, 119, 108);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+/* airforce showcase section */
+.show-case-item:nth-child(3) {
+  background-image: url(/src/images/shoes/showcase/airforce.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+  background-size: contain;
+  max-width: 100%;
+}
+
+.show-case-item:nth-child(3) .brand-header {
+  background-color: rgb(109, 84, 19);
+  width: max-content;
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(3) .price-header {
+  background-color: rgb(109, 84, 19);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+.show-case-item:nth-child(3) .buy-btn {
+  background-color: rgb(109, 84, 19);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+/* dunk and blazer showcase section */
+
+.show-case-item:nth-child(4) {
+  background-image: url(/src/images/shoes/showcase/dunk-1.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+  background-size: contain;
+  max-width: 100%;
+}
+
+.show-case-item:nth-child(4) .brand-header {
+  background-color: rgb(196, 76, 25);
+  width: max-content;
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(4) .price-header {
+  background-color: rgb(196, 76, 25);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+.show-case-item:nth-child(4) .buy-btn {
+  background-color: rgb(196, 76, 25);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+/* new ballance show case section */
+
+.show-case-item:nth-child(5) {
+  background-image: url(/src/images/shoes/newballance.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+  background-size: contain;
+  max-width: 100%;
+}
+
+.show-case-item:nth-child(5) .brand-header {
+  background-color: rgb(143, 48, 60);
+  width: max-content;
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+.show-case-item:nth-child(5) .price-header {
+  background-color: rgb(143, 48, 60);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+.show-case-item:nth-child(5) .buy-btn {
+  background-color: rgb(143, 48, 60);
+  clip-path: polygon(
+    8% 19%,
+    0% 100%,
+    19% 86%,
+    100% 100%,
+    91% 85%,
+    99% 0%,
+    73% 0,
+    50% 16%,
+    22% 0
+  );
+}
+
+#fetuers {
+  clip-path: polygon(
+    50% 0%,
+    79% 17%,
+    100% 0,
+    100% 100%,
+    85% 100%,
+    50% 100%,
+    20% 100%,
+    0 100%,
+    0 0,
+    21% 17%
+  );
+
+  padding: 1rem;
+}

@@ -146,7 +146,8 @@ console.log(Formstate)
                 <input
                   type="text"
                   className={classNames(
-                    { "input p-2  border border-red-800": !validFirstName },
+                    { "input p-2  border focus:border-red-800": !validFirstName },
+                    {"input p-2 border border-gray-500":!Formstate.FirstName},
                     { "input has-value": Formstate.code},
                     { "input  border border-green-800": validFirstName }
                   )}
@@ -180,7 +181,8 @@ console.log(Formstate)
                   <input
                     type="text"
                     className={classNames(
-                      { "input p-2  border border-red-800": !validFirstName },
+                      {"border-gray-500 input p-2":!Formstate.FirstName},
+                      { "input p-2  border focus:border-red-800": !validFirstName },
                       { "input has-value": Formstate.FirstName },
                       { "input  border border-green-800": validFirstName }
                     )}
@@ -232,7 +234,8 @@ console.log(Formstate)
                   <input
                     type="text"
                     className={classNames(
-                      { "input p-2  border border-red-800": !validFirstName },
+                      { "input p-2  border focus:border-gray-500": !validFirstName },
+                      {"input p-2 border border-gray-400":!Formstate.LastName},
                       { "input has-value": Formstate.LastName },
                       { "input  border border-green-800": validFirstName }
                     )}
@@ -253,7 +256,8 @@ console.log(Formstate)
                 <input
                   type={passwordvisibility ? "text" : "password"}
                   className={classNames(
-                    { "input p-2  border border-red-800": !validPassword },
+                    { "input p-2  border focus:border-red-800": !validPassword },
+                    {"input p-2 border border-gray-500":!Formstate.Password},
                     { "input has-value": Formstate.Password },
                     { "input  border border-green-800": validPassword }
                   )}
@@ -339,12 +343,13 @@ console.log(Formstate)
                   <input
                     type="date"
                     className={classNames(
-                      { "input p-2  border border-red-800": !validPassword },
-                      { "input p-2  border border-red-800": !validFirstName },
+                      { "input p-2  border focus:border-red-800": !validPassword },
+                      { "input p-2  border focus:border-red-800": !validFirstName },
                       { "input has-value": Formstate.DateOfBirth },
+                      {"input p-2 border border-gray-500":!Formstate.DateOfBirth},
                       {
                         "input  border border-green-800":
-                          validFirstName && validPassword,
+                         Formstate.DateOfBirth,
                       }
                     )}
                     id="DateInput"
@@ -373,7 +378,7 @@ console.log(Formstate)
                     name="UpdateCheck"
                     onChange={HandleForm}
                     className="max-w-[20px] mt-[.3rem] min-w-[20px] max-h-[20px] min-h-[20px] "
-                    value={""}
+                    value={Formstate.UpdateCheck}
                   />
                   <div className="ml-2">
                     <span className=" font-oswald">
@@ -389,7 +394,7 @@ console.log(Formstate)
                     name="PrivecyPolicyCheck"
                     onChange={HandleForm}
                     className="max-w-[20px] mt-[.3rem] min-w-[20px] max-h-[20px] min-h-[20px] "
-                    value={""}
+                    value={Formstate.PrivecyPolicyCheck}
                   />
                   <div className="ml-2">
                     <span className=" font-oswald">

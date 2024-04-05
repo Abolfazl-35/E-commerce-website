@@ -244,7 +244,7 @@ filterVisibility={filterVisibility}
           <div
             className={classNames(
               "w-full mt-3 grid justify-center items-center    h-max     gap-5",
-              { "grid-cols-1 md:grid-cols-1 lg:grid-cols-2": filterVisibility },
+              { "grid-cols-1 md:grid-cols-2 lg:grid-cols-2": filterVisibility },
               { "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ": !filterVisibility }
             )}
             id="product-section"

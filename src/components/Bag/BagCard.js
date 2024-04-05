@@ -11,13 +11,13 @@ function BagCard(props) {
   let { image, count, dec, price, selectedColor, selectedSize, type } =
     props.item;
 
- console.log(props)
+ 
   return (
     <>
-    {props.item&&(
+    {props.item?(
  <div className="flex w-full">
-        <div className="min-w-max h-[200px] w-[200px]">
-          <img alt="" src={image} className="w-full h-full " />
+        <div className="min-w-max  h-[200px] w-[200px]">
+          <img alt="" src={image} className="max-w-full rounded-sm max-h-full " />
         </div>
         <div className="flex p-2 flex-col justify-between w-full">
           <h1>{dec}</h1>
@@ -55,7 +55,7 @@ function BagCard(props) {
         <p className=" font-bold p-2 mr-2 ">${price}</p>
       </div>
 
-    )}
+    ):null}
      
     </>
   );

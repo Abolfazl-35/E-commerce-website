@@ -50,6 +50,12 @@ function BagProduct(props) {
 
   return (
     <>
+      <div className="flex justify-center items-center font-Roboto flex-col space-y-2 p-10 pt-5">
+        <h1 className=" font-semibold text-2xl">Bag</h1>
+        <p className=" text-greyish-0 text-base">
+        {Cartitems.length} items <span className="border-l border-gray-500 pl-1">$ {Subtotal}</span>
+        </p>
+      </div>
       <div className="flex flex-col md:flex-row  font-Roboto w-full p-4 border-t mt-3">
         {/* Bag products images and details */}
 

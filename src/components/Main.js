@@ -57,7 +57,7 @@ const show_case_item = document.querySelectorAll(".show-case-item");
           className="flex h-full w-[500vw] items-center justify-start"
           id="show-case-section"
         >
-          <div className="show-case-item relative flex h-full w-[100vw] items-center justify-center">
+          <div className="show-case-item relative flex h-full w-[100vw]  items-center justify-center">
             <h2 className="brand-header sm:top[10%] absolute start-[5%] top-[5%] rounded bg-cyan-800 pb-3 pl-4 pr-4 pt-3 text-center font-serif text-sm font-semibold sm:start-[10%] sm:text-lg">
               jordan
               <br />
@@ -162,7 +162,10 @@ const show_case_item = document.querySelectorAll(".show-case-item");
       <div className="w-full bg-zinc-600 p-0" id="fetuers">
         <div className="mt-1  flex items-center justify-between pt-2">
           <div className="flex-col items-center justify-center p-1 font-serif text-sm">
-            <img src={Shipping_Logo} className="w-24" alt="shiping-logo" />
+            <img src={Shipping_Logo} 
+            loading="lazy"
+            className="w-24"
+             alt="shiping-logo" />
             <h2 className="p-1 text-center">Free Shippment</h2>
           </div>
           <div className="flex-col items-center justify-center p-1 font-serif text-sm">
@@ -170,11 +173,15 @@ const show_case_item = document.querySelectorAll(".show-case-item");
               src={ReturnPolicy_logo}
               className="w-24"
               alt="ReturnPolicy_logo"
+              loading="lazy"
             />
             <h2 className="p-1 text-center">Return Policy</h2>
           </div>
           <div className=" flex-col   p-1 items-center justify-center  font-serif text-sm">
-            <img src={ContectUs_Logo} className="w-24 h-24 " alt="Contect_us" />
+            <img src={ContectUs_Logo} 
+            className="w-24 h-24 " 
+            loading="lazy"
+            alt="Contect_us" />
             <h2 className="p-1 text-center">Contect Us</h2>
           </div>
         </div>
