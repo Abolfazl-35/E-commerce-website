@@ -3,7 +3,13 @@ import Logo from "../Logo/trust-logo-4.png";
 import { Link } from "react-router-dom";
 import SignIncss from "../SignInPage/SignIn.css";
 import classNames from "classnames";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+
 function SignInForm(props) {
+const {registerInfo,updateRegisterInfo}=useContext(AuthContext);
+
+
   const Firstname_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
   const PWD_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   let [ResendTime, SetResendTime] = useState(15);
@@ -28,7 +34,7 @@ function SignInForm(props) {
     Select: "",
     UpdateCheck: false,
     PrivecyPolicyCheck: false,
-    visibility: false,
+    
   });
   function HandleForm(event) {
     const {name,value,type,checked}=event.target
@@ -37,7 +43,12 @@ function SignInForm(props) {
     });
   
   }
-console.log(Formstate)
+
+  useEffect(() => {
+updateRegisterInfo(Formstate)
+
+  },[Formstate])
+
   const [passwordvisibility, setpasswordvisibility] = useState(false);
   function HandlePasswordVisibility(event) {
     setpasswordvisibility((prevdata) => {
@@ -117,6 +128,7 @@ console.log(Formstate)
           <h1 className=" font-serif  font-semibold text-3xl">
             Now let's make you a Trust Member.
           </h1>
+         
           <div className="flex w-full space-y-3 flex-col">
             <p className="text-2xl font-serif  font-medium ">
               we've sent a code to

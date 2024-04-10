@@ -19,7 +19,9 @@ import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
 import classNames from "classnames";
 import Bag from "./components/Bag/Bag";
+// import MainChat from "./components/ChatPage/MainChat";
 function App() {
+  
   let [ShoesData, setShoesData] = useState(AllShoesData);
 
   let [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
@@ -211,6 +213,7 @@ function CloseSearch(params) {
                   MiniBagState={MiniBagState}
                  CloseSearch={CloseSearch}
                 />
+                {/* <MainChat/> */}
                 <ShoesMenu />
                 <Main />
                 <ShopHeader />
