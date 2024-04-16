@@ -17,7 +17,7 @@ app.get("/", function(req, res){
 })
 app.use("/api/users",userRoute)
 
-const port=process.env.PORT || 3000
+const port=process.env.PORT || 3001
 const uri=process.env.ATLAS_URI
 
 app.listen(port,(req,res)=>{

@@ -1,6 +1,6 @@
 import { Label } from "@mui/icons-material";
 import classNames from "classnames";
-import React, { useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Details from "./Details";
@@ -9,24 +9,29 @@ import JordanShoesData from "../../JordanShoesData";
 import SingleProductImages from "./SingleProductImages";
 import Nextbtn from "./Nextbtn"
 import { name } from "@cloudinary/url-gen/actions/namedTransformation";
+import { AuthContext } from "../../context/AuthContext";
 
 function Product(props) {
+  const {AddToCart}=useContext(AuthContext)
   const {id}=useParams()
  
-const singleproduct=AllShoesData.filter((i)=>{
-  if (i.id==id) {
+const singleproduct=useCallback(()=>{
+ return AllShoesData.filter((i)=>{
+  if (i.id===Number(id)) {
     return i
   }else return null
 })
+},[id])
+  
+
+
+
 
 const scrollTo = useRef();
 const [product,setproduct]=useState(singleproduct)
 
-useEffect(()=>{
 
 
-  
-})
 
 
 
@@ -386,7 +391,7 @@ useEffect(()=>{
                     type="button"
                     onClick={() => {
                       AddtoBag();
-                      props.HandleProductData(bagproduct);
+                     AddToCart(bagproduct)
                       props.HandleMiniBag(bagproduct)
                     }}
                     ref={fixedStickybtn}

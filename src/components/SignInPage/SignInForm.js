@@ -7,9 +7,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function SignInForm(props) {
-const {registerInfo,updateRegisterInfo}=useContext(AuthContext);
-
-
+  const {
+    registerInfo,
+    updateRegisterInfo,
+    error,
+    registerUser,
+    isRegisterloading,
+  } = useContext(AuthContext);
+console.log(registerInfo)
   const Firstname_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
   const PWD_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   let [ResendTime, SetResendTime] = useState(15);
@@ -27,41 +32,39 @@ const {registerInfo,updateRegisterInfo}=useContext(AuthContext);
     }, "1000");
   }
   let [Formstate, setFormstate] = useState({
-    FirstName: "",
-    LastName: "",
-    Password: "",
+    Firstname: "",
+    Lastname: "",
+    password: "",
     DateOfBirth: "",
     Select: "",
     UpdateCheck: false,
     PrivecyPolicyCheck: false,
-    
+    email:props.EmailData.Email
   });
   function HandleForm(event) {
-    const {name,value,type,checked}=event.target
+    const { name, value, type, checked } = event.target;
     setFormstate((prevdata) => {
-      return { ...prevdata, [name]:type==="checkbox"?checked:value };
+      return { ...prevdata, [name]: type === "checkbox" ? checked : value };
     });
-  
   }
 
   useEffect(() => {
-updateRegisterInfo(Formstate)
-
-  },[Formstate])
+    updateRegisterInfo(Formstate);
+  }, [Formstate]);
 
   const [passwordvisibility, setpasswordvisibility] = useState(false);
-  function HandlePasswordVisibility(event) {
+  function HandlepasswordVisibility(event) {
     setpasswordvisibility((prevdata) => {
       return !prevdata;
     });
   }
   const userRef = useRef(false);
   const errorRef = useRef();
-  const [validFirstName, setValidFirstName] = useState();
-  const [validPassword, setValidPassword] = useState();
- 
+  const [validFirstname, setValidFirstname] = useState();
+  const [validpassword, setValidpassword] = useState();
+
   const [inputfocus, setinputfocus] = useState();
-  
+
   const [errMsg, setErrMsg] = useState();
   const [success, setSuccess] = useState();
   // useEffect(()=>{
@@ -69,33 +72,31 @@ updateRegisterInfo(Formstate)
   // },[])
 
   useEffect(() => {
-    const result = Firstname_REGEX.test(Formstate.FirstName);
+    const result = Firstname_REGEX.test(Formstate.Firstname);
 
-    setValidFirstName(result);
-  }, [Formstate.FirstName]);
+    setValidFirstname(result);
+  }, [Formstate.Firstname]);
   useEffect(() => {
-    const result = PWD_REGEX.test(Formstate.Password);
+    const result = PWD_REGEX.test(Formstate.password);
 
-    setValidPassword(result);
-  }, [Formstate.Password]);
+    setValidpassword(result);
+  }, [Formstate.password]);
 
   useEffect(() => {
     setErrMsg("");
-  }, [Formstate.FirstName, Formstate.Password]);
- 
+  }, [Formstate.Firstname, Formstate.password]);
+
   const errClassName = classNames("font-serrif text-xs text-red-500 ");
 
-  
   const [formconditions, setformconditions] = useState();
   useEffect(() => {
-   
     if (
-      validFirstName &&
-      validPassword &&
+      validFirstname &&
+      validpassword &&
       Formstate.DateOfBirth &&
-      Formstate.FirstName &&
-      Formstate.LastName &&
-      Formstate.Password &&
+      Formstate.Firstname &&
+      Formstate.Lastname &&
+      Formstate.password &&
       Formstate.Select &&
       Formstate.PrivecyPolicyCheck
     ) {
@@ -103,21 +104,21 @@ updateRegisterInfo(Formstate)
     } else {
       setformconditions(false);
     }
-  }, [Formstate, validFirstName, validPassword]);
-  console.log(formconditions)
+  }, [Formstate, validFirstname, validpassword]);
+  console.log(formconditions);
 
   async function HandleSubmit(event) {
     event.preventDefault();
-    const v1 = Firstname_REGEX.test(Formstate.FirstName);
-    const v2 = PWD_REGEX.test(Formstate.Password);
+    const v1 = Firstname_REGEX.test(Formstate.Firstname);
+    const v2 = PWD_REGEX.test(Formstate.password);
     if (!v1 || !v2) {
       setErrMsg("Invalid Entry");
       return;
     }
-    console.log(Formstate)
-    setSuccess(true)
+    console.log(Formstate);
+    setSuccess(true);
   }
-console.log(Formstate)
+  console.log(Formstate);
   return (
     <>
       <div className="container h-max  mx-auto space-y-5 flex justify-center flex-col ">
@@ -128,10 +129,10 @@ console.log(Formstate)
           <h1 className=" font-serif  font-semibold text-3xl">
             Now let's make you a Trust Member.
           </h1>
-         
+
           <div className="flex w-full space-y-3 flex-col">
             <p className="text-2xl font-serif  font-medium ">
-              we've sent a code to
+             Email
               <br />
             </p>
             {props.EmailData.Email && (
@@ -147,21 +148,27 @@ console.log(Formstate)
               </p>
             )}
           </div>
+          {error?.error && <h1 className=" font-Roboto text-base text-red-500 border rounded-lg p-3">{error?.massage}</h1>}
+        
           {/* form */}
           <div className="w-full  h-max   flex flex-col ">
             <form
               className="SignInForm flex flex-col  w-full font-Oswald sm:w-2/3 p-1  "
-              onSubmit={HandleSubmit}
+              onSubmit={registerUser}
             >
               {/* code */}
-              <div className="relative ">
+              {/* <div className="relative ">
                 <input
                   type="text"
                   className={classNames(
-                    { "input p-2  border focus:border-red-800": !validFirstName },
-                    {"input p-2 border border-gray-500":!Formstate.FirstName},
-                    { "input has-value": Formstate.code},
-                    { "input  border border-green-800": validFirstName }
+                    {
+                      "input p-2  border focus:border-red-800": !validFirstname,
+                    },
+                    {
+                      "input p-2 border border-gray-500": !Formstate.Firstname,
+                    },
+                    { "input has-value": Formstate.code },
+                    { "input  border border-green-800": validFirstname }
                   )}
                   id="CodeInput"
                   name="code"
@@ -186,37 +193,40 @@ console.log(Formstate)
                     {ResendTime}
                   </span>
                 )}
-              </div>
-              {/* firstname */}
+              </div> */}
+              {/* Firstname */}
               <div className="flex  sm:flex-row flex-wrap  mt-5 w-full  ">
                 <div className="relative w-full">
                   <input
                     type="text"
-                    className={classNames("border border-gray-500",
-                      
-                      { "input p-2  border border-red-800": !validFirstName &&inputfocus },
-                      { "input has-value": Formstate.FirstName },
-                      { "input  border border-green-800": validFirstName }
+                    className={classNames(
+                      "border border-gray-500",
+
+                      {
+                        "input p-2  border border-red-800":
+                          !validFirstname && inputfocus,
+                      },
+                      { "input has-value": Formstate.Firstname },
+                      { "input  border border-green-800": validFirstname }
                     )}
                     id="FirstInput"
-                    name="FirstName"
+                    name="Firstname"
                     onChange={HandleForm}
                     aria-required="true"
-                    value={Formstate.FirstName}
-                    aria-invalid={validFirstName ? "false" : "true"}
+                    value={Formstate.Firstname}
+                    aria-invalid={validFirstname ? "false" : "true"}
                     onFocus={() => setinputfocus(true)}
                     onBlur={() => setinputfocus(false)}
                     aria-describedby="Firstnameidnote"
-                    required
                     autoComplete="off"
                     autoSave="off"
                   />
 
                   <span className="placeholder w-max text-greyish-0 text-base tracking-wider bg-[#ffffff]">
-                    FirstName
+                    Firstname
                   </span>
                 </div>
-                {/* firstname note */}
+                {/* Firstname note */}
                 <div>
                   <p
                     ref={errorRef}
@@ -229,7 +239,7 @@ console.log(Formstate)
                   <p
                     id="Firstnameidnote"
                     className={
-                      inputfocus && Formstate.FirstName && !validFirstName
+                      inputfocus && Formstate.Firstname && !validFirstname
                         ? "font-serif text-sm  text-greyish-0"
                         : "hidden"
                     }
@@ -241,23 +251,23 @@ console.log(Formstate)
                     letters,numbers,underscores,hyphens allowed.
                   </p>
                 </div>
-                {/* lastname */}
+                {/* Lastname */}
                 <div className="w-full mt-5   relative ">
                   <input
                     type="text"
                     className={classNames(
-                  "border border-gray-500",
-                      { "input has-value": Formstate.LastName },
-                      { "input  border border-green-800": validFirstName }
+                      "border border-gray-500",
+                      { "input has-value": Formstate.Lastname },
+                      { "input  border border-green-800": validFirstname }
                     )}
-                    id="lastnameInput"
-                    name="LastName"
+                    id="LastnameInput"
+                    name="Lastname"
                     onChange={HandleForm}
                     aria-required="true"
-                    value={Formstate.LastName}
+                    value={Formstate.Lastname}
                   />
                   <span className="placeholder w-max text-greyish-0 text-base tracking-wider bg-[#ffffff] ">
-                    LastName
+                    Lastname
                   </span>
                 </div>
               </div>
@@ -266,27 +276,31 @@ console.log(Formstate)
               <div className="relative mt-5">
                 <input
                   type={passwordvisibility ? "text" : "password"}
-                  className={classNames("border border-gray-500",
-                    { "input p-2  border border-red-800": !validPassword &&inputfocus  },
-                    { "input has-value": Formstate.Password },
-                    { "input  border border-green-800": validPassword }
+                  className={classNames(
+                    "border border-gray-500",
+                    {
+                      "input p-2  border border-red-800":
+                        !validpassword && inputfocus,
+                    },
+                    { "input has-value": Formstate.password },
+                    { "input  border border-green-800": validpassword }
                   )}
                   id="passwordInput"
-                  name="Password"
+                  name="password"
                   onChange={HandleForm}
                   onFocus={() => setinputfocus(true)}
                   onBlur={() => setinputfocus(false)}
-                  required
+                  
                   aria-describedby="passwordidnote"
                   autoComplete="off"
-                  aria-invalid={validPassword ? "true" : "false"}
-                  value={Formstate.Password}
+                  aria-invalid={validpassword ? "true" : "false"}
+                  value={Formstate.password}
                 />
                 <span className="placeholder w-max text-greyish-0 text-base tracking-wider bg-[#ffffff]">
-                  Password
+                  password
                 </span>
                 <span className=" absolute top-1 right-2">
-                  <button type="button" onClick={HandlePasswordVisibility}>
+                  <button type="button" onClick={HandlepasswordVisibility}>
                     <i class="bi bi-eye-fill text-2xl hover:text-greyish-0"></i>
                   </button>
                 </span>
@@ -296,7 +310,7 @@ console.log(Formstate)
                 <p
                   id="passwordidnote"
                   className={
-                    inputfocus && Formstate.Password && !validPassword
+                    inputfocus && Formstate.password && !validpassword
                       ? "font-serif text-sm text-greyish-0"
                       : "hidden"
                   }
@@ -353,13 +367,21 @@ console.log(Formstate)
                   <input
                     type="date"
                     className={classNames(
-                      { "input p-2  border focus:border-red-800": !validPassword },
-                      { "input p-2  border focus:border-red-800": !validFirstName },
-                      { "input has-value": Formstate.DateOfBirth },
-                      {"input p-2 border border-gray-500":!Formstate.DateOfBirth},
                       {
-                        "input  border border-green-800":
-                         Formstate.DateOfBirth,
+                        "input p-2  border focus:border-red-800":
+                          !validpassword,
+                      },
+                      {
+                        "input p-2  border focus:border-red-800":
+                          !validFirstname,
+                      },
+                      { "input has-value": Formstate.DateOfBirth },
+                      {
+                        "input p-2 border border-gray-500":
+                          !Formstate.DateOfBirth,
+                      },
+                      {
+                        "input  border border-green-800": Formstate.DateOfBirth,
                       }
                     )}
                     id="DateInput"
@@ -369,10 +391,7 @@ console.log(Formstate)
                     value={Formstate.DateOfBirth}
                   />
 
-                  <span
-                   
-                    className="date-placeholder w-max text-greyish-0 text-base tracking-wider bg-[#ffffff]"
-                  >
+                  <span className="date-placeholder w-max text-greyish-0 text-base tracking-wider bg-[#ffffff]">
                     Date Of Birth
                   </span>
                   <span className="text-greyish-0">
@@ -421,20 +440,19 @@ console.log(Formstate)
                   </div>
                 </div>
               </div>
-              <div className="flex w-full justify-end">
-                <button
+             
+              <div className="flex w-full p-2 justify-end">
                 
-                  disabled={
-                     !formconditions
-                      ? true
-                      : false
-                  }
+                <button
+                  // disabled={!formconditions ? true : false}
                   className={classNames(
-                    "bg-slate-950 text-white p-2 text-lg rounded-full hover:bg-greyish-0 hover:text-slate-950 cursor-pointer",
-                    { "opacity-25 pointer-events-none ": !formconditions }
+                    "bg-slate-950 mt-3  text-white p-2 text-lg rounded-full hover:bg-greyish-0 hover:text-slate-950 cursor-pointer",
+                    { " ": !formconditions }
                   )}
                 >
-                  Create Acoont
+                  {isRegisterloading
+                    ? "Creating your account..."
+                    : "Create Acoont"}
                 </button>
               </div>
             </form>

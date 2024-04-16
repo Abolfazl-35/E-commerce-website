@@ -2,24 +2,38 @@ const userModel = require("../Moduls/userModels");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
-
+const { options } = require("../Routs/userRoute");
+const crypto=require("crypto");
 const createToken = (_id) => {
   const jwtkey = process.env.JWT_SECRET_KEY;
 
   return jwt.sign({ _id }, jwtkey, { expiresIn: "3d" });
 };
 
+const passwordConfig = {
+  minLength: 8,
+  minLowercase: 1,
+  minUppercase: 1,
+  minNumbers: 1,
+  minSymbols: 0 //🟥 dont require special chars
+}
+
 const registerUser = async (req, res) => {
+  console.log(req.body)
+      const {Lastname,Firstname, email, password,DateOfBirth,PrivecyPolicyCheck,Select} = req.body;
+
   try {
-    const {PrivecyPolicyCheck,Firstname, email, password } = req.body;
+    
     let user = await userModel.findOne({ email });
     
     
-    if (!PrivecyPolicyCheck) 
-    return res.status(400).json("accept privecypolicy is requierd")
+   
     if (user)
       return res.status(400).json("User whit the given email already exist...");
-    if (!Firstname || !email || !password)
+    user = new userModel({ Firstname,email, password,DateOfBirth,PrivecyPolicyCheck,Select,Lastname,emailToken:crypto.randomBytes(64).toString("hex") });
+
+
+    if (!Firstname || !email || !password || !Lastname || !DateOfBirth || !PrivecyPolicyCheck ||!Select) 
       return res.status(400).json("All fields are required...");
 
     if (!validator.isEmail(email))
@@ -28,16 +42,15 @@ const registerUser = async (req, res) => {
     if (!validator.isStrongPassword(password))
       return res.status(400).json("Please Enter a Strong password...");
 
-    user = new userModel({ Firstname, email, password });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
 
     await user.save();
     const token = createToken(user._id);
-    res.status(200).json({ _id: user._id, Firstname, email, token });
+    res.status(200).json({ _id: user._id, Firstname,Lastname,Select, email, token, });
   } catch (error) {
     console.log(error);
-    res.status(500).json("error");
+    res.status(500).json("an error aquierd please check your connection");
   }
 };
 const loginUser = async (req, res) => {
@@ -56,7 +69,7 @@ const loginUser = async (req, res) => {
 
     res.status(200).json({ _id: user._id, Firstname: user.Firstname, email, token });
   } catch (error) {
-    res.status(500).json("error");
+    return res.status(500).json("error");
   }
 };
 
@@ -88,5 +101,39 @@ res.status(200).json(users)
 
 };
 
+const  verifyEmail=async (req, res) => {
+  console.log(req.body.emailToken)
+try {
+  const emailToken=req.body.emailToken
 
-module.exports = { registerUser, loginUser,findUser,getUsers };
+  if(!emailToken) return res.status(404).json("EmailToken not found...");
+  const user=await userModel.findOne(emailToken);
+if (user){
+  user.emailToken=null
+  user.isVerified=true
+
+await user.save()
+
+const token=createToken(user._id)
+
+res.status(200).json({
+  _id:user._id,
+  name:user.name,
+  Lastname:user.Lastname,
+  email:user.email,
+  token,
+  Select:user.Select,
+  DateOfBirth:user.DateOfBirth,
+isVerified:user?.isVerified,
+})
+}else res.status(404).json("Email verification failes,invalid token")
+
+} catch (error) {
+  res.status(500).json(error.massage)
+}
+
+
+
+}
+
+module.exports = { registerUser, loginUser,findUser,getUsers,verifyEmail };

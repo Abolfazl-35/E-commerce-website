@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo/trust-logo-4.png";
 import "../components/Navbar.css";
-
+import UserDashBoard from "../Dashboards/UserDashBoard";
 import MiniBag from "./MiniBag";
 import classNames from "classnames";
 import SearchCart from "../SearchCart";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar(props) {
   useEffect(() => {
@@ -147,23 +148,23 @@ function Navbar(props) {
       }
     }
   }, []);
-
-
-  const [searchState, setsearchState] = useState(false);
-  useEffect(() => {
-    setsearchState(() => {
-      if (props.searchresult.Search) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }, [props]);
-  function openSearch(params) {
-    setsearchState((prevdata) => {
-      return true;
-    });
-  }
+console.log(props)
+  const { searchState, user } = useContext(AuthContext);
+  // const [searchState, setsearchState] = useState(false);
+  // useEffect(() => {
+  //   setsearchState(() => {
+  //     if (props.searchresult.Search) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  // }, [props]);
+  // function openSearch(params) {
+  //   setsearchState((prevdata) => {
+  //     return true;
+  //   });
+  // }
 
   const [openNav, setopenNav] = useState(false);
 
@@ -173,26 +174,29 @@ function Navbar(props) {
     });
   }
 
-
-
   return (
-    <>
+    <div className="   w-[100vw] relative ">
+      <div className="w-full   "> 
+      <div className=" w-full overflow-hidden   ">
+        {user && <UserDashBoard />}
+      </div>
+      
+      </div>
       <div className="navbar  sticky top-0 left-0 z-40 flex h-max w-full max-w-full items-center  justify-between shadow-md">
         <div
           id="nav"
           className="relative h-max w-full flex-col items-start justify-between bg-slate-200"
         >
           <MiniBag MiniBagState={props.MiniBagState} item={props.item} />
-          
-          <div 
-          onClick={Navtoggle}
-          className={classNames("overly", { active: openNav })}>
 
-          </div>
+          <div
+            onClick={Navtoggle}
+            className={classNames("overly", { active: openNav })}
+          ></div>
           {/* logo and navbar lists */}
           <div
             id="nav-top"
-            className="relative flex h-max max-h-max w-full border-separate justify-between border-b "
+            className="relative  flex h-max max-h-max w-full border-separate justify-between border-b "
           >
             <Link className="p-1" to="/">
               <div
@@ -202,14 +206,14 @@ function Navbar(props) {
                 <img src={Logo} className="h-full w-full" alt="logo" />
               </div>
             </Link>
-{/* navbar btn in small screens */}
+            {/* navbar btn in small screens */}
             <div
               className={classNames(
                 {
                   "absolute z-[999]  right-[15px] top-5 w-max cursor-pointer":
                     !searchState,
                 },
-                { "hidden": searchState }
+                { hidden: searchState }
               )}
               id="open-menu-btn"
               onClick={Navtoggle}
@@ -235,7 +239,7 @@ function Navbar(props) {
             >
               <div
                 className={classNames(
-                  "relative sm:space-x-1 md:space-x-8  sm:space-y-0 sm:text-xl  justify-start md:justify-center flex flex-col sm:flex-row w-full items-center  space-y-6 p-3 text-lg  sm:mt-0",
+                  "relative sm:space-x-1 md:space-x-8  sm:space-y-0 sm:text-xl  justify-start md:justify-center flex flex-col sm:flex-row w-full items-center  space-y-6 p-3 text-lg sm:mt-0",
                   { active: openNav }
                 )}
                 id="nav-list"
@@ -291,7 +295,7 @@ function Navbar(props) {
                   aria-expanded="false"
                   aria-controls="men-menu"
                 >
-                  <h2 className="h-max sm:pl-4 pb-2 sm:pr-4">women</h2>
+                  <h2 className="h-max sm:pl-4 pb-2 sm:pr-4">Women</h2>
 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -641,18 +645,12 @@ function Navbar(props) {
           </div>
           {/* search and cart */}
           <SearchCart
-            HandleSearch={props.HandleSearch}
-            searchresult={props.searchresult}
-            searchstate={searchState}
-            openSearch={openSearch}
-            data={props.data}
             CartAmount={props.CartAmount}
             MiniBagState={props.MiniBagState}
-            CloseSearch={props.CloseSearch}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

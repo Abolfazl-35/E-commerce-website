@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Massage from "./Massage";
 import BagProduct from "./BagProduct";
+import { AuthContext } from "../../context/AuthContext";
 
 function Bag(props) {
-   
+   const {removeitem,Cart}=useContext(AuthContext)
     
   return (
     <div className="md:container mx-auto">
@@ -13,8 +14,8 @@ function Bag(props) {
       </div>
       <div>
         
-       {props.CartItems?
-        <BagProduct CartItems={props.CartItems} removeItem={props.removeItem} />:<p>Your Bag Is Empty</p>}
+       {Cart?
+        <BagProduct />:<p>Your Bag Is Empty</p>}
       </div>
     </div>
   );

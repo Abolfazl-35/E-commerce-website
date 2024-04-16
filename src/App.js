@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState, useRef,useMemo } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,9 +19,11 @@ import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
 import classNames from "classnames";
 import Bag from "./components/Bag/Bag";
+import VerifyEmail from "./components/SignInPage/VerifyEmail"
+import { AuthContext } from "./context/AuthContext";
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
-  
+  const {user}=useContext(AuthContext)
   let [ShoesData, setShoesData] = useState(AllShoesData);
 
   let [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
@@ -66,7 +68,7 @@ function App() {
     setShoesData(ShoesData);
   }
   
-  let [Cart, Setcart] = useState([]);
+  const [Cart, Setcart] = useState([]);
 
   function AddToCart(product) {
    const NewProduct = Cart.find((i) => {
@@ -90,26 +92,12 @@ function App() {
     }
     // const Basket={...NewProduct}
   }
-  function removeitem(item) {
-
-    const removedProduct = Cart.find((i) => {
-      return (
-        i.selectedColor === item.selectedColor 
-        && i.selectedSize===item.selectedSize
-        && i.id===item.id
-       
-      );
-    });
-Setcart(()=>{
-  return Cart.filter((i)=>{
-    return i!==removedProduct
-  })
-})
 
 
 
 
-  }
+
+
 console.log(Cart)
   const [MiniBagState, setMiniBag] = useState(false);
 
@@ -141,45 +129,13 @@ console.log(Cart)
       return { ...prevformdata, [event.target.name]: event.target.value };
     });
   }
-  const[Searchresult,setSearchresult]=useState({
-    Search:""
-  })
-  function HandleSearch(event) {
-    const {name,value}=event.target
-        setSearchresult((prevdata)=>{
-        return {...prevdata,[name]:value}
-         })
-    if (!value) return setShoesData(AllShoesData)
-
-  }
-const [filterItem,setfilterItem]=useState([])
-
-  useEffect(()=>{
-    if (Searchresult.Search) {
-      const resultArray=ShoesData.filter((i)=>{
-    return i.dec.toLowerCase().replace(
-      / /g,
-      ""
-  ).includes(Searchresult.Search.toLowerCase())
-     })
-
-     setfilterItem(resultArray.slice(1,6))
-    }else if (!Searchresult.Search) {
-      setfilterItem([])
-    }
- 
-    
 
 
 
-    },[Searchresult.Search,Searchresult])
-  
 
-function CloseSearch(params) {
-  setSearchresult((prevdata)=>{
-    return{...prevdata,Search:""}
-  })
-}
+
+
+
 
 // const searchkeys=["dec","brand","name"]
 
@@ -206,12 +162,8 @@ function CloseSearch(params) {
             element={
               <>
                 <Navbar
-                HandleSearch={HandleSearch}
-                searchresult={Searchresult}
-                 data={filterItem}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
-                 CloseSearch={CloseSearch}
                 />
                 {/* <MainChat/> */}
                 <ShoesMenu />
@@ -237,9 +189,6 @@ function CloseSearch(params) {
             element={
               <>
                 <Navbar  
-                HandleSearch={HandleSearch}
-                searchresult={Searchresult}
-                 data={filterItem}
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
                   />
@@ -260,16 +209,18 @@ function CloseSearch(params) {
             
             element={<SignInForm EmailData={EmailData} />}
           />
+          <Route path="/verify-email"
+            
+            element={<VerifyEmail EmailData={EmailData} />}
+          />
           <Route path="/Product/:id"
             
             element={
               <>
-                <Navbar  HandleSearch={HandleSearch}
-                searchresult={Searchresult}
-                 data={filterItem}
+                <Navbar  
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
-                  item={Cart[Cart.length-1]} />
+                />
                 <Product
                  HandleMiniBag={MiniBag}
                   item={product}
@@ -282,15 +233,13 @@ function CloseSearch(params) {
           <Route
           path="/Bag"
           element={<>
-          <Navbar  HandleSearch={HandleSearch}
-                searchresult={Searchresult}
-                 data={filterItem}
+          <Navbar 
                   CartAmount={Cart.length}
                   MiniBagState={MiniBagState}
                   item={Cart[Cart.length-1]} />
 
            <Bag CartItems={Cart}
-           removeItem={removeitem}/>
+           />
            </>
         }
           />

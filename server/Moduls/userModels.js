@@ -8,11 +8,25 @@ const userSchema = new mongoose.Schema({
     require: true, 
     minlength: 3, 
     maxlength: 30 },
-  Lastname: { 
-    type: String, 
-    require: true, 
-    minlength: 3, 
-    maxlength: 30 },
+Lastname:{
+  type: String,
+  required: false,
+
+},
+DateOfBirth:{
+  type: Date,
+  required: true,
+
+},
+PrivecyPolicyCheck:{
+  type: Boolean,
+  required: true,
+},
+Select:{
+  type: String,
+  require: true,
+},
+
   email: { 
     type: String, 
     required: true,
@@ -25,18 +39,12 @@ const userSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
-  PrivecyPolicyCheck:{
-    type:Boolean,
-    required: true,
-  },
-  Select:{
-    type:String,
-    required: false,
-  },
-  UpdateCheck:{
-    type:Boolean,
-    required: false,
-  }
+isVerified:{
+  type: Boolean,
+  default: false,
+},
+emailToken:{type: String, },
+
 
 
 },{timestamps:true});

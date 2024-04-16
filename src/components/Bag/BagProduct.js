@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import dummyimage from "../../images/shoes/jordan/jordan-1.jpg";
 import TooltipFavorite from "../Tooltips/TooltipFavorite";
 import BagProductcss from "./Bagproduct.css";
@@ -6,12 +6,14 @@ import classNames from "classnames";
 import Massage from "./Massage";
 import BagCard from "./BagCard";
 import TooltipDropdown from "../Tooltips/TooltipDropdown";
+import { AuthContext } from "../../context/AuthContext";
 function BagProduct(props) {
-  const [Cartitems, setCartitems] = useState(props.CartItems);
+  const {Cart,Setcart}=useContext(AuthContext)
+
   function addcount(event, id, selectedSize) {
-    setCartitems((prevdata) => {
-      return prevdata.map((i) => {
-        if (i.id === id) {
+    Setcart((prevdata) => {
+      return Cart.map((i) => {
+        if (i.id === id && i.selectedSize===selectedSize) {
           return { ...i, [event.target.name]: event.target.value };
         } else {
           return i;
@@ -21,13 +23,12 @@ function BagProduct(props) {
 
   }
   useEffect(()=>{
-    setCartitems(props.CartItems)
-  },[props.CartItems])
+    Setcart(Cart)
+  },[Cart])
 
   const [Subtotal, setSubtotal] = useState(null);
   
-  console.log(props)
-  console.log(Cartitems);
+
   const [promocodeVisible, setpromocodeVisible] = useState(false);
 
   function promocodeopen(params) {
@@ -35,25 +36,25 @@ function BagProduct(props) {
       return !prevdata;
     });
   }
-  const itemCards = Cartitems.map((i,index) => {
+  const itemCards = Cart.map((i,index) => {
     return <BagCard key={index} item={i} addcount={addcount} removeItem={props.removeItem} />;
   });
   useEffect(() => {
-    const subtotalArray = Cartitems.map((i) => {
+    const subtotalArray = Cart.map((i) => {
       return i.price * i.count;
     });
     const Subtotal = subtotalArray.reduce((a, b) => {
       return a + b;
     }, 0);
     setSubtotal(Subtotal);
-  }, [Cartitems]);
+  }, [Cart]);
 
   return (
     <>
       <div className="flex justify-center items-center font-Roboto flex-col space-y-2 p-10 pt-5">
         <h1 className=" font-semibold text-2xl">Bag</h1>
         <p className=" text-greyish-0 text-base">
-        {Cartitems.length} items <span className="border-l border-gray-500 pl-1">$ {Subtotal}</span>
+        {Cart.length} items <span className="border-l border-gray-500 pl-1">$ {Subtotal}</span>
         </p>
       </div>
       <div className="flex flex-col md:flex-row  font-Roboto w-full p-4 border-t mt-3">

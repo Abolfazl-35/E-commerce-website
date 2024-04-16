@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TooltipFavorite from "../Tooltips/TooltipFavorite";
 import TooltipDelete from "../Tooltips/TooltipDelete";
+import { AuthContext } from "../../context/AuthContext";
 
 
 function BagCard(props) {
@@ -11,7 +12,7 @@ function BagCard(props) {
   let { image, count, dec, price, selectedColor, selectedSize, type } =
     props.item;
 
- 
+ console.log(props)
   return (
     <>
     {props.item?(
@@ -48,7 +49,7 @@ function BagCard(props) {
           </div>
           <div className="flex items-center space-x-3 ">
              <TooltipFavorite />
-          <TooltipDelete removeItem={props.removeItem} iteminfo={props.item}/>
+          <TooltipDelete  iteminfo={props.item}/>
           </div>
          
         </div>
