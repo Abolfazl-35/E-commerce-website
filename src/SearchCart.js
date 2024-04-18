@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Tooltip from "./components/Tooltips/TooltipFavorite";
 import TooltipCart from "./components/Tooltips/TooltipCart";
+import TooltipSearch from "././components/Tooltips/TooltipSearch"
 import classNames from "classnames";
 import "./components/Navbar.css";
 import MiniCard from "./MiniCard";
@@ -9,8 +10,8 @@ import Logo from "./images/logo/trust-logo-4.png";
 import { AuthContext } from "./context/AuthContext";
 import UserDashBoard from "./Dashboards/UserDashBoard";
 import TooltipDashBoard from "./components/Tooltips/TooltipDashBoard";
+
 import { Dashboard } from "@mui/icons-material";
-import { PerformanceContex } from "./context/PerformanceContex";
 function SearchCart(props) {
   // const [searchState, setsearchState] = useState(false);
   // useEffect(() => {
@@ -108,27 +109,31 @@ function SearchCart(props) {
                   <img alt="logo" src={Logo} width={100} height={100} />
                 </div>
                 <div
-                  className={classNames("flex w-1/3 items-center", {
+                  className={classNames("flex w-1/3 items-center ", {
                     "flex items-center relative   w-2/3": searchState,
                   })}
                 >
-                  <label htmlFor="searchinput" className="absolute left-7">
-                    <i
+                  <label htmlFor="searchinput" className="absolute justify-center items-center   left-7">
+                    {searchState && (
+     <i
                       className="bi bi-search hover:text-greyish-0  cursor-pointer p-1 text-xl font-semibold text-slate-950"
                       id="search-icon"
                       onClick={openSearch}
                     ></i>
+                    )}
+               {!searchState && (<TooltipSearch/>)}
+                    
                   </label>
                   <input
                     name="Search"
                     onChange={HandleSearch}
                     value={Searchresult.Search}
                     type="search"
-                    id="searchinput"
+                 
                     autoComplete="off"
                     className={classNames(
-                      " border pl-10  ml-2 p-2 outline-none  border-slate-600 w-[200px] rounded-2xl bg-transparent ",
-                      { " w-full pl-16  ": searchState }
+                      " border pl-10    p-2 outline-none sm:border-slate-600 rounded-2xl bg-transparent ",{"w-[20px] border-none border-slate-600":!searchState},
+                      { " w-full pl-16   ": searchState }
                     )}
                     placeholder="Search"
                   />
@@ -178,21 +183,22 @@ function SearchCart(props) {
               </div>
               {user && (
                 <button
-                  className="hedear-text border-separate cursor-pointer border-l border-slate-700 p-1 text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
+                  className="hedear-text border-separate cursor-pointer border-l border-slate-700  text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
                   onClick={openDashboardf}
                 >
                   <TooltipDashBoard />
                 </button>
               )}
-              <div className="bg-transparent p-1 flex justify-center items-center h-max relative  rounded ">
+              <div className="bg-transparent  flex justify-center items-center h-max relative  rounded ">
                 <Tooltip />
               </div>
               <Link to={"/Bag"}>
-                <div className=" relative p-1 flex bg-gray-400 justify-center items-center mr-2 rounded ">
+                <div className=" relative pb-1 flex justify-center items-center mr-2 rounded ">
                   <TooltipCart />
-                  <span className="absolute right-[-6px] top-[-6px] rounded bg-slate-500 pl-1 pr-1 text-sm text-white">
+                  {cartLength>0&&(                  <span className="absolute bg-gray-600 rounded-full right-[-3px] top-[-3px] font-Roboto font-semibold text-sm  pl-1 pr-1  text-red-900">
                     {cartLength}
-                  </span>
+                  </span>)}
+
                 </div>
               </Link>
             </div>

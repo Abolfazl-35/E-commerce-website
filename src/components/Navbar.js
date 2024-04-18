@@ -645,8 +645,7 @@ console.log(props)
           </div>
           {/* search and cart */}
           <SearchCart
-            CartAmount={props.CartAmount}
-            MiniBagState={props.MiniBagState}
+           
           />
         </div>
       </div>

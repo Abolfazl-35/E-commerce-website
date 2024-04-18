@@ -88,7 +88,7 @@ return !prevdata
   // console.log("section render");
   return (
     <div className="">
-      <div className=" relative flex  sm:p-4 flex-col mt-2">
+      <div className=" relative flex justify-center items-center  sm:p-4 flex-col mt-2">
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
           {props.data && (
@@ -189,7 +189,7 @@ return !prevdata
           </button>
         </div>
         {/* product container */}
-        <div className="flex relative mt-3 p-2 w-full" id="product-container">
+        <div className="flex relative justify-center items-center mt-3 p-2 w-full" id="product-container">
           {/* filter section in big screens */}
           {/* <div
             className={classNames(
@@ -243,7 +243,7 @@ filterVisibility={filterVisibility}
 
           <div
             className={classNames(
-              "w-full mt-3 grid justify-center items-center    h-max     gap-5",
+              "w-full   mt-3 grid justify-center items-center  h-max     gap-5",
               { "grid-cols-1 md:grid-cols-2 lg:grid-cols-2": filterVisibility },
               { "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ": !filterVisibility }
             )}

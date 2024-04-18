@@ -21,12 +21,14 @@ import classNames from "classnames";
 import Bag from "./components/Bag/Bag";
 import VerifyEmail from "./components/SignInPage/VerifyEmail"
 import { AuthContext } from "./context/AuthContext";
+import Footer from "./components/Footer";
+
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
   const {user}=useContext(AuthContext)
-  let [ShoesData, setShoesData] = useState(AllShoesData);
+  const [ShoesData, setShoesData] = useState(AllShoesData);
 
-  let [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
+  const [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
   function setJordan() {
     setShoesData((prevdata) => JordanData);
   }
@@ -98,7 +100,7 @@ function App() {
 
 
 
-console.log(Cart)
+
   const [MiniBagState, setMiniBag] = useState(false);
 
   function MiniBag(item) {
@@ -180,6 +182,7 @@ console.log(Cart)
                   HandleMiniBag={MiniBag}
                   HandleProduct={HandleProduct}
                 />
+                <Footer/>
               </>
             }
           />

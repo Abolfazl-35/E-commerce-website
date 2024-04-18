@@ -1,21 +1,23 @@
 import * as React from "react";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import Tooltip from "@mui/material/Tooltip";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Fade } from "@mui/material";
 import { grey, pink } from "@mui/material/colors";
-
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 export default function BasicTooltip() {
+    const {openSearch}=useContext(AuthContext)
   return (
     <Tooltip
-      title="Favorite"
+      title="Search"
       className="h-max"
+      onClick={openSearch}
       arrow
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 600 }}
     >
-      <FavoriteBorderIcon sx={{fontSize:35,color:grey[800]}} className="pt-1">
-      </FavoriteBorderIcon>
+      <ManageSearchIcon sx={{fontSize:47,color:grey[800]}}  className="pt-1">
+      </ManageSearchIcon>
     </Tooltip>
   );
 }

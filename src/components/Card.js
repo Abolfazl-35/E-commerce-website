@@ -70,21 +70,21 @@ imagesIn.current=images.map((i)=>{
 
 
   return (
-    <>
-      <div className="card rounded flex-col   items-center sm:justify-self-center  sm:w-[480px] md:w-full border-2 h-max  shadow-lg ">
-        <div className="h-[360px] md:h-[460px] md:[w-full]  rounded   ">
-          <Link to={`/product/${props.item.id}`}>
+    <> 
+    <Link to={`/product/${props.item.id}`}>
+
+      <div className="card w-full rounded flex-col items-center sm:justify-self-center   border-2 h-max   shadow-lg ">
+        <div className="md:[w-full]  rounded   ">
             <img
-              className="h-full max-h-full max-w-full w-full rounded object-cover "
+              className="h-[340px] sm:h-[440px] max-w-full w-full rounded object-cover "
               src={images[imgIndex].image}
               alt="productimage"
               loading="lazy"
-              onClick={() => props.HandleProduct(props.item)}
             />
-          </Link>
+        
         </div>
         <div
-          className="product-dec  relative    text-sm flex h-max space-y-4 w-full flex-col items-start rounded bg-zinc-400 "
+          className="product-dec  relative    text-sm flex   h-max space-y-4 w-full flex-col items-start rounded bg-zinc-400 "
           data-attribute="false"
         >
           <div className="product-dec-inner-1 w-full font-serif flex flex-col  text-lg space-y-2  ">
@@ -142,7 +142,7 @@ imagesIn.current=images.map((i)=>{
             <p className="price w-full p-1   ">{props.item.price}$</p>
           </div>
         </div>
-        <Link to="/Product" >
+        {/* <Link to="/Product" >
         <button
           className="w-full bg-slate-200 p-1 text-center font-serif text-slate-950 hover:bg-slate-950 hover:text-slate-200"
           onClick={() => props.HandleProduct(props.item)}
@@ -150,10 +150,11 @@ imagesIn.current=images.map((i)=>{
 
           ADD To Cart
         </button>
-        </Link>
+        </Link> */}
         
        
       </div>
+      </Link>
     </>
   );
 }

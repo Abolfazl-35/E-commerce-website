@@ -295,11 +295,11 @@ const [product,setproduct]=useState(singleproduct)
             <div className="size--container md:max-h-[680px] w-full overflow-y-scroll p-1 flex flex-col  md:w-4/12  ">
               {/* Header in big screens */}
               <div className="p-1 hidden md:block">
-                <h1 className="font-serif text-2xl ">{props.item.dec}</h1>
-                <p className="font-serif text-xl">{props.item.type}</p>
+                <h1 className="font-serif text-2xl ">{product[0].dec}</h1>
+                <p className="font-serif text-xl">{product[0].type}</p>
                 <br />
                 <p className=" font-Oswald tracking-wider text-base ">
-                  ${props.item.price}
+                  ${product[0].price}
                 </p>
               </div>
               {/* Size and descrebtion section */}
