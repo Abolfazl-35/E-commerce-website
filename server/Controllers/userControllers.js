@@ -19,7 +19,7 @@ const passwordConfig = {
 }
 
 const registerUser = async (req, res) => {
-  console.log(req.body)
+
       const {Lastname,Firstname, email, password,DateOfBirth,PrivecyPolicyCheck,Select} = req.body;
 
   try {
@@ -54,6 +54,7 @@ const registerUser = async (req, res) => {
   }
 };
 const loginUser = async (req, res) => {
+  console.log(req.body)
   const { email, password } = req.body;
   try {
     let user = await userModel.findOne({ email });
@@ -67,7 +68,7 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.status(200).json({ _id: user._id, Firstname: user.Firstname, email, token });
+    res.status(200).json({ _id: user._id, Firstname: user.Firstname, email, token,isVerified:user.isVerified, });
   } catch (error) {
     return res.status(500).json("error");
   }
@@ -107,7 +108,7 @@ try {
   const emailToken=req.body.emailToken
 
   if(!emailToken) return res.status(404).json("EmailToken not found...");
-  const user=await userModel.findOne(emailToken);
+  const user=await userModel.findOne({emailToken});
 if (user){
   user.emailToken=null
   user.isVerified=true
@@ -126,7 +127,7 @@ res.status(200).json({
   DateOfBirth:user.DateOfBirth,
 isVerified:user?.isVerified,
 })
-}else res.status(404).json("Email verification failes,invalid token")
+}else res.status(404).json("Email verification failed,invalid token")
 
 } catch (error) {
   res.status(500).json(error.massage)

@@ -34,9 +34,9 @@ console.log(props)
     <>
       <div
         className="container flex w-full flex-col mx-auto p-1
-font-serif items-center justify-center bg-[#ffffff]"
+         font-serif items-center justify-center bg-[#ffffff]"
       >
-<div className="w-full sm:w-3/4 md:w-2/4 flex flex-col justify-center items-center">
+     <div className="w-full sm:w-3/4 md:w-2/4 flex flex-col justify-center items-center">
         <div className="logo flex w-full  justify-center items-center">
           <a href="#" className="">
             <img

@@ -22,7 +22,7 @@ import Bag from "./components/Bag/Bag";
 import VerifyEmail from "./components/SignInPage/VerifyEmail"
 import { AuthContext } from "./context/AuthContext";
 import Footer from "./components/Footer";
-
+import Login from "./components/LoginPage/Login";
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
   const {user}=useContext(AuthContext)
@@ -70,30 +70,30 @@ function App() {
     setShoesData(ShoesData);
   }
   
-  const [Cart, Setcart] = useState([]);
+  // const [Cart, Setcart] = useState([]);
 
-  function AddToCart(product) {
-   const NewProduct = Cart.find((i) => {
-      return (
-        i.selectedSize === product.selectedSize &&
-        i.selectedColor === product.selectedColor
-      );
-    });
+  // function AddToCart(product) {
+  //  const NewProduct = Cart.find((i) => {
+  //     return (
+  //       i.selectedSize === product.selectedSize &&
+  //       i.selectedColor === product.selectedColor
+  //     );
+  //   });
 
-    if (NewProduct) {
-      Setcart((prevdata) => {
-        return Cart.map((i) => {
-          return i.selectedSize === NewProduct.selectedSize &&
-            i.selectedColor === product.selectedColor
-            ? { ...NewProduct, count: NewProduct.count + 1 }
-            : i;
-        });
-      });
-    } else if (product.selectedSize) {
-      Setcart([...Cart, { ...product, count: 1 }]);
-    }
-    // const Basket={...NewProduct}
-  }
+  //   if (NewProduct) {
+  //     Setcart((prevdata) => {
+  //       return Cart.map((i) => {
+  //         return i.selectedSize === NewProduct.selectedSize &&
+  //           i.selectedColor === product.selectedColor
+  //           ? { ...NewProduct, count: NewProduct.count + 1 }
+  //           : i;
+  //       });
+  //     });
+  //   } else if (product.selectedSize) {
+  //     Setcart([...Cart, { ...product, count: 1 }]);
+  //   }
+  //   // const Basket={...NewProduct}
+  // }
 
 
 
@@ -164,7 +164,7 @@ function App() {
             element={
               <>
                 <Navbar
-                  CartAmount={Cart.length}
+                 
                   MiniBagState={MiniBagState}
                 />
                 {/* <MainChat/> */}
@@ -192,7 +192,7 @@ function App() {
             element={
               <>
                 <Navbar  
-                  CartAmount={Cart.length}
+                  
                   MiniBagState={MiniBagState}
                   />
                 <SignUp />
@@ -206,29 +206,41 @@ function App() {
 
           <Route path="/SignIn"
             
-            element={<SignIn HandleEmail={HandleEmail} EmailData={EmailData} />}
+            element={!user?<SignIn HandleEmail={HandleEmail} EmailData={EmailData} />:null}
           />
           <Route path="/SignInForm"
             
-            element={<SignInForm EmailData={EmailData} />}
+            element={<><SignInForm EmailData={EmailData} />
+            
+            </>}
           />
           <Route path="/verify-email"
             
-            element={<VerifyEmail EmailData={EmailData} />}
+            element={<>
+           
+            <Navbar MiniBagState={MiniBagState} />
+             
+           
+ <VerifyEmail EmailData={EmailData} />
+</>
+          }
+          />
+             <Route path="/login"
+            
+            element={<Login  />}
           />
           <Route path="/Product/:id"
             
             element={
               <>
                 <Navbar  
-                  CartAmount={Cart.length}
+                 
                   MiniBagState={MiniBagState}
                 />
                 <Product
                  HandleMiniBag={MiniBag}
                   item={product}
-                  Handleclick={AddToCart}
-                  HandleProductData={AddToCart}
+              
                 />
               </>
             }
@@ -237,11 +249,11 @@ function App() {
           path="/Bag"
           element={<>
           <Navbar 
-                  CartAmount={Cart.length}
+                  
                   MiniBagState={MiniBagState}
-                  item={Cart[Cart.length-1]} />
+                 />
 
-           <Bag CartItems={Cart}
+           <Bag 
            />
            </>
         }

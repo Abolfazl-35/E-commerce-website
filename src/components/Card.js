@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import Cardcss from "./Card.css";
-import ShoesData from "../JordanShoesData";
-import img from "../images/shoes/Airmax/airmax-1.webp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -33,7 +31,7 @@ function Card(props) {
 imagesIn.current=images.map((i)=>{
   if (i) {
     return i.image
-  }
+  }else return null
 })
 
   // imagesIn.current=images.map((i)=>{

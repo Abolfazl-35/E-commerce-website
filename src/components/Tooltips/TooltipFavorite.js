@@ -9,12 +9,12 @@ export default function BasicTooltip() {
   return (
     <Tooltip
       title="Favorite"
-      className="h-max"
+      className="h-max cursor-pointer"
       arrow
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 600 }}
     >
-      <FavoriteBorderIcon sx={{fontSize:35,color:grey[800]}} className="pt-1">
+      <FavoriteBorderIcon sx={{fontSize:35,}} className="pt-1">
       </FavoriteBorderIcon>
     </Tooltip>
   );

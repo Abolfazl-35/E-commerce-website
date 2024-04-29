@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Logo from "../Logo/trust-logo-4.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SignIncss from "../SignInPage/SignIn.css";
 import classNames from "classnames";
 import { useContext } from "react";
@@ -8,13 +8,16 @@ import { AuthContext } from "../../context/AuthContext";
 
 function SignInForm(props) {
   const {
+    user,
     registerInfo,
     updateRegisterInfo,
     error,
     registerUser,
     isRegisterloading,
   } = useContext(AuthContext);
-console.log(registerInfo)
+
+const navigate=useNavigate()
+
   const Firstname_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
   const PWD_REGEX = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   let [ResendTime, SetResendTime] = useState(15);
@@ -444,6 +447,7 @@ console.log(registerInfo)
               <div className="flex w-full p-2 justify-end">
                 
                 <button
+                onClick={user?navigate("/"):null}
                   // disabled={!formconditions ? true : false}
                   className={classNames(
                     "bg-slate-950 mt-3  text-white p-2 text-lg rounded-full hover:bg-greyish-0 hover:text-slate-950 cursor-pointer",
@@ -453,6 +457,7 @@ console.log(registerInfo)
                   {isRegisterloading
                     ? "Creating your account..."
                     : "Create Acoont"}
+                    
                 </button>
               </div>
             </form>

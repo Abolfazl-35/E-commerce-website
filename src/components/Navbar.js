@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo/trust-logo-4.png";
 import "../components/Navbar.css";
-import UserDashBoard from "../Dashboards/UserDashBoard";
+import UserDashBoard from "./Dashboards/UserDashBoard";
 import MiniBag from "./MiniBag";
 import classNames from "classnames";
-import SearchCart from "../SearchCart";
+import SearchCart from "./SearchCart";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar(props) {
@@ -148,7 +148,7 @@ function Navbar(props) {
       }
     }
   }, []);
-console.log(props)
+  console.log(props);
   const { searchState, user } = useContext(AuthContext);
   // const [searchState, setsearchState] = useState(false);
   // useEffect(() => {
@@ -176,11 +176,10 @@ console.log(props)
 
   return (
     <div className="   w-[100vw] relative ">
-      <div className="w-full   "> 
-      <div className=" w-full overflow-hidden   ">
-        {user && <UserDashBoard />}
-      </div>
-      
+      <div className="w-full   ">
+        <div className=" w-full overflow-hidden   ">
+          {user && <UserDashBoard />}
+        </div>
       </div>
       <div className="navbar  sticky top-0 left-0 z-40 flex h-max w-full max-w-full items-center  justify-between shadow-md">
         <div
@@ -644,9 +643,7 @@ console.log(props)
             </div>
           </div>
           {/* search and cart */}
-          <SearchCart
-           
-          />
+          <SearchCart />
         </div>
       </div>
     </div>

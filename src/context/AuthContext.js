@@ -12,24 +12,33 @@ export const AuthContextProvider = ({ children }) => {
 
   const [isRegisterloading, setisRegisterloading] = useState(false);
 
-  const [registerInfo, setRegisterinfo] = useState();
+ const [registerInfo, setRegisterinfo] = useState();
+
+const [loginInfo,setLoginInfo]=useState(null);
+
+const [isLoginloading, setIsLoginLoading] = useState(false);
+
+// Getting user from local storage and set the state
 useEffect(() => {
 const user=localStorage.getItem("User");
 
 setUser(JSON.parse(user));
 },[])
 
-
+// Getting register info from singn in form
   const updateRegisterInfo = useCallback((info) => {
     setRegisterinfo(info);
   }, []);
 
+  // update function for verify email
   const updateUser=useCallback((response) => {
   localStorage.setItem("user", JSON.stringify(response));
   setUser(response)
   console.log(response)
 
   },[])
+
+// SENDING SIGNUP INFO TO DATABASE AND SERVER
 
   const registerUser = useCallback(async (e) => {
     e.preventDefault();
@@ -40,7 +49,7 @@ setUser(JSON.parse(user));
       `${baseUrl}/users/register`,
       JSON.stringify(registerInfo)
     );
-    console.log(response)
+   
     setisRegisterloading(false);
 
     if (response.error) {
@@ -57,6 +66,56 @@ setisRegisterloading(false);
 setUser(response);
 
   }, [registerInfo]);
+
+
+// GETTING LOGIN INFO FROM LOGIN FORM AND SETTING LOGIN STATE
+
+const updateLoginInfo=useCallback((info) => {
+setLoginInfo(info);
+
+},[])
+
+const loginUser=useCallback(async (e) => {
+  e.preventDefault();
+ 
+  setIsLoginLoading(true);
+  setError(null);
+  const response = await postRequest(
+    `${baseUrl}/users/login`,
+    JSON.stringify(loginInfo)
+  );
+ 
+  setIsLoginLoading(false);
+
+  if (response.error) {
+    setIsLoginLoading(false);
+     setError(response);
+   return setTimeout(()=>{
+setError(null)
+   },3000)
+  }
+
+  setIsLoginLoading(false);
+  console.log(response)
+     localStorage.setItem("User", JSON.stringify(response));
+
+setUser(response);
+
+})
+
+
+
+const logoutUser=useCallback(()=>{
+localStorage.removeItem("User");
+setUser(null);
+
+
+
+
+},[])
+
+
+
 
   const [openDashboard,setOpenDashboard]=useState(false);
   const openDashboardf =()=>{
@@ -174,7 +233,7 @@ const [cartLength,setCartLength]=useState(0)
 useEffect(()=>{
   setCartLength(Cart.length)
 },[Cart])
-console.log(Cart)
+console.log(loginInfo)
 console.log(lastItemAdded)
 
   return (
@@ -199,6 +258,7 @@ console.log(lastItemAdded)
           lastItemAdded,
           removeitem,
           Setcart,cartLength,
+          logoutUser,updateLoginInfo,loginUser
         }}
     >
       {children}

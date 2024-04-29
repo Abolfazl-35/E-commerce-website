@@ -1,0 +1,31 @@
+.placeholder{
+    position: absolute;
+    top: .7rem;
+
+  left:1rem;
+    transition: 0.5s;
+    pointer-events: none;  
+}
+
+#login_form input:focus + .placeholder{
+      position: absolute;
+    top: -.8rem;
+
+  left: .5rem;
+    transition: 0.3s;
+    pointer-events: none;  
+}
+#login_form input.has-value + .placeholder{
+    position: absolute;
+  top: -.8rem;
+
+left: .5rem;
+  transition: 0.3s;
+  pointer-events: none;  
+}
+
+ input[type=password]::-ms-reveal,
+ input[type=password]::-ms-clear
+{
+display: none;
+}

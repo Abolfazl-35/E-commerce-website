@@ -1,23 +1,22 @@
 import * as React from "react";
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import Tooltip from "@mui/material/Tooltip";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Fade } from "@mui/material";
 import { grey, pink } from "@mui/material/colors";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 export default function BasicTooltip() {
-    const {openSearch}=useContext(AuthContext)
   return (
     <Tooltip
-      title="Search"
+      title="ManageAcount"
       className="h-max cursor-pointer"
-      onClick={openSearch}
       arrow
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 600 }}
     >
-      <ManageSearchIcon sx={{fontSize:47,color:grey[800]}}  className="pt-1">
-      </ManageSearchIcon>
+      <ManageAccountsIcon
+        sx={{ fontSize: 35 }}
+        className=""
+      ></ManageAccountsIcon>
     </Tooltip>
   );
 }
