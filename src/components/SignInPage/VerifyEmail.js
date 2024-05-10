@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { baseUrl, postRequest } from "../../utils/services";
 
 function VerifyEmail() {
@@ -27,12 +27,25 @@ function VerifyEmail() {
           );
           setIsLoading(false);
           console.log("res", response);
+          
           if (response.error) {
-            console.log(response.massage);
+         
             return setEroor(response.massage);
           }
           console.log(response);
           updateUser(response);
+        }
+        if (!emailToken) {
+          setIsLoading(true);
+          const response = await postRequest(
+            `${baseUrl}/users/verify-email`,
+            JSON.stringify({ emailToken })
+           
+          );
+          setIsLoading(false); 
+          if (response.error) {
+            return setEroor(response.massage)
+          }
         }
       }
     })();
@@ -56,7 +69,10 @@ function VerifyEmail() {
         </div>
       )}
       <div className="flex justify-center items-center">
+        <Link to="/">        
         <button className="bg-slate-950 text-white p-3 rounded-full">Back to MainPage</button>
+
+        </Link>
       </div>
     </>
   );

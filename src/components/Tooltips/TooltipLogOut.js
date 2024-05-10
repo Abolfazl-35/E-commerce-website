@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 
 function TooltipLogOut() {
- const {logoutUser} = useContext(AuthContext);
+ const {logoutUser,openDashboardf} = useContext(AuthContext);
     return (
         <Tooltip
         title="LogOut"
@@ -14,7 +14,8 @@ function TooltipLogOut() {
         arrow
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 600 }}
-        onClick={logoutUser}
+        onClick={()=>{logoutUser()
+          openDashboardf()}}
       >
         <LogoutIcon sx={{fontSize:30}} className="">
         </LogoutIcon>

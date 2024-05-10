@@ -32,7 +32,7 @@ setUser(JSON.parse(user));
 
   // update function for verify email
   const updateUser=useCallback((response) => {
-  localStorage.setItem("user", JSON.stringify(response));
+  localStorage.setItem("User", JSON.stringify(response));
   setUser(response)
   console.log(response)
 
@@ -101,7 +101,7 @@ setError(null)
 
 setUser(response);
 
-})
+},[loginInfo])
 
 
 
@@ -258,7 +258,8 @@ console.log(lastItemAdded)
           lastItemAdded,
           removeitem,
           Setcart,cartLength,
-          logoutUser,updateLoginInfo,loginUser
+          logoutUser,updateLoginInfo,loginUser,
+          isLoginloading
         }}
     >
       {children}

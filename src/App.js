@@ -23,6 +23,7 @@ import VerifyEmail from "./components/SignInPage/VerifyEmail"
 import { AuthContext } from "./context/AuthContext";
 import Footer from "./components/Footer";
 import Login from "./components/LoginPage/Login";
+import SendVerify from "./components/SignInPage/SendVerify";
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
   const {user}=useContext(AuthContext)
@@ -217,18 +218,19 @@ function App() {
           <Route path="/verify-email"
             
             element={<>
-           
-            <Navbar MiniBagState={MiniBagState} />
-             
-           
+ 
  <VerifyEmail EmailData={EmailData} />
 </>
-          }
-          />
+          } />
+         
              <Route path="/login"
             
-            element={<Login  />}
-          />
+            element={<Login  />}  />
+        
+        <Route path="/send-verify"
+            
+            element={<SendVerify  />}  />
+
           <Route path="/Product/:id"
             
             element={

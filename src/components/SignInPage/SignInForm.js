@@ -61,7 +61,7 @@ const navigate=useNavigate()
       return !prevdata;
     });
   }
-  const userRef = useRef(false);
+  const [userExist,setUserExist] = useState(false);
   const errorRef = useRef();
   const [validFirstname, setValidFirstname] = useState();
   const [validpassword, setValidpassword] = useState();
@@ -70,9 +70,11 @@ const navigate=useNavigate()
 
   const [errMsg, setErrMsg] = useState();
   const [success, setSuccess] = useState();
-  // useEffect(()=>{
-  //   userRef.current.focus()
-  // },[])
+  useEffect(()=>{
+    if (user) {
+      setUserExist(true)
+    }
+  },[user])
 
   useEffect(() => {
     const result = Firstname_REGEX.test(Formstate.Firstname);
@@ -203,14 +205,14 @@ const navigate=useNavigate()
                   <input
                     type="text"
                     className={classNames(
-                      "border border-gray-500",
+                      "border-2 h-12 border-gray-500",
 
                       {
-                        "input p-2  border border-red-800":
+                        "input p-2  border-2 border-red-800":
                           !validFirstname && inputfocus,
                       },
                       { "input has-value": Formstate.Firstname },
-                      { "input  border border-green-800": validFirstname }
+                      { "input  border-2 border-green-800": validFirstname }
                     )}
                     id="FirstInput"
                     name="Firstname"
@@ -259,9 +261,9 @@ const navigate=useNavigate()
                   <input
                     type="text"
                     className={classNames(
-                      "border border-gray-500",
+                      "border-2 h-12 border-gray-500",
                       { "input has-value": Formstate.Lastname },
-                      { "input  border border-green-800": validFirstname }
+                      { "input  border-2 border-green-800": validFirstname }
                     )}
                     id="LastnameInput"
                     name="Lastname"
@@ -280,13 +282,13 @@ const navigate=useNavigate()
                 <input
                   type={passwordvisibility ? "text" : "password"}
                   className={classNames(
-                    "border border-gray-500",
+                    "border-2 h-12 border-gray-500",
                     {
-                      "input p-2  border border-red-800":
+                      "input p-2  border-2 border-red-800":
                         !validpassword && inputfocus,
                     },
                     { "input has-value": Formstate.password },
-                    { "input  border border-green-800": validpassword }
+                    { "input  border-2 border-green-800": validpassword }
                   )}
                   id="passwordInput"
                   name="password"
@@ -340,7 +342,7 @@ const navigate=useNavigate()
                   <select
                     value={Formstate.Select ? Formstate.Select : "select"}
                     onChange={HandleForm}
-                    className="p-2  w-full"
+                    className="p-2 border-2 outline-none w-full"
                     name="Select"
                   >
                     <option
@@ -371,11 +373,11 @@ const navigate=useNavigate()
                     type="date"
                     className={classNames(
                       {
-                        "input p-2  border focus:border-red-800":
+                        "input p-2 h-12  border-2 focus:border-red-800":
                           !validpassword,
                       },
                       {
-                        "input p-2  border focus:border-red-800":
+                        "input p-2 h-12  border-2 focus:border-red-800":
                           !validFirstname,
                       },
                       { "input has-value": Formstate.DateOfBirth },
@@ -447,7 +449,7 @@ const navigate=useNavigate()
               <div className="flex w-full p-2 justify-end">
                 
                 <button
-                onClick={user?navigate("/"):null}
+                onClick={userExist?navigate("/"):null}
                   // disabled={!formconditions ? true : false}
                   className={classNames(
                     "bg-slate-950 mt-3  text-white p-2 text-lg rounded-full hover:bg-greyish-0 hover:text-slate-950 cursor-pointer",

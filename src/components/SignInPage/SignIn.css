@@ -1,8 +1,8 @@
-
 .placeholder {
   position: absolute;
   top: 25%;
-  left: 45%;
+left: 43%;
+right: 50%;
 
   transition: 0.3s;
   pointer-events: none;
@@ -10,19 +10,18 @@
 
 .SignInEmail input {
   box-sizing: border-box;
+  padding-left: 1rem;
+
 }
 .SignInEmail input:focus + .placeholder {
-  top: -15%;
-  left: 5%;
+  top: -23%;
+  left: 3%;
   font-size: small;
-  
 }
-
-
 
 .SignInEmail input.has-value + .placeholder {
   position: absolute;
-  top: -15%;
+  top: -23%;
   left: 5%;
   transition: 0.3s;
   pointer-events: none;
@@ -30,34 +29,31 @@
 
 .SignInForm input {
   box-sizing: border-box;
- 
+
   border-radius: 0.375rem;
-  
+
   outline: none;
   width: 100%;
-padding: .5rem;
-
+  padding: 0.5rem;
 }
-.SignInForm input:focus{
- 
+.SignInForm input:focus {
 }
-
 
 .SignInForm input[type="date"]:focus + .date-placeholder {
-    top: -20%;
-    left: 0.5rem;
-    font-size: small;
-    color: rgb(126, 20, 20);
-    padding: 0;
+  top: -20%;
+  left: 0.5rem;
+  font-size: small;
+  color: rgb(126, 20, 20);
+  padding: 0;
 }
-.SignInForm input[type="date"].has-value + .date-placeholder{
-    position: absolute;
-    top: -20%;
-    left: .5rem;
-    transition: 0.3s;
-    pointer-events: none;
-    font-size: small;
-  }
+.SignInForm input[type="date"].has-value + .date-placeholder {
+  position: absolute;
+  top: -20%;
+  left: 0.5rem;
+  transition: 0.3s;
+  pointer-events: none;
+  font-size: small;
+}
 
 .SignInForm input:focus + .placeholder {
   top: -25%;
@@ -68,29 +64,27 @@ padding: .5rem;
 .SignInForm input.has-value + .placeholder {
   position: absolute;
   top: -25%;
-  left: .5rem;
+  left: 0.5rem;
   transition: 0.3s;
   pointer-events: none;
   font-size: small;
 }
-.SignInForm .date-placeholder{
-    position: absolute;
-    top: .6rem;
-    left: .5rem;
-  
-    transition: 0.3s;
-    pointer-events: none;
-}
-.SignInForm .placeholder {
+.SignInForm .date-placeholder {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 0.7rem;
+  left: 0.7rem;
 
   transition: 0.3s;
   pointer-events: none;
 }
+.SignInForm .placeholder {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
 
-
+  transition: 0.3s;
+  pointer-events: none;
+}
 
 /* .SignInForm select >option{
 background-color: blue;

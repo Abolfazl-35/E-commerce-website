@@ -27,7 +27,7 @@ function Navbar(props) {
         showdropdown_men_women_dropdown(men_item.ariaExpanded);
       });
       men_item.addEventListener("mouseleave", (e) => {
-        console.log(e.target);
+       
 
         men_item.ariaExpanded = false;
         showdropdown_men_women_dropdown(men_item.ariaExpanded);
@@ -146,6 +146,9 @@ function Navbar(props) {
       } else if (ariaparam === "false") {
         accessories_menu.classList.remove("show");
       }
+    }
+    return ()=>{
+      
     }
   }, []);
   console.log(props);

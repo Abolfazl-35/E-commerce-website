@@ -186,7 +186,7 @@ function SearchCart(props) {
               {user && (
                 <button
                   className="hedear-text border-separate cursor-pointer border-l border-slate-700  text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
-                  onClick={openDashboardf}
+                  onClick={()=>openDashboardf()}
                 >
                   <TooltipDashBoard />
                 </button>

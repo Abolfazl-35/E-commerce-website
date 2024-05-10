@@ -1,4 +1,4 @@
-.placeholder{
+.login-placeholder{
     position: absolute;
     top: .7rem;
 
@@ -7,7 +7,7 @@
     pointer-events: none;  
 }
 
-#login_form input:focus + .placeholder{
+#login_form input:focus + .login-placeholder{
       position: absolute;
     top: -.8rem;
 
@@ -15,7 +15,7 @@
     transition: 0.3s;
     pointer-events: none;  
 }
-#login_form input.has-value + .placeholder{
+#login_form input.has-value + .login-placeholder{
     position: absolute;
   top: -.8rem;
 

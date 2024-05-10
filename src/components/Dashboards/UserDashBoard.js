@@ -35,15 +35,20 @@ sx={{width:56,height:56}}
 
 </Avatar>
         
-
-<h1 className=' font-Roboto font-semibold '>
+<div>
+<h1 className=' font-Roboto text-sm font-semibold '>
    {user.Firstname}
   
 </h1>
 </div>
-<Link to="/verify-email">
-<p>Verifying your Email</p>
+
+</div>
+{!user.isVerified &&(
+  <Link to="/send-verify">
+<p className=' font-Roboto text-sm'>Click for Verifying your Email</p>
 </Link>
+)}
+
       </div>
 
 

@@ -8,7 +8,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 function Login() {
   const usenavigate = useNavigate();
-  const { updateLoginInfo, loginUser, error, user } = useContext(AuthContext);
+  const { updateLoginInfo, loginUser, error, user,isLoginloading } = useContext(AuthContext);
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -18,6 +18,16 @@ function Login() {
       return { ...prevdata, [event.target.name]: event.target.value };
     });
   }
+  const [userExist,setUserExist] = useState(false);
+
+
+useEffect(()=>{
+setUserExist(() => {
+  if(user) return true
+ 
+})
+},[user])
+
 
   useEffect(() => {
     updateLoginInfo(loginForm);
@@ -46,7 +56,7 @@ function Login() {
             />
           </a>
         </div>
-        <div>
+        <div className="flex font-Roboto text-red-900 font-semibold text-lg">
           <h1>{error?.massage}</h1>
         </div>
         <form
@@ -78,7 +88,7 @@ function Login() {
               autoSave="on"
             />
 
-            <span className="placeholder w-max  text-greyish-0 text-base tracking-wider bg-[#ffffff]">
+            <span className="login-placeholder w-max  text-greyish-0 text-base tracking-wider bg-[#ffffff]">
               Email
             </span>
           </div>
@@ -104,7 +114,7 @@ function Login() {
               autoSave="off"
             />
 
-            <span className="placeholder w-max  text-greyish-0 text-base tracking-wider bg-[#ffffff]">
+            <span className="login-placeholder w-max  text-greyish-0 text-base tracking-wider bg-[#ffffff]">
               Password
             </span>
             <span
@@ -117,13 +127,13 @@ function Login() {
           </div>
           <div className="flex justify-center items-center w-full p-3 mt-5 border-t">
             <button
-              onClick={user ? usenavigate("/") : null}
+              onClick={userExist ? usenavigate("/") : null}
               className=" w-full bg-slate-950 text-lg text-white font-Roboto p-3 rounded-3xl hover:bg-white hover:text-black"
             >
-              Login
+             {isLoginloading?"Loading...":"login"}
             </button>
           </div>
-          <div className="flex w-full justify-between pt-3 items-center mt-5 font-Roboto text-lg font-semibold">
+          <div className="flex flex-col  w-full justify-between pt-3 items-center mt-5 font-Roboto text-lg font-semibold">
             <p>Sign up</p>
             <p className="">
               Forget your <span>password?</span>
