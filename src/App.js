@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useState, useRef,useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -19,17 +19,21 @@ import Product from "./components/SingleproductComponents/Product";
 import SignInForm from "./components/SignInPage/SignInForm";
 import classNames from "classnames";
 import Bag from "./components/Bag/Bag";
-import VerifyEmail from "./components/SignInPage/VerifyEmail"
+import VerifyEmail from "./components/SignInPage/VerifyEmail";
 import { AuthContext } from "./context/AuthContext";
 import Footer from "./components/Footer";
 import Login from "./components/LoginPage/Login";
 import SendVerify from "./components/SignInPage/SendVerify";
+import Chat from "./components/Chat/Chat";
+import MainChat from "./components/Chat/MainChat";
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
-  const {user}=useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [ShoesData, setShoesData] = useState(AllShoesData);
 
-  const [sortbyprice, setsort] = useState([{ sorted: "price", reversed: false }]);
+  const [sortbyprice, setsort] = useState([
+    { sorted: "price", reversed: false },
+  ]);
   function setJordan() {
     setShoesData((prevdata) => JordanData);
   }
@@ -46,7 +50,6 @@ function App() {
   //   });
   // }
 
- 
   function PriceHighLow() {
     const copyitems = [...ShoesData];
     setsort({ sortbyprice: "price", reversed: !sortbyprice.reversed });
@@ -70,7 +73,7 @@ function App() {
     });
     setShoesData(ShoesData);
   }
-  
+
   // const [Cart, Setcart] = useState([]);
 
   // function AddToCart(product) {
@@ -96,34 +99,26 @@ function App() {
   //   // const Basket={...NewProduct}
   // }
 
-
-
-
-
-
-
   const [MiniBagState, setMiniBag] = useState(false);
 
   function MiniBag(item) {
-   if (item.selectedSize && item.selectedColor) {
+    if (item.selectedSize && item.selectedColor) {
       setMiniBag((prevdata) => {
-      return true;
-    });
-        setTimeout(() => {
-      setMiniBag((prevdata) => {
-        return false;
+        return true;
       });
-    }, "3000");
-   }
-
-
+      setTimeout(() => {
+        setMiniBag((prevdata) => {
+          return false;
+        });
+      }, "3000");
+    }
   }
 
   const [product, setproduct] = useState([]);
   function HandleProduct(newProduct) {
     setproduct((prevdat) => newProduct);
   }
- 
+
   const [EmailData, setEmailData] = useState({ Email: "" });
 
   function HandleEmail(event) {
@@ -133,26 +128,17 @@ function App() {
     });
   }
 
+  // const searchkeys=["dec","brand","name"]
 
+  //   const search=(data)=>{
+  //     return data.filter((i)=>{
+  //       return searchkeys.some((item)=>{
+  //         return i[item].toLowerCase().trim().replace(" ","").includes(Searchresult.Search.trim().replace(" ","").toLowerCase())
+  //       })
 
+  //     })
 
-
-
-
-
-// const searchkeys=["dec","brand","name"]
-
-//   const search=(data)=>{
-//     return data.filter((i)=>{
-//       return searchkeys.some((item)=>{
-//         return i[item].toLowerCase().trim().replace(" ","").includes(Searchresult.Search.trim().replace(" ","").toLowerCase())
-//       })
-         
-
-//     })
- 
-//   }
-
+  //   }
 
   console.log("app render");
 
@@ -160,20 +146,18 @@ function App() {
     <div className={classNames("")}>
       <Router>
         <Routes>
-          <Route path="/"
-            
+          <Route
+            path="/"
             element={
               <>
-                <Navbar
-                 
-                  MiniBagState={MiniBagState}
-                />
+                <Chat />
+                <MainChat/>
+                <Navbar MiniBagState={MiniBagState} />
                 {/* <MainChat/> */}
                 <ShoesMenu />
                 <Main />
                 <ShopHeader />
                 <Section
-                
                   // Handleclick={AddToCart}
                   data={ShoesData}
                   // HandleImage={changeimage}
@@ -183,19 +167,16 @@ function App() {
                   HandleMiniBag={MiniBag}
                   HandleProduct={HandleProduct}
                 />
-                <Footer/>
+                <Footer />
               </>
             }
           />
 
-          <Route path="/SignUp"
-           
+          <Route
+            path="/SignUp"
             element={
               <>
-                <Navbar  
-                  
-                  MiniBagState={MiniBagState}
-                  />
+                <Navbar MiniBagState={MiniBagState} />
                 <SignUp />
                 <Header />
                 <VideoSection />
@@ -205,60 +186,53 @@ function App() {
             }
           />
 
-          <Route path="/SignIn"
-            
-            element={!user?<SignIn HandleEmail={HandleEmail} EmailData={EmailData} />:null}
+          <Route
+            path="/SignIn"
+            element={
+              !user ? (
+                <SignIn HandleEmail={HandleEmail} EmailData={EmailData} />
+              ) : null
+            }
           />
-          <Route path="/SignInForm"
-            
-            element={<><SignInForm EmailData={EmailData} />
-            
-            </>}
-          />
-          <Route path="/verify-email"
-            
-            element={<>
- 
- <VerifyEmail EmailData={EmailData} />
-</>
-          } />
-         
-             <Route path="/login"
-            
-            element={<Login  />}  />
-        
-        <Route path="/send-verify"
-            
-            element={<SendVerify  />}  />
-
-          <Route path="/Product/:id"
-            
+          <Route
+            path="/SignInForm"
             element={
               <>
-                <Navbar  
-                 
-                  MiniBagState={MiniBagState}
-                />
-                <Product
-                 HandleMiniBag={MiniBag}
-                  item={product}
-              
-                />
+                <SignInForm EmailData={EmailData} />
               </>
             }
           />
           <Route
-          path="/Bag"
-          element={<>
-          <Navbar 
-                  
-                  MiniBagState={MiniBagState}
-                 />
+            path="/verify-email"
+            element={
+              <>
+                <VerifyEmail EmailData={EmailData} />
+              </>
+            }
+          />
 
-           <Bag 
-           />
-           </>
-        }
+          <Route path="/login" element={<Login />} />
+
+          <Route path="/send-verify" element={<SendVerify />} />
+
+          <Route
+            path="/Product/:id"
+            element={
+              <>
+                <Navbar MiniBagState={MiniBagState} />
+                <Product HandleMiniBag={MiniBag} item={product} />
+              </>
+            }
+          />
+          <Route
+            path="/Bag"
+            element={
+              <>
+                <Navbar MiniBagState={MiniBagState} />
+
+                <Bag />
+              </>
+            }
           />
         </Routes>
       </Router>

@@ -62,7 +62,7 @@ function SearchCart(props) {
   //   document.body.classList.remove("container")
   //  }
   // },[props])
-  console.log(searchState);
+  
   return (
     <div className="">
       <div className="h-max w-full justify-end  ">

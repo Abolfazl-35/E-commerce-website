@@ -233,9 +233,16 @@ const [cartLength,setCartLength]=useState(0)
 useEffect(()=>{
   setCartLength(Cart.length)
 },[Cart])
-console.log(loginInfo)
-console.log(lastItemAdded)
 
+
+const [chatPageOpen,setChatPageOpen] = useState(false)
+
+function HandleChatPage() {
+ setChatPageOpen((prevdata)=>{
+  return !prevdata
+ })
+}
+console.log(chatPageOpen)
   return (
     <AuthContext.Provider
       value={{ user,
@@ -259,7 +266,8 @@ console.log(lastItemAdded)
           removeitem,
           Setcart,cartLength,
           logoutUser,updateLoginInfo,loginUser,
-          isLoginloading
+          isLoginloading,
+        HandleChatPage,chatPageOpen
         }}
     >
       {children}
