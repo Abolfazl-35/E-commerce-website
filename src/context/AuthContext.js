@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { createContext, useState } from "react";
 import { baseUrl, postRequest } from "../utils/services";
 import AllShoesData from "../AllShoesData";
+import JordanData from "../JordanShoesData";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -94,7 +95,7 @@ const loginUser=useCallback(async (e) => {
 setError(null)
    },3000)
   }
-
+console.log(error)
   setIsLoginLoading(false);
   console.log(response)
      localStorage.setItem("User", JSON.stringify(response));
@@ -114,8 +115,11 @@ setUser(null);
 
 },[])
 
+const [ShoesData, setShoesData] = useState(AllShoesData);
 
-
+function setJordan() {
+  setShoesData((prevdata) => JordanData);
+}
 
   const [openDashboard,setOpenDashboard]=useState(false);
   const openDashboardf =()=>{
@@ -123,7 +127,6 @@ setUser(null);
     return !prevdata
   })
   }
-  const [ShoesData, setShoesData] = useState(AllShoesData);
 
   const[Searchresult,setSearchresult]=useState({
     Search:""
@@ -242,6 +245,7 @@ function HandleChatPage() {
   return !prevdata
  })
 }
+
 console.log(chatPageOpen)
   return (
     <AuthContext.Provider
@@ -267,7 +271,7 @@ console.log(chatPageOpen)
           Setcart,cartLength,
           logoutUser,updateLoginInfo,loginUser,
           isLoginloading,
-        HandleChatPage,chatPageOpen
+        HandleChatPage,chatPageOpen,ShoesData,setJordan,setShoesData
         }}
     >
       {children}

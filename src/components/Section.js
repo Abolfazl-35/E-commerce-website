@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Section.css";
 import { useState } from "react";
 import JordanData from "../JordanShoesData";
@@ -9,6 +9,7 @@ import { colors } from "@mui/material";
 import classNames from "classnames";
 import Filter from "./Filter";
 import FilterSection from "./FilterSection";
+import { AuthContext } from "../context/AuthContext";
 function Section(props) {
   // useEffect(() => {
   //   const sortBy_btn = document.getElementById("sortby-btn");
@@ -34,7 +35,8 @@ function Section(props) {
   //     }
   //   });
   // },[ShoesData]);
-  console.log();
+  const {ShoesData}=useContext(AuthContext)
+
   const [filterVisibility, setfilterVisibility] = useState(false);
 
   function openFilterSection(params) {
@@ -78,22 +80,22 @@ return !prevdata
     return null;
   });
   let HeadText;
-  if (props.data === AllShoesData) {
+  if (ShoesData === AllShoesData) {
     HeadText = "Nike";
   }
-  if (props.data === JordanData) {
+  if (ShoesData === JordanData) {
     HeadText = "Jordan";
   }
 
   // console.log("section render");
   return (
-    <div className="">
-      <div className=" relative flex justify-center items-center  sm:p-4 flex-col mt-2">
+    <div className=" sm:container sm:mx-auto md:flex md:mx-0 md:min-w-full">
+      <div className=" relative flex justify-between w-full items-center  sm:p-4 flex-col mt-2">
         {/* Header and filter && sort btn */}
         <div className="flex p-3 justify-between w-full">
-          {props.data && (
+          {ShoesData && (
             <h1 className=" font-bold pl-2 p-5 text-nowrap  w-max text-lg  font-serif">
-              {HeadText} Shoes & Sneakers({props.data.length})
+              {HeadText} Shoes & Sneakers({ShoesData.length})
             </h1>
           )}
 

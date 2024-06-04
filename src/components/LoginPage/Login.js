@@ -130,7 +130,7 @@ setUserExist(() => {
               onClick={userExist ? usenavigate("/") : null}
               className=" w-full bg-slate-950 text-lg text-white font-Roboto p-3 rounded-3xl hover:bg-white hover:text-black"
             >
-             {isLoginloading?"Loading...":"login"}
+             {isLoginloading?"Loading...":"Login"}
             </button>
           </div>
           <div className="flex flex-col  w-full justify-between pt-3 items-center mt-5 font-Roboto text-lg font-semibold">

@@ -28,15 +28,12 @@ import Chat from "./components/Chat/Chat";
 import MainChat from "./components/Chat/MainChat";
 // import MainChat from "./components/ChatPage/MainChat";
 function App() {
-  const { user } = useContext(AuthContext);
-  const [ShoesData, setShoesData] = useState(AllShoesData);
+  const { user,ShoesData,setJordan,setShoesData } = useContext(AuthContext);
 
   const [sortbyprice, setsort] = useState([
     { sorted: "price", reversed: false },
   ]);
-  function setJordan() {
-    setShoesData((prevdata) => JordanData);
-  }
+
 
   // function changeimage(id, newimage) {
   //   console.log(newimage);
