@@ -48,6 +48,7 @@ function DynamicSlides() {
   }
 
   var settings = {
+    
     dots: true,
     infinite: false,
     speed: 500,
@@ -85,17 +86,15 @@ function DynamicSlides() {
     ],
   };
   return (
-    <div className="mx-auto p-2 h-max overflow-y-hidden overflow-x-scroll sm:overflow-hidden">
-      <div className="flex w-full relative">
-        <h1>next</h1>
-      </div>
-      <div className="mt-16">
+    <div className="mx-auto  h-full mb-10     ">
+     
+      <div className="mt-16    ">
         <Slider {...settings}>
           {slides.map((slide) => {
             return (
               <div
                 key={slide}
-                className="card-item relative w-full max-w-full p-2      "
+                className="card-item relative p-2       "
               >
                <div className="w-full">
 

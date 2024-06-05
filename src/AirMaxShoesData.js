@@ -44,7 +44,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-2.webp"),
       },
      {
       shown:"white",
@@ -77,11 +77,11 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-3.jpeg"),
       },
      {
       shown:"white",
-      image:require("./images/shoes/Airmax/airmax-1.webp"),
+      image:require("./images/shoes/Airmax/airmax-4.jpeg"),
       },
     {
   shown:"white",  
@@ -110,7 +110,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-4.jpeg"),
       },
      {
       shown:"white",
@@ -143,7 +143,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-5.jpeg"),
       },
      {
       shown:"white",
@@ -176,7 +176,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-6.jpeg"),
       },
      {
       shown:"white",
@@ -209,7 +209,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-7.webp"),
       },
      {
       shown:"white",
@@ -242,7 +242,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-8.webp"),
       },
      {
       shown:"white",
@@ -275,7 +275,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-9.webp"),
       },
      {
       shown:"white",
@@ -308,7 +308,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-10.jpeg"),
       },
      {
       shown:"white",
@@ -341,7 +341,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-11.webp"),
       },
      {
       shown:"white",
@@ -374,7 +374,7 @@ const airmax_shoes = [
     images:[
       {
       shown:"white",
-      image:require( "./images/shoes/Airmax/airmax-1.webp"),
+      image:require( "./images/shoes/Airmax/airmax-12.webp"),
       },
      {
       shown:"white",

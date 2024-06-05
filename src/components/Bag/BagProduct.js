@@ -8,26 +8,24 @@ import BagCard from "./BagCard";
 import TooltipDropdown from "../Tooltips/TooltipDropdown";
 import { AuthContext } from "../../context/AuthContext";
 function BagProduct(props) {
-  const {Cart,Setcart}=useContext(AuthContext)
+  const { Cart, Setcart } = useContext(AuthContext);
 
   function addcount(event, id, selectedSize) {
     Setcart((prevdata) => {
       return Cart.map((i) => {
-        if (i.id === id && i.selectedSize===selectedSize) {
+        if (i.id === id && i.selectedSize === selectedSize) {
           return { ...i, [event.target.name]: event.target.value };
         } else {
           return i;
         }
       });
     });
-
   }
-  useEffect(()=>{
-    Setcart(Cart)
-  },[Cart])
+  useEffect(() => {
+    Setcart(Cart);
+  }, [Cart]);
 
   const [Subtotal, setSubtotal] = useState(null);
-  
 
   const [promocodeVisible, setpromocodeVisible] = useState(false);
 
@@ -36,8 +34,15 @@ function BagProduct(props) {
       return !prevdata;
     });
   }
-  const itemCards = Cart.map((i,index) => {
-    return <BagCard key={index} item={i} addcount={addcount} removeItem={props.removeItem} />;
+  const itemCards = Cart.map((i, index) => {
+    return (
+      <BagCard
+        key={index}
+        item={i}
+        addcount={addcount}
+        removeItem={props.removeItem}
+      />
+    );
   });
   useEffect(() => {
     const subtotalArray = Cart.map((i) => {
@@ -54,7 +59,8 @@ function BagProduct(props) {
       <div className="flex justify-center items-center font-Roboto flex-col space-y-2 p-10 pt-5">
         <h1 className=" font-semibold text-2xl">Bag</h1>
         <p className=" text-greyish-0 text-base">
-        {Cart.length} items <span className="border-l border-gray-500 pl-1">$ {Subtotal}</span>
+          {Cart.length} items{" "}
+          <span className="border-l border-gray-500 pl-1">$ {Subtotal}</span>
         </p>
       </div>
       <div className="flex flex-col md:flex-row  font-Roboto w-full p-4 border-t mt-3">
@@ -65,13 +71,15 @@ function BagProduct(props) {
           {itemCards}
         </div>
         {/* bag summery */}
-        <div className="w-full mt-3 pl-2 pt-3 md:mt-0 md:pt-2 md:pl-5 md:w-1/3 flex p-2">
+        <div className="w-full pb-28 mt-3 pl-2 pt-3 md:mt-0 md:pt-2 md:pl-5 md:w-1/3 flex p-2">
           <div className="flex flex-col space-y-7 w-full justify-start items-center relative">
             <h1 className="text-center font-bold text-3xl">Summary</h1>
             {/* form for promo code */}
             <p className="flex justify-center items-center">
               Do you have a Promo Code?
-              <button  onClick={promocodeopen}><TooltipDropdown/></button>
+              <button onClick={promocodeopen}>
+                <TooltipDropdown />
+              </button>
             </p>
             <form
               className={classNames("promocode-form ", {
@@ -97,16 +105,16 @@ function BagProduct(props) {
               <p>${Subtotal}</p>
             </div>
             <div className="flex w-full p-2 justify-between font-semibold text-lg ">
-              <p>Estimated Shipping &Handling</p>
+              <p>Estimated Shipping & Handling</p>
               <p>$7.00</p>
             </div>
             <div className="flex w-full p-2 justify-between font-semibold text-lg ">
               <p>Estimated Task</p>
               <p>_</p>
             </div>
-            <div className="flex w-full justify-between font-semibold text-lg  border-t border-b p-2 border-gray-600">
+            <div className="flex w-full justify-between font-semibold text-lg   border-t border-b p-2 border-gray-600">
               <p>Total</p>
-              <p>_</p>
+              <p>{Subtotal?Subtotal + 7:null}</p>
             </div>
             <div className="w-full pt-4 hidden md:block ">
               <button className="p-4 w-full text-center rounded-3xl bg-slate-950 text-white">

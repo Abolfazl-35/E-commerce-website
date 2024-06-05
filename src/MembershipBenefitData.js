@@ -11,7 +11,7 @@ const MemberShipImage=[
         id:2,
         image:require("./Membership/nike-membership (1).jpg"),
         description:"Sports & Wellness Apps",
-    description_2:"Movement Wher You're At",
+    description_2:"Movement Where You're At",
     buttonText:"Move",
     },
     {

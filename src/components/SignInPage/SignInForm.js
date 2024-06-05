@@ -400,7 +400,7 @@ const navigate=useNavigate()
                     Date Of Birth
                   </span>
                   <span className="text-greyish-0">
-                    <small>Get a Trust Member Reward on your birthdat</small>
+                    <small>Get a Trust Member Reward on your birthday</small>
                   </span>
                 </div>
               </div>

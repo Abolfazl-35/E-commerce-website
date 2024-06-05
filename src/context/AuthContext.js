@@ -75,7 +75,7 @@ const updateLoginInfo=useCallback((info) => {
 setLoginInfo(info);
 
 },[])
-
+console.log(loginInfo)
 const loginUser=useCallback(async (e) => {
   e.preventDefault();
  

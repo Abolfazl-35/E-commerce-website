@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function MiniBag(props) {
 const{lastItemAdded}=useContext(AuthContext)
@@ -28,9 +29,12 @@ const{lastItemAdded}=useContext(AuthContext)
                 <div className="flex flex-1 flex-col space-y-14">
                   <p className="font-serif text-lg font-semibold">{lastItemAdded[0].dec}</p>
                   <div className="flex w-full justify-evenly">
-                    <button className="bg-transparent border border-slate-950  text-black p-2 rounded-full">
+                    <Link to={lastItemAdded?"/Bag":null}>
+                                        <button className="bg-transparent border border-slate-950  text-black p-2 rounded-full">
                       View Bag
                     </button>
+                    </Link>
+
                     <button className="bg-black border border-slate-950  text-white p-2 rounded-full">
                       Checkout
                     </button>

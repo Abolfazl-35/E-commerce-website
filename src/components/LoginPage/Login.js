@@ -5,13 +5,13 @@ import "./Login.css";
 import { AuthContext } from "../../context/AuthContext";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Login() {
   const usenavigate = useNavigate();
   const { updateLoginInfo, loginUser, error, user,isLoginloading } = useContext(AuthContext);
   const [loginForm, setLoginForm] = useState({
-    email: "",
-    password: "",
+    loginEmail: "",
+    loginPassword: "",
   });
   function HandleLoginForm(event) {
     setLoginForm((prevdata) => {
@@ -31,7 +31,7 @@ setUserExist(() => {
 
   useEffect(() => {
     updateLoginInfo(loginForm);
-  }, [loginForm]);
+  }, [loginForm,updateLoginInfo]);
 
   const [loginPasswordVisibility, setLoginPasswordVisibility] = useState(false);
 
@@ -40,7 +40,7 @@ setUserExist(() => {
       return !prevdata;
     });
   }
-  console.log(loginPasswordVisibility);
+  console.log(loginForm);
 
   return (
     <div className="flex w-full sm:mx-auto justify-center  ">
@@ -72,18 +72,18 @@ setUserExist(() => {
             <input
               type="email"
               className={classNames(
-                "border border-gray-500 rounded p-1 outline-none w-full  h-[3rem]",
-                { "has-value": loginForm.email }
+                "border-2 border-black  rounded p-1 outline-none w-full  h-[3rem]",
+                { "has-value": loginForm.loginEmail}
               )}
-              id="FirstInput"
-              name="email"
+              id="LoginInput"
+              name="loginEmail"
               onChange={HandleLoginForm}
               //   aria-required="true"
-              value={loginForm.email}
+              value={loginForm.loginEmail}
               // aria-invalid={""}
               // onFocus={""}
               // onBlur={""}
-              aria-describedby="Firstnameidnote"
+            
               autoComplete="on"
               autoSave="on"
             />
@@ -99,13 +99,13 @@ setUserExist(() => {
             <input
               type={loginPasswordVisibility ? "text" : "password"}
               className={classNames(
-                "border border-gray-500 rounded p-1 outline-none w-full  h-[3rem]",
-                { "has-value": loginForm.password }
+                "border-2  rounded p-1 border-black outline-none w-full  h-[3rem]",
+                { "has-value": loginForm.loginPassword }
               )}
-              name="password"
+              name="loginPassword"
               onChange={HandleLoginForm}
               aria-required="true"
-              value={loginForm.password}
+              value={loginForm.loginPassword}
               // aria-invalid={""}
               // onFocus={""}
               // onBlur={""}
@@ -134,7 +134,9 @@ setUserExist(() => {
             </button>
           </div>
           <div className="flex flex-col  w-full justify-between pt-3 items-center mt-5 font-Roboto text-lg font-semibold">
-            <p>Sign up</p>
+           <Link to="/SignInForm">
+           <p>Sign up</p>
+           </Link> 
             <p className="">
               Forget your <span>password?</span>
             </p>
