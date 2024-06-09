@@ -4,17 +4,17 @@ import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { baseUrl, postRequest } from "../../utils/services";
 
 function VerifyEmail() {
-  const { user, updateUser } = useContext(AuthContext);
+  const { User, updateUser } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setEroor] = useState("");
   const [searchParams, setErrorSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const emailToken = searchParams.get("emailToken");
   console.log(emailToken);
-  console.log(user);
+
   useEffect(() => {
     (async () => {
-      if (user?.isVerified) {
+      if (User?.isVerified) {
         setTimeout(() => {
           return navigate("/");
         }, 3000);
@@ -49,7 +49,7 @@ function VerifyEmail() {
         }
       }
     })();
-  }, [emailToken, user]);
+  }, [emailToken, User]);
 
   return (
     <>
@@ -59,7 +59,7 @@ function VerifyEmail() {
         </div>
       ) : (
         <div className=" justify-center text-lg font-Roboto font-semibold text-green-900 items-center w-full p-5">
-          {user?.isVerified ? (
+          {User?.isVerified ? (
             <h2>user isVerified</h2>
           ) : (
             <div className="w-full border rounded font-Roboto text-lg text-red-900 font-semibold justify-center items-center p-4">

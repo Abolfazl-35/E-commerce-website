@@ -4,23 +4,23 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 function SendVerify() {
-  const { user, updateUser } = useContext(AuthContext);
+  const { User, updateUser } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [response, setResponse] = useState()
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
-      if (user?.isVerified) {
+      if (User?.isVerified) {
         setTimeout(() => {
           return navigate("/");
         }, 3000);
       } else {
-        if (user) {
+        if (User) {
           setIsLoading(true);
           const response = await postRequest(
             `${baseUrl}/users/verifacation`,
-            JSON.stringify(user)
+            JSON.stringify(User)
           );
           setIsLoading(false);
           setResponse(response);
@@ -32,7 +32,7 @@ function SendVerify() {
         }
       }
     })();
-  }, [user]);
+  }, [User]);
 
   return (
     <div className=" container mx-auto">

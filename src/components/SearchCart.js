@@ -36,7 +36,7 @@ function SearchCart(props) {
   // }
 
   const {
-    user,
+    User,
     openDashboardf,
     Searchresult,
     searchState,
@@ -173,7 +173,7 @@ function SearchCart(props) {
                 >
                   Join us
                 </Link>
-                {!user && (
+                {!User && (
                   <Link
                     className="hedear-text border-separate cursor-pointer border-l border-slate-700 p-1 text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
                     id="login-btn"
@@ -183,7 +183,7 @@ function SearchCart(props) {
                   </Link>
                 )}
               </div>
-              {user && (
+              {User && (
                 <button
                   className="hedear-text border-separate cursor-pointer border-l border-slate-700  text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
                   onClick={()=>openDashboardf()}
@@ -207,7 +207,7 @@ function SearchCart(props) {
             </div>
           </div>
           <div className="w-full flex justify-end">
-            {!user && (
+            {!User && (
               <p className=" hidden sm:block w-max text-end mr-12 border-t border-gray-500 font-Oswald font-semibold p-2">
                 already have an a acount?
                 <Link

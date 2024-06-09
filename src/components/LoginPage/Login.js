@@ -8,7 +8,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link, useNavigate } from "react-router-dom";
 function Login() {
   const usenavigate = useNavigate();
-  const { updateLoginInfo, loginUser, error, user,isLoginloading } = useContext(AuthContext);
+  const { updateLoginInfo, loginUser, error, User,isLoginloading } = useContext(AuthContext);
   const [loginForm, setLoginForm] = useState({
     loginEmail: "",
     loginPassword: "",
@@ -23,10 +23,10 @@ function Login() {
 
 useEffect(()=>{
 setUserExist(() => {
-  if(user) return true
+  if(User) return true
  
 })
-},[user])
+},[User])
 
 
   useEffect(() => {

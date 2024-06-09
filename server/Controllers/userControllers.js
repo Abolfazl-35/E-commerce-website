@@ -92,7 +92,7 @@ const loginUser = async (req, res) => {
   const { loginEmail, loginPassword } = req.body;
  const email = loginEmail || "";
  const password = loginPassword || "";
-  console.log(loginPassword)
+  console.log(email)
   try {
     let user = await userModel.findOne( {email} );
 
@@ -109,7 +109,7 @@ const loginUser = async (req, res) => {
       _id: user._id,
       Firstname: user.Firstname,
       email,
-      token,
+     
       isVerified: user.isVerified,
     });
   } catch (error) {

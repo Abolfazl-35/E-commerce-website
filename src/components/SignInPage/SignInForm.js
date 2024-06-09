@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 function SignInForm(props) {
   const {
-    user,
+    User,
     registerInfo,
     updateRegisterInfo,
     error,
@@ -71,10 +71,10 @@ const navigate=useNavigate()
   const [errMsg, setErrMsg] = useState();
   const [success, setSuccess] = useState();
   useEffect(()=>{
-    if (user) {
+    if (User) {
       setUserExist(true)
     }
-  },[user])
+  },[User])
 
   useEffect(() => {
     const result = Firstname_REGEX.test(Formstate.Firstname);

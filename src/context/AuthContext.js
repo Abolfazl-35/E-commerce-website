@@ -6,273 +6,296 @@ import JordanData from "../JordanShoesData";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-
-  const [user, setUser] = useState(null);
+  const [User, setUser] = useState(null);
 
   const [error, setError] = useState(null);
 
   const [isRegisterloading, setisRegisterloading] = useState(false);
 
- const [registerInfo, setRegisterinfo] = useState();
+  const [registerInfo, setRegisterinfo] = useState();
 
-const [loginInfo,setLoginInfo]=useState(null);
+  const [loginInfo, setLoginInfo] = useState(null);
 
-const [isLoginloading, setIsLoginLoading] = useState(false);
+  const [isLoginloading, setIsLoginLoading] = useState(false);
 
-// Getting user from local storage and set the state
-useEffect(() => {
-const user=localStorage.getItem("User");
+  // Getting user from local storage and set the state
+  useMemo(() => {
+    const User = localStorage.getItem("User");
 
-setUser(JSON.parse(user));
-},[])
+    setUser(JSON.parse(User));
+  }, []);
 
-// Getting register info from singn in form
+  // Getting register info from singn in form
   const updateRegisterInfo = useCallback((info) => {
     setRegisterinfo(info);
   }, []);
 
   // update function for verify email
-  const updateUser=useCallback((response) => {
-  localStorage.setItem("User", JSON.stringify(response));
-  setUser(response)
-  console.log(response)
+  const updateUser = useCallback((response) => {
+    localStorage.setItem("User", JSON.stringify(response));
+    setUser(response);
+    console.log(response);
+  }, []);
 
-  },[])
+  // SENDING SIGNUP INFO TO DATABASE AND SERVER
 
-// SENDING SIGNUP INFO TO DATABASE AND SERVER
+  const registerUser = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-  const registerUser = useCallback(async (e) => {
-    e.preventDefault();
- 
-    setisRegisterloading(true);
-    setError(null);
-    const response = await postRequest(
-      `${baseUrl}/users/register`,
-      JSON.stringify(registerInfo)
-    );
-   
-    setisRegisterloading(false);
+      setisRegisterloading(true);
+      setError(null);
+      const response = await postRequest(
+        `${baseUrl}/users/register`,
+        JSON.stringify(registerInfo)
+      );
 
-    if (response.error) {
       setisRegisterloading(false);
-       setError(response);
-     return setTimeout(()=>{
-setError(null)
-     },3000)
-    }
-  
-setisRegisterloading(false);
-       localStorage.setItem("User", JSON.stringify(response));
-  
-setUser(response);
 
-  }, [registerInfo]);
+      if (response.error) {
+        setisRegisterloading(false);
+        setError(response);
+        return setTimeout(() => {
+          setError(null);
+        }, 3000);
+      }
 
+      setisRegisterloading(false);
+      localStorage.setItem("User", JSON.stringify(response));
 
-// GETTING LOGIN INFO FROM LOGIN FORM AND SETTING LOGIN STATE
-
-const updateLoginInfo=useCallback((info) => {
-setLoginInfo(info);
-
-},[])
-console.log(loginInfo)
-const loginUser=useCallback(async (e) => {
-  e.preventDefault();
- 
-  setIsLoginLoading(true);
-  setError(null);
-  const response = await postRequest(
-    `${baseUrl}/users/login`,
-    JSON.stringify(loginInfo)
+      setUser(response);
+    },
+    [registerInfo]
   );
- 
-  setIsLoginLoading(false);
 
-  if (response.error) {
-    setIsLoginLoading(false);
-     setError(response);
-   return setTimeout(()=>{
-setError(null)
-   },3000)
+  // GETTING LOGIN INFO FROM LOGIN FORM AND SETTING LOGIN STATE
+
+  const updateLoginInfo = useCallback((info) => {
+    setLoginInfo(info);
+  }, []);
+  console.log(User);
+  const loginUser = useCallback(
+    async (e) => {
+      e.preventDefault();
+
+      setIsLoginLoading(true);
+      setError(null);
+      const response = await postRequest(
+        `${baseUrl}/users/login`,
+        JSON.stringify(loginInfo)
+      );
+
+      setIsLoginLoading(false);
+
+      if (response.error) {
+        setIsLoginLoading(false);
+        setError(response);
+        return setTimeout(() => {
+          setError(null);
+        }, 3000);
+      }
+      console.log(error);
+      setIsLoginLoading(false);
+
+      localStorage.setItem("User", JSON.stringify(response));
+
+      setUser(response);
+    },
+    [loginInfo]
+  );
+
+  console.log(User);
+
+  const logoutUser = useCallback(() => {
+    localStorage.removeItem("User");
+    setUser(null);
+  }, []);
+
+  const [ShoesData, setShoesData] = useState(AllShoesData);
+
+  function setJordan() {
+    setShoesData((prevdata) => JordanData);
   }
-console.log(error)
-  setIsLoginLoading(false);
-  console.log(response)
-     localStorage.setItem("User", JSON.stringify(response));
 
-setUser(response);
+  const [openDashboard, setOpenDashboard] = useState(false);
+  const openDashboardf = () => {
+    setOpenDashboard((prevdata) => {
+      return !prevdata;
+    });
+  };
 
-},[loginInfo])
-
-
-
-const logoutUser=useCallback(()=>{
-localStorage.removeItem("User");
-setUser(null);
-
-
-
-
-},[])
-
-const [ShoesData, setShoesData] = useState(AllShoesData);
-
-function setJordan() {
-  setShoesData((prevdata) => JordanData);
-}
-
-  const [openDashboard,setOpenDashboard]=useState(false);
-  const openDashboardf =()=>{
-  setOpenDashboard((prevdata)=>{
-    return !prevdata
-  })
-  }
-
-  const[Searchresult,setSearchresult]=useState({
-    Search:""
-  })
-
-
+  const [Searchresult, setSearchresult] = useState({
+    Search: "",
+  });
 
   function HandleSearch(event) {
-    const {name,value}=event.target
-        setSearchresult((prevdata)=>{
-        return {...prevdata,[name]:value}
-         })
-    if (!value) return setShoesData(AllShoesData)
-
+    const { name, value } = event.target;
+    setSearchresult((prevdata) => {
+      return { ...prevdata, [name]: value };
+    });
+    if (!value) return setShoesData(AllShoesData);
   }
 
-const [filterItem,setfilterItem]=useState([])
-  useEffect(()=>{
+  const [filterItem, setfilterItem] = useState([]);
+  useEffect(() => {
     if (Searchresult.Search) {
-      const resultArray=ShoesData.filter((i)=>{
-    return i.dec.toLowerCase().replace(
-      / /g,
-      ""
-  ).includes(Searchresult.Search.toLowerCase())
-     })
-
-     setfilterItem(resultArray.slice(1,6))
-    }else if (!Searchresult.Search) {
-      setfilterItem([])
-    }
- 
-    
-
-
-
-    },[Searchresult.Search,Searchresult])
-
-    const [searchState, setsearchState] = useState(false);
-    useEffect(() => {
-      setsearchState(() => {
-        if (Searchresult.Search) {
-          return true;
-        } else {
-          return false;
-        }
+      const resultArray = ShoesData.filter((i) => {
+        return i.dec
+          .toLowerCase()
+          .replace(/ /g, "")
+          .includes(Searchresult.Search.toLowerCase());
       });
-    }, [Searchresult]);
-    function openSearch(params) {
-      setsearchState((prevdata) => {
+
+      setfilterItem(resultArray.slice(1, 6));
+    } else if (!Searchresult.Search) {
+      setfilterItem([]);
+    }
+  }, [Searchresult.Search, Searchresult]);
+
+  const [searchState, setsearchState] = useState(false);
+  useEffect(() => {
+    setsearchState(() => {
+      if (Searchresult.Search) {
         return true;
-      });
-    }
-    function CloseSearch(params) {
-      setSearchresult((prevdata)=>{
-        return{...prevdata,Search:""}
-      })
-    }
+      } else {
+        return false;
+      }
+    });
+  }, [Searchresult]);
+  function openSearch(params) {
+    setsearchState((prevdata) => {
+      return true;
+    });
+  }
+  function CloseSearch(params) {
+    setSearchresult((prevdata) => {
+      return { ...prevdata, Search: "" };
+    });
+  }
 
+  const [Cart, Setcart] = useState([]);
 
-    const [Cart, Setcart] = useState([]);
+  function AddToCart(product) {
+    const NewProduct = Cart.find((i) => {
+      return (
+        i.selectedSize === product.selectedSize &&
+        i.selectedColor === product.selectedColor
+      );
+    });
 
-    function AddToCart(product) {
-     const NewProduct = Cart.find((i) => {
-        return (
-          i.selectedSize === product.selectedSize &&
-          i.selectedColor === product.selectedColor
-        );
-      });
-  
-      if (NewProduct) {
-        Setcart((prevdata) => {
-          return Cart.map((i) => {
-            return i.selectedSize === NewProduct.selectedSize &&
-              i.selectedColor === product.selectedColor
-              ? { ...NewProduct, count: NewProduct.count + 1 }
-              : i;
-          });
+    if (NewProduct) {
+      Setcart((prevdata) => {
+        return Cart.map((i) => {
+          return i.selectedSize === NewProduct.selectedSize &&
+            i.selectedColor === product.selectedColor
+            ? { ...NewProduct, count: NewProduct.count + 1 }
+            : i;
         });
-      } else if (product.selectedSize) {
-        Setcart([...Cart, { ...product, count: 1 }]);
-      }}
+      });
+    } else if (product.selectedSize) {
+      Setcart([...Cart, { ...product, count: 1 }]);
+    }
+  }
 
-      const [lastItemAdded,setlastItemAdded] = useState(null);
-useMemo(()=>{
-  return setlastItemAdded(()=>{
-    return Cart.slice(-1)
-  })
-},[Cart])
+  const [lastItemAdded, setlastItemAdded] = useState(null);
+  useMemo(() => {
+    return setlastItemAdded(() => {
+      return Cart.slice(-1);
+    });
+  }, [Cart]);
 
-function removeitem(item) {
-console.log(item)
-  const removedProduct = Cart.find((i) => {
-    return (
-      i.selectedColor === item.selectedColor 
-      && i.selectedSize===item.selectedSize
-      && i.id===item.id
-     
-    )
-  })
-  Setcart(()=>{
-    return Cart.filter((i)=>{
-      return i!==removedProduct
-    })
-  })
+  function removeitem(item) {
+    console.log(item);
+    const removedProduct = Cart.find((i) => {
+      return (
+        i.selectedColor === item.selectedColor &&
+        i.selectedSize === item.selectedSize &&
+        i.id === item.id
+      );
+    });
+    Setcart(() => {
+      return Cart.filter((i) => {
+        return i !== removedProduct;
+      });
+    });
+  }
+  const [cartLength, setCartLength] = useState(0);
+  useEffect(() => {
+    setCartLength(Cart.length);
+  }, [Cart]);
+
+  const [chatPageOpen, setChatPageOpen] = useState(false);
+
+  function HandleChatPage() {
+    setChatPageOpen((prevdata) => {
+      return !prevdata;
+    });
+  }
+const [favoriteProducts,setFavoriteProducts] = useState([]);
+
+
+function HandleFavoriteProducts(product) {
+   
+const isexsist=favoriteProducts.some((i) => i.id === product.id)
+
+if (!isexsist) {
+setFavoriteProducts((prevdata)=>{
+  return [...prevdata,product]
+
+})
+
+
 }
-const [cartLength,setCartLength]=useState(0)
+
+
+
+  
+
+
+}
 useEffect(()=>{
-  setCartLength(Cart.length)
-},[Cart])
+   localStorage.setItem("favoriteProducts",JSON.stringify(favoriteProducts))
+},[favoriteProducts])
 
 
-const [chatPageOpen,setChatPageOpen] = useState(false)
-
-function HandleChatPage() {
- setChatPageOpen((prevdata)=>{
-  return !prevdata
- })
-}
-
-console.log(chatPageOpen)
+console.log(favoriteProducts)
+  console.log(chatPageOpen);
   return (
     <AuthContext.Provider
-      value={{ user,
-         registerInfo,
-          updateRegisterInfo,
-           registerUser,
-            error,
-            isRegisterloading,
-            updateUser,
-            openDashboardf,
-            openDashboard,
-            Searchresult,
-            searchState,
-            openSearch,
-            HandleSearch,
-            CloseSearch,
-           filterItem,
-          AddToCart,
-          Cart,
-          lastItemAdded,
-          removeitem,
-          Setcart,cartLength,
-          logoutUser,updateLoginInfo,loginUser,
-          isLoginloading,
-        HandleChatPage,chatPageOpen,ShoesData,setJordan,setShoesData
-        }}
+      value={{
+        User,
+        registerInfo,
+        updateRegisterInfo,
+        registerUser,
+        error,
+        isRegisterloading,
+        updateUser,
+        openDashboardf,
+        openDashboard,
+        Searchresult,
+        searchState,
+        openSearch,
+        HandleSearch,
+        CloseSearch,
+        filterItem,
+        AddToCart,
+        Cart,
+        lastItemAdded,
+        removeitem,
+        Setcart,
+        cartLength,
+        logoutUser,
+        updateLoginInfo,
+        loginUser,
+        isLoginloading,
+        HandleChatPage,
+        chatPageOpen,
+        ShoesData,
+        setJordan,
+        setShoesData,
+        favoriteProducts,
+        HandleFavoriteProducts
+      }}
     >
       {children}
     </AuthContext.Provider>

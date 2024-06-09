@@ -8,6 +8,8 @@ const { Socket } = require("dgram");
 const mongoose = require("mongoose");
 const userRoute = require("./Routs/userRoute");
 const chatRoute = require("./Routs/chatRoute");
+const messageRoute = require("./Routs/messageRoute");
+
 require("dotenv").config();
 
 app.use(express.json());
@@ -17,7 +19,9 @@ app.get("/", function (req, res) {
   res.send("welcome to our minichat...");
 });
 app.use("/api/users", userRoute);
-app.use("/api/chats",chatRoute);
+app.use("/api/chats", chatRoute);
+app.use("/api/messages", messageRoute);
+
 const port = process.env.PORT || 3001;
 const uri = process.env.ATLAS_URI;
 

@@ -152,7 +152,7 @@ function Navbar(props) {
     }
   }, []);
   console.log(props);
-  const { searchState, user } = useContext(AuthContext);
+  const { searchState, User } = useContext(AuthContext);
   // const [searchState, setsearchState] = useState(false);
   // useEffect(() => {
   //   setsearchState(() => {
@@ -181,7 +181,7 @@ function Navbar(props) {
     <div className="   w-[100vw] relative ">
       <div className="w-full   ">
         <div className=" w-full overflow-hidden   ">
-          {user && <UserDashBoard />}
+          {User && <UserDashBoard />}
         </div>
       </div>
       <div className="navbar  sticky top-0 left-0 z-40 flex h-max w-full max-w-full items-center  justify-between shadow-md">

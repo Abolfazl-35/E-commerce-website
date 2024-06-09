@@ -12,7 +12,7 @@ import { name } from "@cloudinary/url-gen/actions/namedTransformation";
 import { AuthContext } from "../../context/AuthContext";
 
 function Product(props) {
-  const {AddToCart}=useContext(AuthContext)
+  const {AddToCart,HandleFavoriteProducts}=useContext(AuthContext)
   const {id}=useParams()
  
 const singleproduct=useCallback(()=>{
@@ -30,20 +30,7 @@ const singleproduct=useCallback(()=>{
 const scrollTo = useRef();
 const [product,setproduct]=useState(singleproduct)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const [imageIndex, setimageIndex] = useState(0);
+const [imageIndex, setimageIndex] = useState(0);
 
 
 
@@ -399,7 +386,7 @@ const [product,setproduct]=useState(singleproduct)
                   >
                     Add to Bag
                   </button>
-                  <button className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 ">
+                  <button type="button" onClick={()=>HandleFavoriteProducts(product[0])} className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 ">
                     Favorite
                     <span className="ml-2">
                       <i className="bi bi-heart text-slate-200 text-sm "></i>

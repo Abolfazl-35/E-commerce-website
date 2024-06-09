@@ -23,6 +23,7 @@ import { AuthContext } from "./context/AuthContext";
 // import SendVerify from "./components/SignInPage/SendVerify";
 import Chat from "./components/Chat/Chat";
 import MainChat from "./components/Chat/MainChat";
+import { ChatContextProvider } from "./context/ChatContext";
 
 const LazySection=React.lazy(() =>import("./components/Section"))
 
@@ -60,7 +61,7 @@ const LazyLogin =React.lazy(() =>import("./components/LoginPage/Login"))
 
 
 function App() {
-  const { user,ShoesData,setJordan,setShoesData } = useContext(AuthContext);
+  const { User,ShoesData,setJordan,setShoesData } = useContext(AuthContext);
 
   const [sortbyprice, setsort] = useState([
     { sorted: "price", reversed: false },
@@ -172,7 +173,8 @@ function App() {
   console.log("app render");
 
   return (
-    <div className={classNames("")}>
+    <ChatContextProvider User={User}>
+    
       <Router>
         <Routes>
           <Route
@@ -221,7 +223,7 @@ function App() {
           <Route
             path="/SignIn"
             element={
-              !user ? (
+              !User ? (
               <React.Suspense fallback="Loading"><LazySignIn HandleEmail={HandleEmail} EmailData={EmailData} /></React.Suspense>
               ) : null
             }
@@ -270,7 +272,8 @@ function App() {
           />
         </Routes>
       </Router>
-    </div>
+  
+    </ChatContextProvider>
   );
 }
 

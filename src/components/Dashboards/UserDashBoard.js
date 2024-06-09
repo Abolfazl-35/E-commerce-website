@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 function UserDashBoard() {
   
 
-    const {user,openDashboard}=useContext(AuthContext)
+    const {User,openDashboard}=useContext(AuthContext)
     
   return (
   
@@ -29,7 +29,7 @@ function UserDashBoard() {
       <div className='flex flex-col p-4 rounded space-y-3  space-x-5 items-start h-1/2 bg-slate-200 w-full '>
         <div className='flex items-center space-x-4'>
 <Avatar
-src={user?.profileimage?user.profileimage:null}
+src={User?.profileimage?User.profileimage:null}
 sx={{width:56,height:56}}
 >
 
@@ -37,13 +37,13 @@ sx={{width:56,height:56}}
         
 <div>
 <h1 className=' font-Roboto text-sm font-semibold '>
-   {user.Firstname}
+   {User.Firstname}
   
 </h1>
 </div>
 
 </div>
-{!user.isVerified &&(
+{!User.isVerified &&(
   <Link to="/send-verify">
 <p className=' font-Roboto text-sm'>Click for Verifying your Email</p>
 </Link>
