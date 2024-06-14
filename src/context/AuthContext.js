@@ -235,7 +235,6 @@ export const AuthContextProvider = ({ children }) => {
   // FAvorite section functions And State
 
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-   
   useEffect(() => {
   
 
@@ -265,17 +264,31 @@ export const AuthContextProvider = ({ children }) => {
 
   
 const HandleFavoriteProducts=useCallback((product)=>{
-  const isexsist = favoriteProducts.some((i) => i.id === product.id);
+ 
+  try {
+      const isexsist = favoriteProducts.some((i) => i.id === product.id);
 
   if (!isexsist) {
     setFavoriteProducts((prevdata) => {
 
       return [...prevdata, product] 
-      
-    });
+     
+    })
 
+  
+
+    
+  }
+  } catch (error) {
 
   }
+  finally{
+
+  }
+
+
+
+  
 
 
 },[favoriteProducts])
@@ -295,8 +308,9 @@ setFavoriteProducts((prevdata)=>{
 
 
 
-  console.log(favoriteProducts);
-  console.log(chatPageOpen);
+
+ 
+  // console.log(chatPageOpen);
   return (
     <AuthContext.Provider
       value={{

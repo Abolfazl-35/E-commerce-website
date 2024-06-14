@@ -5,16 +5,23 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Details from "./Details";
 import AllShoesData from "../../AllShoesData";
-import JordanShoesData from "../../JordanShoesData";
 import SingleProductImages from "./SingleProductImages";
 import Nextbtn from "./Nextbtn"
-import { name } from "@cloudinary/url-gen/actions/namedTransformation";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { pink } from "@mui/material/colors";
 import { AuthContext } from "../../context/AuthContext";
 
 function Product(props) {
-  const {AddToCart,HandleFavoriteProducts}=useContext(AuthContext)
-  const {id}=useParams()
- 
+  const {AddToCart,HandleFavoriteProducts,favoriteProducts}=useContext(AuthContext)
+  
+  const [favoriteItemsStste, setFavoriteItemsState]=useState(undefined);
+
+
+
+
+const {id}=useParams()
+
+
 const singleproduct=useCallback(()=>{
  return AllShoesData.filter((i)=>{
   if (i.id===Number(id)) {
@@ -27,13 +34,23 @@ const singleproduct=useCallback(()=>{
 
 
 
+
 const scrollTo = useRef();
 const [product,setproduct]=useState(singleproduct)
 
 const [imageIndex, setimageIndex] = useState(0);
 
 
+useEffect(() => {
+const itemisinfavorite=favoriteProducts.some((i)=>{
+return i.id===Number(id)
 
+})
+
+  if (itemisinfavorite) {
+    setFavoriteItemsState(true)
+  }
+  },[favoriteProducts])
 
 
 
@@ -386,11 +403,16 @@ const [imageIndex, setimageIndex] = useState(0);
                   >
                     Add to Bag
                   </button>
-                  <button type="button" onClick={()=>HandleFavoriteProducts(product[0])} className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0 ">
+                  <button type="button" onClick={()=>HandleFavoriteProducts(product[0])} className="w-full bg-slate-950 font-serif text-slate-200 p-3 rounded-3xl text-lg hover:bg-greyish-0  ">
                     Favorite
-                    <span className="ml-2">
-                      <i className="bi bi-heart text-slate-200 text-sm "></i>
+                    <span className="ml-2 ">
+                      {/* <i className="bi bi-heart text-slate-200 text-sm  ">
+
+                      </i> */}
+                      {favoriteItemsStste?(     <FavoriteIcon  sx={{ color: pink[500],marginBottom:0.5 }}/>):(<FavoriteIcon sx={{marginBottom:0.5}}/>)}
+                 
                     </span>
+                 
                   </button>
                 </div>
               </form>
