@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Tooltip from "./Tooltips/TooltipFavorite";
+import TooltipFavorite from "./Tooltips/TooltipFavorite";
 import TooltipCart from "./Tooltips/TooltipCart";
 import TooltipSearch from "./Tooltips/TooltipSearch";
 import classNames from "classnames";
@@ -192,7 +192,10 @@ function SearchCart(props) {
                 </button>
               )}
               <div className="bg-transparent  flex justify-center items-center h-max relative  rounded ">
-                <Tooltip />
+               <Link to="/Favorite">
+               <TooltipFavorite />
+               </Link>
+                
               </div>
               <Link to={"/Bag"}>
                 <div className=" relative pb-1 flex justify-center items-center mr-2 rounded ">

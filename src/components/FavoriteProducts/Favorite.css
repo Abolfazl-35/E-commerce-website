@@ -1,0 +1,13 @@
+/* .dec-container{
+    display: grid;
+    grid-template-rows: 0fr;
+   transition: grid-template-rows 300ms ease-in ;
+  
+}
+.dec-container > div{
+    overflow: hidden;
+    
+}
+.dec-container.open{
+    grid-template-rows: 1fr;
+} */

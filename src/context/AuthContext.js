@@ -231,34 +231,71 @@ export const AuthContextProvider = ({ children }) => {
       return !prevdata;
     });
   }
-const [favoriteProducts,setFavoriteProducts] = useState([]);
 
+  // FAvorite section functions And State
 
-function HandleFavoriteProducts(product) {
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
    
-const isexsist=favoriteProducts.some((i) => i.id === product.id)
+  useEffect(() => {
+  
 
-if (!isexsist) {
-setFavoriteProducts((prevdata)=>{
-  return [...prevdata,product]
+  const favorite = localStorage.getItem("favoriteProducts")?localStorage.getItem("favoriteProducts"):null
+ if (favorite) {
+   setFavoriteProducts(JSON.parse(favorite));
+ }
+ 
+    
 
-})
 
 
-}
+}, []);
+  useEffect(() => {
+   
+ 
+
+    localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
+
+
+  }, [favoriteProducts]);
+
+
+
 
 
 
   
+const HandleFavoriteProducts=useCallback((product)=>{
+  const isexsist = favoriteProducts.some((i) => i.id === product.id);
+
+  if (!isexsist) {
+    setFavoriteProducts((prevdata) => {
+
+      return [...prevdata, product] 
+      
+    });
 
 
-}
-useEffect(()=>{
-   localStorage.setItem("favoriteProducts",JSON.stringify(favoriteProducts))
+  }
+
+
 },[favoriteProducts])
 
 
-console.log(favoriteProducts)
+function removeFvoriteProduct(product){
+const removedproduct=favoriteProducts.find((i)=>{
+  return i.id === product.id;
+})
+setFavoriteProducts((prevdata)=>{
+  return favoriteProducts.filter((i)=>{
+    return i!==removedproduct
+  })
+})
+
+}
+
+
+
+  console.log(favoriteProducts);
   console.log(chatPageOpen);
   return (
     <AuthContext.Provider
@@ -294,7 +331,8 @@ console.log(favoriteProducts)
         setJordan,
         setShoesData,
         favoriteProducts,
-        HandleFavoriteProducts
+        HandleFavoriteProducts,
+        removeFvoriteProduct
       }}
     >
       {children}

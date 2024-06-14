@@ -14,16 +14,14 @@ import Navbar from "./components/Navbar";
 // import SimpleSlider from "./components/SignUpPage/SimpleSlider";
 // import Product from "./components/SingleproductComponents/Product";
 // import SignInForm from "./components/SignInPage/SignInForm";
-import classNames from "classnames";
 // import Bag from "./components/Bag/Bag";
 import VerifyEmail from "./components/SignInPage/VerifyEmail";
 import { AuthContext } from "./context/AuthContext";
-// import Footer from "./components/Footer";
-// import Login from "./components/LoginPage/Login";
-// import SendVerify from "./components/SignInPage/SendVerify";
+
 import Chat from "./components/Chat/Chat";
-import MainChat from "./components/Chat/MainChat";
 import { ChatContextProvider } from "./context/ChatContext";
+
+const LazyFavoriteSection=React.lazy(() => import("./components/FavoriteProducts/FavoriteSection"));
 
 const LazySection=React.lazy(() =>import("./components/Section"))
 
@@ -182,7 +180,7 @@ function App() {
             element={
               <>
                 <Chat />
-                <MainChat/>
+                <React.Suspense><LazyMainChat/></React.Suspense>
                 <Navbar MiniBagState={MiniBagState} />
                 {/* <MainChat/> */}
                <React.Suspense fallback="Loading"><LazyShoesMenu /></React.Suspense> 
@@ -203,7 +201,20 @@ function App() {
               </>
             }
           />
+<Route
+path="/Favorite"
+element={
+  <>
+  <Navbar MiniBagState={MiniBagState} />
+  <React.Suspense fallback="">
+    <LazyFavoriteSection/>
+  </React.Suspense>
+  </>
+}
+>
 
+
+</Route>
           <Route
             path="/SignUp"
             element={
