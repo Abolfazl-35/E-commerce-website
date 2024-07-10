@@ -120,10 +120,10 @@ const navigate=useNavigate()
       setErrMsg("Invalid Entry");
       return;
     }
-    console.log(Formstate);
+  
     setSuccess(true);
   }
-  console.log(Formstate);
+
   return (
     <>
       <div className="container h-max  mx-auto space-y-5 flex justify-center flex-col ">

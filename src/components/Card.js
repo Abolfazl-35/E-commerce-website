@@ -5,28 +5,7 @@ import { Link } from "react-router-dom";
 
 function Card(props) {
   let { images } = props.item;
-  // console.log(images[0].image);
-  useEffect(() => {
-    const product_dec = document.querySelectorAll(".product-dec");
 
-    const product_dec_inner_2 = document.querySelectorAll(
-      ".product-dec-inner-2"
-    );
-    const product_dec_inner_1 = document.querySelectorAll(
-      ".product-dec-inner-1"
-    );
-    product_dec.forEach((i) => {
-      i.addEventListener("mouseenter", (e) => {
-        i.firstChild.nextSibling.classList.add("is_hover");
-        i.firstChild.classList.add("not_show");
-      });
-
-      i.addEventListener("mouseleave", (e) => {
-        i.firstChild.nextSibling.classList.remove("is_hover");
-        i.firstChild.classList.remove("not_show");
-      });
-    });
-  });
   let imagesIn = useRef();
 imagesIn.current=images.map((i)=>{
   if (i) {
@@ -34,25 +13,10 @@ imagesIn.current=images.map((i)=>{
   }else return null
 })
 
-  // imagesIn.current=images.map((i)=>{
-  //   console.log(i)
-  // })
 
   const [imgIndex, setimgIndex] = useState(0);
 
-  // console.log(imagesIn.current);
-  //   const product_dec = document.querySelectorAll(".product-dec");
 
-  //   const product_dec_inner_2 = document.querySelectorAll(".product-dec-inner-2");
-  //   const product_dec_inner_1 = document.querySelectorAll(".product-dec-inner-1");
-
-  // function Handler(params) {
-  //   product_dec.forEach((i)=>{
-  // i.firstChild.nextSibling.classList.add("is_hover");
-  // i.firstChild.classList.add("not_show")
-  //   })
-
-  // }
   function imageIndexf(index) {
     setimgIndex(() => {
       return index;
@@ -140,15 +104,7 @@ imagesIn.current=images.map((i)=>{
             <p className="price w-full p-1   ">{props.item.price}$</p>
           </div>
         </div>
-        {/* <Link to="/Product" >
-        <button
-          className="w-full bg-slate-200 p-1 text-center font-serif text-slate-950 hover:bg-slate-950 hover:text-slate-200"
-          onClick={() => props.HandleProduct(props.item)}
-        >
 
-          ADD To Cart
-        </button>
-        </Link> */}
         
        
       </div>

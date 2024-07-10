@@ -1,4 +1,3 @@
-import { Label } from "@mui/icons-material";
 import classNames from "classnames";
 import React, { useCallback, useContext, useMemo } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import Details from "./Details";
 import AllShoesData from "../../AllShoesData";
 import SingleProductImages from "./SingleProductImages";
-import Nextbtn from "./Nextbtn"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { pink } from "@mui/material/colors";
 import { AuthContext } from "../../context/AuthContext";
@@ -65,27 +63,11 @@ return i.id===Number(id)
 
 
 
-
-  
-
-
-
-
-
-
-
-
-
-  //  useEffect(()=>{
-  //      const Values=Object.values(props.item.images)
-  //     setimages(Values)
-  //  },[])
-
   const fixedStickybtn = useRef();
 
 
   function NextSlider(params) {
-    console.log("clicked")
+
     setimageIndex((prevdata) => {
       if (prevdata < product[0].images.length - 1) {
         return ++prevdata;
@@ -95,7 +77,7 @@ return i.id===Number(id)
     });
   }
   function prevslider(params) {
-    console.log("clicked")
+ 
     setimageIndex((prevdata) => {
       if (prevdata > 0) {
         return --prevdata;
@@ -247,11 +229,7 @@ return i.id===Number(id)
                     ></i>
                   </button>
 
-                  {/* <Nextbtn
-                  NextSlider={NextSlider}
-                  imageIndex={imageIndex}
-                  images={productImages}
-                  /> */}
+              
                 </div>
               </div>
               <div className="absolute  top-[50%] left-5 block md:hidden ">

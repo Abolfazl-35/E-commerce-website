@@ -40,13 +40,13 @@ setUserExist(() => {
       return !prevdata;
     });
   }
-  console.log(loginForm);
+
 
   return (
     <div className="flex w-full sm:mx-auto justify-center  ">
       <div className="flex w-full sm:w-2/3  justify-center flex-col  flex-wrap items-center  mt-5   ">
         <div className="logo flex w-full  justify-center items-center">
-          <a href="#" className="">
+          <a href="./" className="">
             <img
               src={Logo}
               className="max-w-full max-h-full"
@@ -56,7 +56,7 @@ setUserExist(() => {
             />
           </a>
         </div>
-        <div className="flex font-Roboto text-red-900 font-semibold text-lg">
+        <div className="flex mb-1 font-Roboto text-red-900 font-semibold text-lg">
           <h1>{error?.massage}</h1>
         </div>
         <form
@@ -78,11 +78,9 @@ setUserExist(() => {
               id="LoginInput"
               name="loginEmail"
               onChange={HandleLoginForm}
-              //   aria-required="true"
+            
               value={loginForm.loginEmail}
-              // aria-invalid={""}
-              // onFocus={""}
-              // onBlur={""}
+             
             
               autoComplete="on"
               autoSave="on"
@@ -106,10 +104,8 @@ setUserExist(() => {
               onChange={HandleLoginForm}
               aria-required="true"
               value={loginForm.loginPassword}
-              // aria-invalid={""}
-              // onFocus={""}
-              // onBlur={""}
-              aria-describedby="Firstnameidnote"
+            
+              
               autoComplete="off"
               autoSave="off"
             />

@@ -27,8 +27,6 @@ function Navbar(props) {
         showdropdown_men_women_dropdown(men_item.ariaExpanded);
       });
       men_item.addEventListener("mouseleave", (e) => {
-       
-
         men_item.ariaExpanded = false;
         showdropdown_men_women_dropdown(men_item.ariaExpanded);
       });
@@ -147,27 +145,10 @@ function Navbar(props) {
         accessories_menu.classList.remove("show");
       }
     }
-    return ()=>{
-      
-    }
+    return () => {};
   }, []);
   console.log(props);
   const { searchState, User } = useContext(AuthContext);
-  // const [searchState, setsearchState] = useState(false);
-  // useEffect(() => {
-  //   setsearchState(() => {
-  //     if (props.searchresult.Search) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   });
-  // }, [props]);
-  // function openSearch(params) {
-  //   setsearchState((prevdata) => {
-  //     return true;
-  //   });
-  // }
 
   const [openNav, setopenNav] = useState(false);
 
@@ -176,7 +157,7 @@ function Navbar(props) {
       return !prevdata;
     });
   }
-
+console.log(openNav)
   return (
     <div className="   w-[100vw] relative ">
       <div className="w-full   ">
@@ -210,11 +191,14 @@ function Navbar(props) {
             </Link>
             {/* navbar btn in small screens */}
             <div
-              className={classNames(
+              className={classNames("fixed",
                 {
-                  "absolute z-[999]  right-[15px] top-5 w-max cursor-pointer":
-                    !searchState,
+                  " fixed z-[999] sm:hidden  right-4 top-5 w-max cursor-pointer":
+                    !searchState||!openNav
+                  
                 },
+                {  " absolute z-[999]  right-[1.90rem] top-5 w-max cursor-pointer":
+                    !openNav},
                 { hidden: searchState }
               )}
               id="open-menu-btn"
@@ -236,7 +220,7 @@ function Navbar(props) {
             </div>
 
             <ul
-              className=" flex w-full  items-start   space-y-6 p-3 text-lg text-slate-950 sm:space-x-5 sm:space-y-0 sm:text-base"
+              className=" flex w-full  items-start   space-y-6 p-3 sm:pt-3 sm:pb-0 text-lg text-slate-950 sm:space-x-5 sm:space-y-0 sm:text-base"
               id="nav-list-container"
             >
               <div
@@ -377,6 +361,25 @@ function Navbar(props) {
                   <button className="bg-slate-100 border border-slate-900 rounded-2xl text-slate-950 p-1">
                     Sign In
                   </button>
+                </div>
+                <div className=" sm:hidden">
+                <div className="flex flex-nowrap flex-col justify-center   font-Oswald w-full  items-center">
+                  {!User && (
+                    <>
+                      <p className=" text-nowrap   w-max text-end  border-t border-gray-500  font-semibold p-2">
+                        already have an a acount?
+                      </p>
+                      <p className="pb-1 font-semibold">
+                        <Link
+                          className=" underline   underline-offset-2 "
+                          to={"/login"}
+                        >
+                          Log In
+                        </Link>
+                      </p>
+                    </>
+                  )}
+                </div>
                 </div>
               </div>
             </ul>

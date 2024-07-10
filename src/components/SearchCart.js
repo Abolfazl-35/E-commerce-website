@@ -8,33 +8,9 @@ import "../components/Navbar.css";
 import MiniCard from "./MiniCard";
 import Logo from "../images/logo/trust-logo-4.png";
 import { AuthContext } from "../context/AuthContext";
-import UserDashBoard from "./Dashboards/UserDashBoard";
 import TooltipDashBoard from "./Tooltips/TooltipDashBoard";
 
-import { Dashboard } from "@mui/icons-material";
 function SearchCart(props) {
-  // const [searchState, setsearchState] = useState(false);
-  // useEffect(() => {
-  //   setsearchState(() => {
-  //     if (props.searchresult.Search) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   });
-  // }, [props]);
-  // function openSearch(params) {
-  //   setsearchState((prevdata) => {
-  //     return true;
-  //   });
-  // }
-
-  // function SearchWidthF(params) {
-  //   setSearchWidth((prevdata) => {
-  //     return !prevdata;
-  //   });
-  // }
-
   const {
     User,
     openDashboardf,
@@ -54,15 +30,6 @@ function SearchCart(props) {
     }
   });
 
-  // useEffect(()=>{
-  //    if (props.searchresult.Search) {
-  //   document.body.classList.add("container")
-  //   console.log("object",props)
-  //  }else{
-  //   document.body.classList.remove("container")
-  //  }
-  // },[props])
-  
   return (
     <div className="">
       <div className="h-max w-full justify-end  ">
@@ -186,16 +153,15 @@ function SearchCart(props) {
               {User && (
                 <button
                   className="hedear-text border-separate cursor-pointer border-l border-slate-700  text-xl text-slate-950 hover:text-slate-600 sm:text-2xl"
-                  onClick={()=>openDashboardf()}
+                  onClick={() => openDashboardf()}
                 >
                   <TooltipDashBoard />
                 </button>
               )}
               <div className="bg-transparent  flex justify-center items-center h-max relative  rounded ">
-               <Link to="/Favorite">
-               <TooltipFavorite />
-               </Link>
-                
+                <Link to="/Favorite">
+                  <TooltipFavorite />
+                </Link>
               </div>
               <Link to={"/Bag"}>
                 <div className=" relative pb-1 flex justify-center items-center mr-2 rounded ">
@@ -209,17 +175,21 @@ function SearchCart(props) {
               </Link>
             </div>
           </div>
-          <div className="w-full flex justify-end">
+          <div className="hidden sm:flex justify-end sm:flex-row font-Oswald w-full  items-center">
             {!User && (
-              <p className=" hidden sm:block w-max text-end mr-12 border-t border-gray-500 font-Oswald font-semibold p-2">
-                already have an a acount?
-                <Link
-                  className=" underline underline-offset-2 ml-2"
-                  to={"/login"}
-                >
-                  Log In
-                </Link>
-              </p>
+              <>
+                <p className="  w-max text-end  border-t border-gray-500  font-semibold p-2">
+                  already have an a acount?
+                </p>
+                <p className="pb-1 font-semibold">
+                  <Link
+                    className=" underline mr-8   underline-offset-2 "
+                    to={"/login"}
+                  >
+                    Log In
+                  </Link>
+                </p>
+              </>
             )}
           </div>
         </div>

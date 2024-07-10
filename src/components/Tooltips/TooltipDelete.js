@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 function TooltipDelete(props) {
   const {removeitem}=useContext(AuthContext)
 
-console.log(props)
+
   return (
     <>
     <Tooltip title="Remove" onClick={()=>removeitem(props.iteminfo)} className='h-max'

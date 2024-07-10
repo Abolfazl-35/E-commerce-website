@@ -34,7 +34,7 @@ export const AuthContextProvider = ({ children }) => {
   const updateUser = useCallback((response) => {
     localStorage.setItem("User", JSON.stringify(response));
     setUser(response);
-    console.log(response);
+   
   }, []);
 
   // SENDING SIGNUP INFO TO DATABASE AND SERVER
@@ -73,7 +73,7 @@ export const AuthContextProvider = ({ children }) => {
   const updateLoginInfo = useCallback((info) => {
     setLoginInfo(info);
   }, []);
-  console.log(User);
+
   const loginUser = useCallback(
     async (e) => {
       e.preventDefault();
@@ -94,7 +94,7 @@ export const AuthContextProvider = ({ children }) => {
           setError(null);
         }, 3000);
       }
-      console.log(error);
+
       setIsLoginLoading(false);
 
       localStorage.setItem("User", JSON.stringify(response));
@@ -104,7 +104,7 @@ export const AuthContextProvider = ({ children }) => {
     [loginInfo]
   );
 
-  console.log(User);
+
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
@@ -310,7 +310,7 @@ setFavoriteProducts((prevdata)=>{
 
 
  
-  // console.log(chatPageOpen);
+
   return (
     <AuthContext.Provider
       value={{

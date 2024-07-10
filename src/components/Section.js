@@ -85,7 +85,7 @@ return !prevdata
     HeadText = "Jordan";
   }
 
-  // console.log("section render");
+
   return (
     <div className=" sm:container sm:mx-auto md:flex md:mx-0 md:min-w-full">
       <div className=" relative flex justify-between w-full items-center  sm:p-4 flex-col mt-2">

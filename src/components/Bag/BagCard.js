@@ -12,7 +12,7 @@ function BagCard(props) {
   let { image, count, dec, price, selectedColor, selectedSize, type } =
     props.item;
 
- console.log(props)
+
   return (
     <>
     {props.item?(

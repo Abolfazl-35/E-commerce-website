@@ -7,18 +7,7 @@ function AddSection() {
         const msg_section = document.getElementById("msg-section");
         const msg = document.querySelectorAll(".msg");
 
-        //     msg.forEach(msg,index => {
-        //      msg.setAttribute("aria-hidden",true)
-        //   const duplicat=msg.cloneNode(true)
-    
-        //  duplicat.setAttribute("aria-hidden",true)
-        //    console.log(duplicat)
-        //    console.log(msg.clientWidth)
-        //     msg_section.appendChild(duplicat)
-        //   let client_Width=msg.clientWidth
-        // msg_section.style.transform(`translateX(${-client_Width * index}px)`)
-    
-        //         });
+
         let interval = "3000";
         let index = 0;
     

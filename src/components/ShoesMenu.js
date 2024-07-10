@@ -2,58 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../components/ShoesMenu.css";
 import { Style } from "@mui/icons-material";
 function ShoesMenu() {
-  // useEffect(() => {
-  //   const nav_buttom = document.getElementById("nav-buttom");
-  //   const msg_section = document.getElementById("msg-section");
-  //   const msg = document.querySelectorAll(".msg");
-  //   const menu_btn = document.getElementById("menu-btn");
-  //   menu_btn.addEventListener("click", (e) => {
-  //     e.preventDefault();
-  //     if (nav_buttom.classList.contains("open_menu")) {
-  //       nav_buttom.classList.remove("open_menu");
-  //     } else {
-  //       nav_buttom.classList.add("open_menu");
-  //     }
-  //   });
 
-  //   //     msg.forEach(msg,index => {
-  //   //      msg.setAttribute("aria-hidden",true)
-  //   //   const duplicat=msg.cloneNode(true)
-
-  //   //  duplicat.setAttribute("aria-hidden",true)
-  //   //    console.log(duplicat)
-  //   //    console.log(msg.clientWidth)
-  //   //     msg_section.appendChild(duplicat)
-  //   //   let client_Width=msg.clientWidth
-  //   // msg_section.style.transform(`translateX(${-client_Width * index}px)`)
-
-  //   //         });
-  //   let interval = "3000";
-  //   let index = 0;
-
-  //   const startmsg = () => {
-  //     setInterval(() => {
-  //       msg[index].ariaHidden = true;
-  //       index++;
-  //       msg_section.style.transform = `translateX(${-100 * index}vw)`;
-  //       msg_section.style.transition = "0.7s";
-  //       if (msg[msg.length - 1].ariaHidden === "true") {
-  //         msg_section.style.transform = "none";
-  //         index = 0;
-  //         msg_section.style.transform = `translateX(${-100 * index}vw)`;
-  //         msg.forEach((i) => {
-  //           i.ariaHidden = false;
-  //         });
-  //       }
-  //     }, interval);
-  //   };
-  //   startmsg();
-  // });
-  
-  
-  
-  
-  
   const [msg,setmsg]=useState(0)
   useEffect(()=>{
     let msgTime=setTimeout(()=>{
@@ -110,7 +59,7 @@ function ShoesMenu() {
             >
               <div className="flex justify-center items-center">
                 <p className="m-0 p-0 text-xs xs:text-sm sm:text-base  text-center ">
-                  Get Your Gear Fater
+                  Get Your Gear Faster
                 </p>
               </div>
 
@@ -131,7 +80,7 @@ function ShoesMenu() {
               </div>
 
               <div className="flex w-full p-1 items-center justify-center">
-                <a href="#" className="underline tracking-normal text-sm">
+                <a href="/signup" className="underline tracking-normal text-sm">
                  Sign Up
                 </a>
               </div>
@@ -139,18 +88,11 @@ function ShoesMenu() {
           </ul>
         </div>
       </div>
-      <div className="flex border-t p-1 w-full justify-center items-center">
-          <button
-          id="menu-btn"
-          className="hidden cursor-pointer justify-self-center rounded bg-transparent p-1 pt-0 text-base uppercase tracking-wider hover:bg-slate-600 hover:text-white"
-        >
-          menu
-        </button>
-      </div>
+  
 
       <div
-        id="nav-buttom"
-        className="w-full bg-slate-200 p-2 shadow-md sm:flex sm:shadow-none"
+        id="nav-buttom border-t"
+        className="w-full bg-slate-200 p-2 hidden shadow-md sm:flex sm:shadow-none"
       >
        
         <div

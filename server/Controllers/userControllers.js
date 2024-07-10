@@ -2,22 +2,15 @@ const userModel = require("../Moduls/userModels");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
-const { options } = require("../Routs/userRoute");
 const crypto = require("crypto");
 const { sendVerifacationMail } = require("../utils/sendVerificationMail");
 const createToken = (_id) => {
   const jwtkey = process.env.JWT_SECRET_KEY;
 
-  return jwt.sign({ _id }, jwtkey, { expiresIn: "3d" });
+  return jwt.sign({ _id }, jwtkey, { expiresIn: 3 });
 };
 
-const passwordConfig = {
-  minLength: 8,
-  minLowercase: 1,
-  minUppercase: 1,
-  minNumbers: 1,
-  minSymbols: 0, //🟥 dont require special chars
-};
+
 
 const registerUser = async (req, res) => {
   const {
@@ -83,16 +76,16 @@ const registerUser = async (req, res) => {
         isVerified: user.isVerified,
       });
   } catch (error) {
-    console.log(error);
+  
     res.status(500).json("an error aquierd please check your connection");
   }
 };
 const loginUser = async (req, res) => {
-  console.log(req.body);
+
   const { loginEmail, loginPassword } = req.body;
  const email = loginEmail || "";
  const password = loginPassword || "";
-  console.log(email)
+ 
   try {
     let user = await userModel.findOne( {email} );
 
@@ -109,11 +102,11 @@ const loginUser = async (req, res) => {
       _id: user._id,
       Firstname: user.Firstname,
       email,
-     
+     token,
       isVerified: user.isVerified,
     });
   } catch (error) {
-    return res.status(500).json("error");
+    return res.status(500).json("an error aquired plz check your internet connection");
   }
 };
 
@@ -122,7 +115,7 @@ const findUser = async (req, res) => {
   try {
     const user = await userModel.findById(userId);
 
-    res.status(200).json(user);
+    res.status(200).json({Firstname:user.Firstname,email:user.email});
   } catch (error) {
     res.status(500).json("error");
   }
@@ -132,14 +125,16 @@ const getUsers = async (req, res) => {
   try {
     const users = await userModel.find();
 
-    res.status(200).json(users);
+    res.status(200).json({users});
   } catch (error) {
     res.status(500).json("error");
   }
 };
 
+
+
 const verifyEmail = async (req, res) => {
-  console.log(req.body.emailToken);
+
   try {
     const emailToken = req.body.emailToken;
 
@@ -170,7 +165,7 @@ const verifyEmail = async (req, res) => {
 };
 
 const verification = async (req, res) => {
-  console.log(req.body._id)
+
   const userId = req.body._id;
   try {
     const user = await userModel.findById(userId);
@@ -189,4 +184,5 @@ module.exports = {
   findUser,
   getUsers,
   verifyEmail,
+  
 };

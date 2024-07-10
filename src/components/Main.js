@@ -13,7 +13,6 @@ useEffect(()=>{
   const prev_btn = document.getElementById("prev-btn");
   const menu_list = document.querySelectorAll(".menu-list");
 const show_case_section = document.getElementById("show-case-section");
-const show_case_item = document.querySelectorAll(".show-case-item");
   menu_list.forEach((i, index) => {
     i.addEventListener("click", (e) => {
       e.preventDefault();
@@ -50,7 +49,7 @@ const show_case_item = document.querySelectorAll(".show-case-item");
 
   return (
     <>
-      <div className="wrapper relative h-[380px] overflow-hidden">
+      <div className="wrapper border-t relative h-[380px] overflow-hidden">
         <i id="next-btn" className="bi bi-arrow-right-circle text-3xl"></i>
         <i id="prev-btn" className="bi bi-arrow-left-circle text-3xl"></i>
         <div

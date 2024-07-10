@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Video from "../videos/Only Basketball - Nike.mp4"
 import VideoSectioncss from "../SignUpPage/VideoSection.css"
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 function VideoSection() {
+  const {User}=useContext(AuthContext)
   return (
     <>
     <div className=' relative overflow-hidden flex w-full font-Roboto  '>
@@ -18,7 +20,8 @@ function VideoSection() {
       ITS BETTER AS A Member
     </h1>
     <p className='font-semibold p-3 flex flex-wrap w-full  text-wrap text-lg sm:w-max sm:text-xl'>Move,Shop,Costomized and Celebrate With the best of <br/>Trust</p>
-  <Link to="/SignIn"><button className='p-2  bg-slate-100 rounded-full text-black w-max'>Sign Up</button></Link> 
+  {!User?( <Link to="/SignIn"><button className='p-2  bg-slate-100 rounded-full text-black w-max'>Sign Up</button></Link> 
+):(null)}
    </div>
     </div> 
     </>

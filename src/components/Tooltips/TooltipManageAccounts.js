@@ -2,7 +2,6 @@ import * as React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Fade } from "@mui/material";
-import { grey, pink } from "@mui/material/colors";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 export default function BasicTooltip() {
   return (

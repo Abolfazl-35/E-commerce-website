@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const FavoriteCard = (props) => {
   const{removeFvoriteProduct}=useContext(AuthContext)
-  console.log(props)
+
     let { images } = props.item;
 
     let imagesIn = useRef();
@@ -33,13 +33,9 @@ const FavoriteCard = (props) => {
         } else return true;
       });
 
-      const [cardDetail,setCardDetail] = useState(false);
+   
     
-function HandleDetail(params) {
-  setCardDetail((prevdata)=>{
-return !prevdata
-  })
-}
+
   return (
     <> 
     
@@ -52,7 +48,7 @@ return !prevdata
               src={images[imgIndex].image}
               alt="productimage"
               loading="lazy"
-              onClick={HandleDetail}
+           
             />
    
        <div>
@@ -63,9 +59,7 @@ return !prevdata
           </div>
         </div>
       
-             {/* <div className='flex p-2 h-10'>
-           <button onClick={HandleDetail}>details</button>
-        </div> */}
+       
         
         <div   className={classNames("dec-container relative w-1/2 p-2   text-sm flex  space-y-2  rounded  ")}
        

@@ -11,7 +11,7 @@ const mailOptions={
 }
 transporter.sendMail(mailOptions,(error,info)=>{
     if(error){
-        console.log(error)
+     
         return ("an error aquired please check your connection");
     }else{
         return ("Verification mail has been sent")

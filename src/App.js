@@ -3,22 +3,10 @@ import { useState, useRef, useMemo } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import Main from "./components/Main";
-// import Section from "./components/Section";
-// import ShopHeader from "./components/ShopHeader";
-// import ShoesMenu from "./components/ShoesMenu";
-// import SignIn from "./components/SignInPage/SignIn";
-// import SignUp from "./components/SignUpPage/AddSection";
-// import Header from "./components/SignUpPage/Header";
-// import VideoSection from "./components/SignUpPage/VideoSection";
-// import SimpleSlider from "./components/SignUpPage/SimpleSlider";
-// import Product from "./components/SingleproductComponents/Product";
-// import SignInForm from "./components/SignInPage/SignInForm";
-// import Bag from "./components/Bag/Bag";
+
 import VerifyEmail from "./components/SignInPage/VerifyEmail";
 import { AuthContext } from "./context/AuthContext";
 
-import Chat from "./components/Chat/Chat";
 import { ChatContextProvider } from "./context/ChatContext";
 
 const LazyFavoriteSection=React.lazy(() => import("./components/FavoriteProducts/FavoriteSection"));
@@ -51,9 +39,7 @@ const LazyBag =React.lazy(() =>import("./components/Bag/Bag"))
 
 const LazySendVerify =React.lazy(() =>import("./components/SignInPage/SendVerify"))
 
-const LazyChat =React.lazy(() =>import("./components/Chat/Chat"))
 
-const LazyMainChat =React.lazy(() =>import("./components/Chat/MainChat"))
 
 const LazyLogin =React.lazy(() =>import("./components/LoginPage/Login"))
 
@@ -168,7 +154,7 @@ function App() {
 
   //   }
 
-  console.log("app render");
+
 
   return (
     <ChatContextProvider User={User}>
@@ -179,8 +165,6 @@ function App() {
             path="/"
             element={
               <>
-                <Chat />
-                <React.Suspense><LazyMainChat/></React.Suspense>
                 <Navbar MiniBagState={MiniBagState} />
                 {/* <MainChat/> */}
                <React.Suspense fallback="Loading"><LazyShoesMenu /></React.Suspense> 

@@ -6,25 +6,7 @@ import classNames from "classnames";
 
 function SignIn(props) {
   const notValidEmail = useRef();
-  // const [EmailData,setEmailData]=useState({Email:""})
-  // console.log(EmailData)
-  // function HandleEmail(event) {
 
-  // setEmailData((prevformdata=>{
-  //     return {...prevformdata,
-  //     [event.target.name]:event.target.value}
-  //   }))
-
-  // }
-  // useEffect(()=>{
-  // const emailinpute=document.getElementById("EmailInput")
-  //   if (props.EmailData.Email!=="") {
-  //     emailinpute.classList.add("has-value")
-  //   }else if (props.EmailData.Email==="") {
-  //     emailinpute.classList.remove("has-value")
-  //   }
-
-  // },[props.EmailData])
   const [validInput, setValidInput] = useState(true);
   function checkEmailInput(e) {
     if (!props.EmailData.Email) {
@@ -39,8 +21,7 @@ function SignIn(props) {
       }, "2000");
     }
   }
-  console.log(props);
-  console.log(validInput);
+
 
   return (
     <>
@@ -50,7 +31,7 @@ function SignIn(props) {
       >
         <div className="w-full sm:w-3/4 md:w-2/4 flex flex-col justify-center items-center">
           <div className="logo flex w-full  justify-center items-center">
-            <a href="#" className="">
+            <a href="./" className="">
               <img
                 src={Logo}
                 className="max-w-full max-h-full"
