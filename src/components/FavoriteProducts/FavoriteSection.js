@@ -9,6 +9,7 @@ const FavoriteSection = () => {
     return <FavoriteCard key={i.id} item={i} />;
   });
 
+
   return (
     <div className=" bg-slate-100 p-3 h-[100vh]">
       <div className="p-3 font-Roboto  border container mx-auto rounded">
