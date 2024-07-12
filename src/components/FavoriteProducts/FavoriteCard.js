@@ -66,8 +66,8 @@ const FavoriteCard = (props) => {
           
           data-attribute="false"
         >
-          <div className='dec-section'>
-          <div className="product-dec-inner-1 w-full font-foboto flex flex-col  md:text-md space-y-1  ">
+          <div className='dec-section    '>
+          <div className="product-dec-inner-1  w-full font-foboto flex flex-col  md:text-md space-y-1  ">
             <span className="w-full rounded ">
               <h1 className=" font-Roboto text-base  tracking-wide    w-full rounded p-2">
                 <strong>{props.item.name}</strong>
@@ -76,7 +76,7 @@ const FavoriteCard = (props) => {
             <h2 className="w-full p-2  text-zinc-800">
               <strong>Brand:{props.item.brand}</strong>
             </h2>
-            <p className="w-full p-2 text-gray-600">{props.item.dec}</p>
+            <p className="w-full  p-2 text-gray-600">{props.item.dec}</p>
 
             <p className="w-full flex p-2 text-gray-600"><span className="mb-[.1rem]">{images.length}</span> <span className=" ml-1">Color</span></p>
           </div>
@@ -86,7 +86,7 @@ const FavoriteCard = (props) => {
                 Best Seller
               </p>
             </div>
-            <div className="flex gap-1">
+            <div className="lg:flex gap-1 hidden">
 
               <img
                 className=" cursor-pointer object-contain justify-self-start rounded"
@@ -121,7 +121,8 @@ const FavoriteCard = (props) => {
           <div className="flex pb-2 pl-2   text-base font-Oswald tracking-wider ">
             <p className="price w-full p-1   ">{props.item.price}$</p>
           </div>
-          <Link to={`/product/${props.item.id}`}>
+          <div className=' '>
+          <Link to={`/product/${props.item.id}`} className=' ' >
           
           <div className='p-2  text-sm md:text-base font-Roboto rounded transition hover:bg-greyish-0'
           >
@@ -130,7 +131,9 @@ const FavoriteCard = (props) => {
             </p>
             
           </div>
-          </Link>
+          </Link> 
+          </div>
+
           </div>
 
         </div>

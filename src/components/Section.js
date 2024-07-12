@@ -5,8 +5,6 @@ import JordanData from "../JordanShoesData";
 import Card from "./Card";
 import AllShoesData from "../AllShoesData";
 import classNames from "classnames";
-import Filter from "./Filter";
-import FilterSection from "./FilterSection";
 import { AuthContext } from "../context/AuthContext";
 function Section(props) {
   // useEffect(() => {
@@ -233,12 +231,7 @@ return !prevdata
               Nike By You
             </h1>
           </div> */}
-<FilterSection
-Handleset={props.Handleset}
-filterVisibility={filterVisibility}
 
-
-/>
           {/* product card */}
 
           <div
@@ -317,7 +310,6 @@ filterVisibility={filterVisibility}
           </div>
         </div>
       </div>
-      <Filter bigFiltervisible={bigFiltervisible} BigFilterF={BigFilterF}/>
     </div>
   );
 }
