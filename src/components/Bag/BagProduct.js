@@ -91,7 +91,7 @@ function BagProduct(props) {
                   type="text"
                   name="PromoCode"
                   id="PromoCode"
-                  value=""
+                  value="defultvalue"
                   className="h-10 border border-gray-600 rounded-xl p-3"
                 />
                 <button className="p-2 ml-1 pl-3 pr-3 border rounded-3xl border-gray-600">

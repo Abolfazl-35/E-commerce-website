@@ -41,7 +41,7 @@ function Details(props) {
               <div>
               <button
                 onClick={props.HandleDetailPage}
-                className="p-2 font-serif cursor-pointer underline underline-offset-8"
+                className="p-2 pb-10 sm:pb-0 font-serif cursor-pointer underline underline-offset-8"
               >
                 View Product Details
               </button>

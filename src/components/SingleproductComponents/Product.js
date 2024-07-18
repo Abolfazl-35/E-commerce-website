@@ -471,7 +471,7 @@ return i.id===Number(id)
                     onClick={HandleDetailPage}
                     className="p-2 absolute top-2 right-2"
                   >
-                    <i class="bi bi-x text-4xl"></i>
+                    <i className="bi bi-x text-4xl"></i>
                   </button>
                 </div>
               </div>
