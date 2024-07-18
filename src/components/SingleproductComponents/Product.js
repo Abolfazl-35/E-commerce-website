@@ -133,7 +133,7 @@ return i.id===Number(id)
     }
   }
 
-  console.log("render product");
+
 
   return (
     
@@ -292,7 +292,7 @@ return i.id===Number(id)
                   { "border border-transparent": bagproduct.selectedSize },
                   { "border border-red-500": !bagproduct }
                 )}
-                onSubmit={AddtoBag}
+               
               >
                 {/* images form */}
                 <div className="flex gap-1 flex-nowrap overflow-x-auto">
@@ -371,8 +371,8 @@ return i.id===Number(id)
                 <div className="flex flex-col space-y-4 w-full mt-6 p-2">
                   <button
                     type="button"
-                    onClick={() => {
-                      AddtoBag();
+                    onClick={() => {!bagproduct.selectedSize?AddtoBag():
+                      
                      AddToCart(bagproduct)
                       props.HandleMiniBag(bagproduct)
                     }}
@@ -491,8 +491,9 @@ return i.id===Number(id)
 
           //       }
           onClick={() => {
-            AddtoBag();
-            props.HandleProductData(bagproduct);
+            !bagproduct.selectedSize?AddtoBag():
+
+            AddToCart(bagproduct)
             props.HandleMiniBag(bagproduct);
           }}
         >

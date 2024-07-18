@@ -147,7 +147,7 @@ function Navbar(props) {
     }
     return () => {};
   }, []);
-  console.log(props);
+
   const { searchState, User } = useContext(AuthContext);
 
   const [openNav, setopenNav] = useState(false);
@@ -157,7 +157,7 @@ function Navbar(props) {
       return !prevdata;
     });
   }
-console.log(openNav)
+
   return (
     <div className="   w-[100vw] relative ">
       <div className="w-full   ">

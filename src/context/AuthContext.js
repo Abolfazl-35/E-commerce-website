@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import { baseUrl, postRequest } from "../utils/services";
 import AllShoesData from "../AllShoesData";
 import JordanData from "../JordanShoesData";
+import { json } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -173,16 +174,34 @@ export const AuthContextProvider = ({ children }) => {
     });
   }
 
+  // cart functions
   const [Cart, Setcart] = useState([]);
+  useEffect(() => {
+  const cart=localStorage.getItem("Cart")?localStorage.getItem("Cart"):null
+  if (cart) {
+      Setcart(JSON.parse(cart))
+  }
+
+
+},[])
+  
+  useEffect(() => {
+    localStorage.setItem("Cart",JSON.stringify(Cart))
+
+  
+    
+    },[Cart])
+
 
   function AddToCart(product) {
+     localStorage.setItem("Cart",JSON.stringify(Cart)); 
     const NewProduct = Cart.find((i) => {
       return (
         i.selectedSize === product.selectedSize &&
         i.selectedColor === product.selectedColor
       );
     });
-
+  
     if (NewProduct) {
       Setcart((prevdata) => {
         return Cart.map((i) => {
@@ -195,7 +214,10 @@ export const AuthContextProvider = ({ children }) => {
     } else if (product.selectedSize) {
       Setcart([...Cart, { ...product, count: 1 }]);
     }
+ 
   }
+
+  
 
   const [lastItemAdded, setlastItemAdded] = useState(null);
   useMemo(() => {
@@ -223,6 +245,8 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     setCartLength(Cart.length);
   }, [Cart]);
+
+
 
   const [chatPageOpen, setChatPageOpen] = useState(false);
 

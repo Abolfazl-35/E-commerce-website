@@ -34,8 +34,8 @@ function Details(props) {
               </div>
               <div className="pt-5 mt-3">
                 <ul className="list-disc list-inside font-serif text-base">
-                  <li className=" uppercase">Shown:<span className="">{props.Shown}</span></li>
-                  <li className="mt-2 uppercase">Style:DD1391-601</li>
+                  <li key={props.Shown} className=" uppercase">Shown:<span className="">{props.Shown}</span></li>
+                  <li key={props.id} className="mt-2 uppercase">Style:DD1391-601</li>
                 </ul>
               </div>
               <div>
