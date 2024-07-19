@@ -16,7 +16,7 @@ function VideoSection() {
     className=''/>
  <video/>
    <div className='video-dec  space-y-5 flex flex-col sm:justify-center w-full  sm:w-0  justify-center items-start sm:items-center p-2'>
-    <h1 className='w-max font-extrabold text-2xl xs:text-4xl font-Oswald p-3'>
+    <h1 className='w-max font-extrabold text-2xl sm:text-4xl font-Oswald p-3'>
       ITS BETTER AS A Member
     </h1>
     <p className='font-semibold p-3 flex flex-wrap w-full  text-wrap text-lg sm:w-max sm:text-xl'>Move,Shop,Costomized and Celebrate With the best of <br/>Trust</p>

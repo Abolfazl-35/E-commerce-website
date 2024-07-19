@@ -355,12 +355,12 @@ function Navbar(props) {
                   </p>
                 </li>
                 <div className="sm:hidden flex w-full justify-evenly items-center">
-                  <button className="bg-slate-950 text-white border rounded-2xl border-slate-100 p-1">
+                  <Link to="/SignUp" className="bg-slate-950  text-white border rounded-2xl border-slate-100 p-2">
                     Join Us
-                  </button>
-                  <button className="bg-slate-100 border border-slate-900 rounded-2xl text-slate-950 p-1">
+                  </Link>
+                  <Link to="/SignIn" className="bg-slate-100 border border-slate-900 rounded-2xl text-slate-950 p-2">
                     Sign In
-                  </button>
+                  </Link>
                 </div>
                 <div className=" sm:hidden">
                 <div className="flex flex-nowrap flex-col justify-center   font-Oswald w-full  items-center">
