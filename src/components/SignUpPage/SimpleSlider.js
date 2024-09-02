@@ -86,7 +86,7 @@ function DynamicSlides() {
     ],
   };
   return (
-    <div className="mx-auto  h-full mb-10     ">
+    <div className="mx-auto overflow-hidden  h-full mb-10     ">
      
       <div className="mt-16    ">
         <Slider {...settings}>

@@ -159,7 +159,7 @@ function Navbar(props) {
   }
 
   return (
-    <div className="   w-[100vw] relative ">
+    <div className="   relative ">
       <div className="w-full   ">
         <div className=" w-full overflow-hidden   ">
           {User && <UserDashBoard />}

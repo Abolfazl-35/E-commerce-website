@@ -32,7 +32,7 @@ function AddSection() {
 
   return (
     <>
-        <div className="mt-2 flex w-full items-center justify-start">
+        <div className="mt-2  flex w-full items-center justify-start">
        
        <div className="flex w-full overflow-hidden  ">
          <ul

@@ -9,7 +9,7 @@ function VideoSection() {
   return (
     <>
     <div className=' relative overflow-hidden flex w-full font-Roboto  '>
-      <div className='video-overly'></div>
+      <div className='video-overly overflow-hidden'></div>
       <video
    src={Video}
       autoPlay loop muted playsInline

@@ -5,7 +5,7 @@ function Header() {
   const {User}=useContext(AuthContext);
   return (
     <>
-    <div className=" font-Roboto border-t ">
+    <div className=" font-Roboto border-t overflow-hidden ">
       <div className=" top-0  p-3">
         <div className="flex    flex-col justify-start items-start  min-w-full space-y-3 sm:space-y-0 sm:flex-row  relative  p-4   ">
           <div className=" relative mb-5 pb-5   ">
