@@ -158,30 +158,30 @@ const show_case_section = document.getElementById("show-case-section");
         </div>
       </div>
 
-      <div className="w-full bg-zinc-600 p-0" id="fetuers">
+      <div className="w-full text-xs sm:text-sm  bg-zinc-600 p-0" id="fetuers">
         <div className="mt-1  flex items-center justify-between pt-2">
-          <div className="flex-col items-center justify-center p-1 font-serif text-sm">
+          <div className="flex-col items-center  justify-center p-1 font-serif ">
             <img src={Shipping_Logo} 
             loading="lazy"
-            className="w-24"
+            className="w-24 "
              alt="shiping-logo" />
-            <h2 className="p-1 text-center">Free Shippment</h2>
+            <h2 className=" text-center   text-nowrap">Free Shippment</h2>
           </div>
-          <div className="flex-col items-center justify-center p-1 font-serif text-sm">
+          <div className="flex-col items-center justify-center p-1 font-serif ">
             <img
               src={ReturnPolicy_logo}
               className="w-24"
               alt="ReturnPolicy_logo"
               loading="lazy"
             />
-            <h2 className="p-1 text-center">Return Policy</h2>
+            <h2 className=" text-center">Return Policy</h2>
           </div>
-          <div className=" flex-col   p-1 items-center justify-center  font-serif text-sm">
+          <div className=" flex-col     items-center justify-center  font-serif ">
             <img src={ContectUs_Logo} 
-            className="w-24 h-24 " 
+            className="w-24 sm:h-[5.5rem] mb-3 h-[5rem] " 
             loading="lazy"
             alt="Contect_us" />
-            <h2 className="p-1 text-center">Contect Us</h2>
+            <h2 className=" text-center ">Contect Us</h2>
           </div>
         </div>
       </div>
